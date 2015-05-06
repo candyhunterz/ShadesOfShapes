@@ -14,11 +14,15 @@
 	<link rel="stylesheet" type="text/css" href="style/style.css"> 
 </head>
 <body>
+	<audio autoplay id="music">
+		<source src="sounds/elavator.mp3" type="audio/mpeg">
+	</audio>
 	<!-- Start of the main page -->
 	<div data-role="page" id="main">
 		<img src="images/logo.png" alt="logo" id="logo">
 		<h1 id="mainHeader">Shades of Shapes</h1>
 		<a href="#pregame" data-role="button" data-inline="true" id="playButton">Play</a>
+		<img src="images/mute.png" alt="mute" id="muteButton">
 	</div>
 	<!-- Start of the pregame page -->
 	<div data-role="page" id="pregame">
@@ -29,9 +33,13 @@
 		<div role="main" class="ui-content">
 			<h1><a href="#bar">TAP</a></h1>
 			<div id="choice">
-				<a href="#bar"><table>
-					<tr><td id='d25' onclick="click(event)"></td></tr>
-				</table></a>
+				<a href="#bar">
+					<table>
+						<tr>
+							<td id='d25' onclick="click(event)"></td>
+						</tr>
+					</table>
+				</a>
 			</div>
 		</div><!-- /content -->
 
