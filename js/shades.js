@@ -91,13 +91,16 @@ $(document).ready(function() {
 		}
 	}
 
+	// function that mute the sound 
 	$("#muteButton").click(function() {
 		if(mute == 0){
 			mute = 1;
 			document.getElementById("music").pause();
+			$(this).attr("src","images/mute.png");
 		} else {
 			mute = 0;
 			document.getElementById("music").play();
+			$(this).attr("src","images/sound.png");
 		}
 	});
 
