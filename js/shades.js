@@ -35,6 +35,7 @@ $(document).ready(function() {
 	// initialize game state
 	function setColor() {
 		randomize();
+		makeShapes();
 	}
 	
 	//function to return the color of selection box
@@ -56,7 +57,7 @@ $(document).ready(function() {
 	})
 
 	// function to get the color of a clicked cell
-	$("#board").click(function() {
+	$("td").click(function() {
 		playSoundFx(SoundfxNum);
 		var color = $(this).css("background-color");
 		var choiceColor = $("#choice td").css("background-color");
@@ -84,19 +85,54 @@ $(document).ready(function() {
 
 	});
 
-	// function to generate shape
-	function makeShape(shape) {
-		switch (shape) {
-			case 'triangle': break;
-			case 'square': 
-			break;
-			case 'circle': break;
-			case 'hexagon': break;
-			case 'diamond': break;
-			case 'octagon': break;
-			default: ;
-		}
+	// function to generate shapes into each cell using svg 
+	// using D3.js to make things easier
+	function makeShapes() {
+		var svgContainers = [];
+		var shape;
+		// making svg containers in all squares
+		for (var i=0; i<board.length; i++) {
+			svgContainers[i] = d3.select("#d"+i).append("svg")
+			.attr("width", 50)
+			.attr("height", 50);
+			randomShapes(svgContainers[i]);
+		}	
 	}
+	
+	// function to randomly make a shape
+	function randomShapes(svg) {
+	var num = Math.floor(Math.random()*6)
+	var shape;
+	var color;
+	switch (num) {
+		case 0:
+		color = "green"; 
+		svg.append("circle")
+		.attr("cx",25)
+		.attr("cy",25)
+		.attr("r",25)
+		.attr("fill", color);
+		break;
+		case 1: 
+		color = "cyan";
+		svg.append("rect")
+		.attr("width",50)
+		.attr("height",50)
+		.attr("fill", color);
+		break;
+		case 2: 
+		
+		break;
+		case 3: 
+		break;
+		case 4: 
+		break;
+		case 5: 
+		break;
+		default: ;
+		console.log("not a valid shape");
+	}
+}
 	//sound effects
 	function playSoundFx(fx){
 		switch(fx){
