@@ -125,6 +125,10 @@ $(document).ready(function() {
 				console.log("not a valid shape");
 		}
 	}
+	
+	// fades game board timer set to 5 sec
+	$(".cell").fadeTo(5000, 0);
+
 
 
 
