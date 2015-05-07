@@ -10,13 +10,10 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<script src="js/shades.js"></script>
-
-	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+ 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+ 	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+ 	<script type="text/javascript" src="js/TimeCircles.js"></script>
 	<link rel="stylesheet" type="text/css" href="style/style.css"> 
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-	<script type="text/javascript" src="js/TimeCircles.js"></script>
-	
-
 </head>
 <body>
 	<audio autoplay id="music">
@@ -35,21 +32,7 @@
 			<h1>Pregame</h1>
 		</div><!-- /header -->
 
-
-	<div data-role="header">
-		<h1>Foo</h1>
-	</div><!-- /header -->
-
-	<div role="main" class="ui-content">
-		<div id="timerdiv">
-			<div id="timer"></div>
-			<script>
-				$("#timer").TimeCircles();
-			</script> 
-		</div>
-		<div id="choice">
-			<br/>
-
+		<div role="main" class="ui-content">
 			<h1><a href="#bar">TAP</a></h1>
 			<div id="choice">
 				<a href="#bar">
@@ -69,67 +52,62 @@
 
 	<!-- Start of the game page -->
 	<div data-role="page" id="bar">
-
-
-	<div id="logo"><h1>Shades Of Shapes</h1>
-
-	<div role="main" class="ui-content">
-		
-		
-	
-	<div id='score'>
-		score: <p>0</p>
-	</div>
-	<div class="background">
-	<div id="board">
-		<table>
-			<tr>
-				<td id='d0' onclick="click(event)">
-				</td>
-				<td id='d1' onclick="click(event)">
-					
-				</td>
-				<td id='d2' onclick="click(event)"></td>
-				<td id='d3' onclick="click(event)"></td>
-				<td id='d4' onclick="click(event)"></td>
-			</tr>
-			<tr>
-				<td id='d5' onclick="click(event)"></td>
-				<td id='d6' onclick="click(event)"></td>
-				<td id='d7' onclick="click(event)"></td>
-				<td id='d8' onclick="click(event)"></td>
-				<td id='d9' onclick="click(event)"></td>
-			</tr>
-			<tr>
-				<td id='d10' onclick="click(event)"></td>
-				<td id='d11' onclick="click(event)"></td>
-				<td id='d12' onclick="click(event)"></td>
-				<td id='d13' onclick="click(event)"></td>
-				<td id='d14' onclick="click(event)"></td>
-			</tr>
-			<tr>
-				<td id='d15' onclick="click(event)"></td>
-				<td id='d16' onclick="click(event)"></td>
-				<td id='d17' onclick="click(event)"></td>
-				<td id='d18' onclick="click(event)"></td>
-				<td id='d19' onclick="click(event)"></td>
-			</tr>
-			<tr>
-				<td id='d20' onclick="click(event)"></td>
-				<td id='d21' onclick="click(event)"></td>
-				<td id='d22' onclick="click(event)"></td>
-				<td id='d23' onclick="click(event)"></td>
-				<td id='d24' onclick="click(event)"></td>
-			</tr>
-		</table>
-	</div>
-	</div>
-	</div><!-- /content -->
-
-	<div data-role="footer">
-		<div id="level">Level: <p>0</p></div>
-	</div><!-- /footer -->
-
+		<div id="logo">
+			<h1>Shades Of Shapes</h1>
+		</div>
+		<div role="main" class="ui-content">
+			<div id='score'> 
+				score: <p>0</p>
+			</div>
+			<div class="background">
+				<div id="board">
+					<table>
+						<tr>
+							<td id='d0' onclick="click(event)">
+							</td>
+							<td id='d1' onclick="click(event)"></td>
+							<td id='d2' onclick="click(event)"></td>
+							<td id='d3' onclick="click(event)"></td>
+							<td id='d4' onclick="click(event)"></td>
+						</tr>
+						<tr>
+							<td id='d5' onclick="click(event)"></td>
+							<td id='d6' onclick="click(event)"></td>
+							<td id='d7' onclick="click(event)"></td>
+							<td id='d8' onclick="click(event)"></td>
+							<td id='d9' onclick="click(event)"></td>
+						</tr>
+						<tr>
+							<td id='d10' onclick="click(event)"></td>
+							<td id='d11' onclick="click(event)"></td>
+							<td id='d12' onclick="click(event)"></td>
+							<td id='d13' onclick="click(event)"></td>
+							<td id='d14' onclick="click(event)"></td>
+						</tr>
+						<tr>
+							<td id='d15' onclick="click(event)"></td>
+							<td id='d16' onclick="click(event)"></td>
+							<td id='d17' onclick="click(event)"></td>
+							<td id='d18' onclick="click(event)"></td>
+							<td id='d19' onclick="click(event)"></td>
+						</tr>
+						<tr>
+							<td id='d20' onclick="click(event)"></td>
+							<td id='d21' onclick="click(event)"></td>
+							<td id='d22' onclick="click(event)"></td>
+							<td id='d23' onclick="click(event)"></td>
+							<td id='d24' onclick="click(event)"></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<a href="#done">done</a>
+		</div><!-- /content -->
+		<div data-role="footer">
+			<div id="level">
+				Level: <p>0</p>
+			</div>
+		</div><!-- /footer -->
 	</div><!-- /page -->
 
 	<!-- Start of the gameover page -->
@@ -148,3 +126,4 @@
 	
 </body>
 </html>
+

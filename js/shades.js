@@ -49,7 +49,7 @@ $(document).ready(function() {
 
 	// making the pregame page not lose the color
 	$("#choice").click(function(){
-		console.log(color);
+		//console.log(color);
 	})
 
 	// function to get the color of a clicked cell
