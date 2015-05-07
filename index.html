@@ -32,18 +32,31 @@
 			<h1>Pregame</h1>
 		</div><!-- /header -->
 
-		<div role="main" class="ui-content">
-			<h1><a href="#bar">TAP</a></h1>
-			<div id="choice">
-				<a href="#bar">
-					<table>
-						<tr>
-							<td id='d25' onclick="click(event)"></td>
-						</tr>
-					</table>
-				</a>
+
+	<div data-role="header">
+		<h1>Foo</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<div id ="container">	
+			<div id="timerdiv">
+				<div id="timer"></div>
+				<script>
+					$("#timer").TimeCircles();
+					var delay = 2800; //Your delay in milliseconds
+
+					setTimeout(function(){ window.location = "#bar"; }, delay);
+				</script> 
 			</div>
-		</div><!-- /content -->
+			<div id="choice">
+				<br/>
+				<h1><a href="#bar">TAP</a></h1>
+				<a href="#bar"><table>
+					<tr><td id='d25' onclick="click(event)"></td></tr>
+				</table></a>	
+			</div>
+		</div>
+	</div><!-- /content -->
 
 		<div data-role="footer">
 			<h4>Page Footer</h4>

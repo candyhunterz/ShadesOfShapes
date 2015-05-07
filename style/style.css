@@ -8,10 +8,21 @@ body, #board {
 	padding-bottom: 10px;
 }
 
-#choice {
+
+#container {
 
 	position:relative;
+	width: 300px;
+	margin-left:-150px;
+	left: 50%;
 	padding-bottom: 60px;
+	min-height: 300px;
+}
+
+#choice {
+	position:absolute;
+	padding-top: 50px;
+	padding-left: 110px;
 	z-index: 100;
 
 	
@@ -86,6 +97,14 @@ svg {
 	margin-right: auto;
 }
 
+
+#timerdiv {
+	position: absolute;
+	margin-left: auto;
+	margin-right: auto;
+	z-index: 50;
+	padding-top:10px;
+}
 
 circle {
 	
