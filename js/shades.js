@@ -7,7 +7,7 @@ $(document).ready(function() {
 	var mute = 0;
 
 	//function to randomize the colors of the cell
-	function randomize(color,shape) {
+	function randomize() {
 		for (var i=0; i<board.length; i++) {
 			var num = Math.floor(Math.random()*3)
 			var color='';
@@ -29,6 +29,7 @@ $(document).ready(function() {
 	// initialize game state
 	function setColor() {
 		randomize();
+		makeShapes();
 	}
 	
 	//function to return the color of selection box
