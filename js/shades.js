@@ -49,7 +49,6 @@ $(document).ready(function() {
 	$("td").click(function() {
 		var color = $(this).css("background-color");
 		var choiceColor = $("#choice td").css("background-color")
-		makeShape('rect');
 		if (color === choiceColor) {
 			$(this).css({backgroundColor: '#FFFFFF'});
 			$(this).animate({
