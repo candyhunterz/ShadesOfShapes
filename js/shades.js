@@ -37,7 +37,6 @@ $(document).ready(function() {
 		$("#choice td").css("background-color")
 	}
 
-
 	function reset() {
 		$("img").remove("#checkmark");
 		$("td").animate({
@@ -51,9 +50,10 @@ $(document).ready(function() {
 	})
 
 	// function to get the color of a clicked cell
-	$("#board").click(function() {
+	$("td").click(function() {
 		var color = $(this).css("background-color");
 		var choiceColor = $("#choice td").css("background-color");
+		makeShape('rect');
 		if (color === choiceColor) {
 			$(this).css({backgroundColor: '#FFFFFF'});
 			$(this).animate({
@@ -63,7 +63,11 @@ $(document).ready(function() {
 		console.log(color);
 	})
 
-	
+	$(".gameButton").click(function() {
+		$(".cell").fadeTo(5000, 0);
+	});
+
+	// clears grid once button is clicked
 	$("#restart").click(function() {
 		reset();
 	});
@@ -78,33 +82,57 @@ $(document).ready(function() {
 
 	});
 
-	// function to generate shape
-	function makeShape(shape) {
-		switch (shape) {
-			case 'triangle': break;
-			case 'square': 
-			break;
-			case 'circle': break;
-			case 'hexagon': break;
-			case 'diamond': break;
-			case 'octagon': break;
-			default: ;
-		}
+	// function to generate shapes into each cell using svg 
+	// using D3.js to make things easier
+	function makeShapes() {
+		var svgContainers = [];
+		var shape;
+		// making svg containers in all squares
+		for (var i=0; i<board.length; i++) {
+			svgContainers[i] = d3.select("#d"+i).append("svg")
+			.attr("width", 50)
+			.attr("height", 50);
+			randomShapes(svgContainers[i]);
+		}	
 	}
 
-	// function that mute the sound 
-	$("#muteButton").click(function() {
-		if(mute == 0){
-			mute = 1;
-			document.getElementById("music").pause();
-			$(this).attr("src","images/mute.png");
-		} else {
-			mute = 0;
-			document.getElementById("music").play();
-			$(this).attr("src","images/sound.png");
+	// function to randomly make a shape
+	function randomShapes(svg) {
+		var num = Math.floor(Math.random()*6)
+		var shape;
+		var color;
+		switch (num) {
+			case 0:
+			color = "green"; 
+				svg.append("circle")
+				.attr("cx",25)
+				.attr("cy",25)
+				.attr("r",25)
+				.attr("fill", color);
+				break;
+			case 1: 
+				color = "cyan";
+				svg.append("rect")
+				.attr("width",50)
+				.attr("height",50)
+				.attr("fill", color);
+				break;
+			case 2: 
+
+				break;
+			case 3: 
+				break;
+			case 4: 
+				break;
+			case 5: 
+				break;
+			default: ;
+				console.log("not a valid shape");
 		}
-	});
-
-setColor();
-
+	}
+	// fades game board timer set to 5 sec
+	setColor();
+	$(".cell").fadeTo(5000, 0);
+	//var svgContainer = d3.select("#d2").append("svg").attr("width", 50).attr("height", 50);
+	//var circle = svgContainer.append("circle").attr("cx", 30).attr("cy", 30).attr("r", 20);
 });
