@@ -5,7 +5,13 @@ $(document).ready(function() {
 	var row1, row2, row3, row4, row5, col1, col2, col3, col4, col5, leftDiag, rightDiag;
 	var correct = 0;
 	var mute = 0;
-
+	var SoundfxNum = "0";
+	var fx1 = new Audio("sounds/fx1.mp3");
+	var fx2 = new Audio("sounds/fx2.mp3");
+	var fx3 = new Audio("sounds/fx3.mp3");
+	var fx4 = new Audio("sounds/fx4.mp3");
+	var fx5 = new Audio("sounds/fx5.mp3");
+	
 	//function to randomize the colors of the cell
 	function randomize(color,shape) {
 		for (var i=0; i<board.length; i++) {
@@ -51,6 +57,7 @@ $(document).ready(function() {
 
 	// function to get the color of a clicked cell
 	$("#board").click(function() {
+		playSoundFx(SoundfxNum);
 		var color = $(this).css("background-color");
 		var choiceColor = $("#choice td").css("background-color");
 		if (color === choiceColor) {
@@ -90,7 +97,31 @@ $(document).ready(function() {
 			default: ;
 		}
 	}
-
+	//sound effects
+	function playSoundFx(fx){
+		switch(fx){
+			case "0":
+				SoundfxNum = "1";
+				fx1.play();
+				break;
+			case "1" :
+				SoundfxNum = "2";
+				fx2.play();
+				break;
+			case  "2":
+				SoundfxNum = "3";
+				fx3.play();
+				break;
+			case  "3":
+				SoundfxNum = "4";
+				fx4.play();
+				break;
+			case  "4":
+				SoundfxNum = "0";
+				fx5.play();
+				break;
+		}
+	}
 	// function that mute the sound 
 	$("#muteButton").click(function() {
 		if(mute == 0){
