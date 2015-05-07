@@ -4,9 +4,10 @@ $(document).ready(function() {
 	var board = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 	var row1, row2, row3, row4, row5, col1, col2, col3, col4, col5, leftDiag, rightDiag;
 	var correct = 0;
-	
 
-	
+	var mute = 0;
+
+
 	//function to randomize the colors of the cell
 	function randomize() {
 		for (var i=0; i<board.length; i++) {
@@ -45,10 +46,16 @@ $(document).ready(function() {
 		opacity: 1}, 0, function(){});
 		setColor();
 	}
+
+	// making the pregame page not lose the color
+	$("#choice").click(function(){
+		console.log(color);
+	})
+
 	// function to get the color of a clicked cell
-	$("td").click(function() {
+	$("#board").click(function() {
 		var color = $(this).css("background-color");
-		var choiceColor = $("#choice td").css("background-color")
+		var choiceColor = $("#choice td").css("background-color");
 		if (color === choiceColor) {
 			$(this).css({backgroundColor: '#FFFFFF'});
 			$(this).animate({
@@ -68,10 +75,7 @@ $(document).ready(function() {
 		for (var i=0; i<board.length; i++) {
 			$("#d" + i).animate({
 				opacity: 0, color: '#FFFFFF'}, 5000, function() {
-
 				});
-
-			
 		}
 
 	});
@@ -125,7 +129,18 @@ $(document).ready(function() {
 		}
 	}
 
-
+	// function that mute the sound 
+	$("#muteButton").click(function() {
+		if(mute == 0){
+			mute = 1;
+			document.getElementById("music").pause();
+			$(this).attr("src","images/mute.png");
+		} else {
+			mute = 0;
+			document.getElementById("music").play();
+			$(this).attr("src","images/sound.png");
+		}
+	});
 
 setColor();
 	//var svgContainer = d3.select("#d2").append("svg").attr("width", 50).attr("height", 50);
