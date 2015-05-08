@@ -133,6 +133,8 @@ circle {
 #playButton{
 	position: relative;
 	top:50px;
+	margin-left:auto;
+	margin-right:auto;
 	font-size:20px;
 	height:60px;
 	width:300px;
@@ -143,7 +145,7 @@ circle {
 }
 
 #muteButton{
-	right:0;
+	right:5px;
 	bottom:0;
 	height:50px;
 	position: absolute;
