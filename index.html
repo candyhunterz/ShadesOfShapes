@@ -10,28 +10,27 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<script src="js/shades.js"></script>
- 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
- 	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
- 	<script type="text/javascript" src="js/TimeCircles.js"></script>
+	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 	<link rel="stylesheet" type="text/css" href="style/style.css"> 
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+	<script type="text/javascript" src="js/TimeCircles.js"></script>
 </head>
 <body>
+	<!--Audio file for music -->
 	<audio autoplay id="music">
 		<source src="sounds/elavator.mp3" type="audio/mpeg">
 	</audio>
+	
 	<!-- Start of the main page -->
 	<div data-role="page" id="main">
 		<img src="images/logo.png" alt="logo" id="logo">
 		<h1 id="mainHeader">Shades of Shapes</h1>
-		<a href="#pregame" data-role="button" data-inline="true" id="playButton">Play</a>
+		<a href="#foo" data-role="button" data-inline="true" id="playButton">Play</a>
 		<img src="images/sound.png" alt="mute" id="muteButton">
 	</div>
+	
 	<!-- Start of the pregame page -->
-	<div data-role="page" id="pregame">
-		<div data-role="header">
-			<h1>Pregame</h1>
-		</div><!-- /header -->
-
+	<div data-role="page" id="foo">
 
 	<div data-role="header">
 		<h1>Foo</h1>
@@ -41,23 +40,17 @@
 		<div id ="container">	
 			<div id="timerdiv">
 				<div id="timer"></div>
-				<script>
-					$("#timer").TimeCircles();
-					var delay = 2800; //Your delay in milliseconds
-
-					setTimeout(function(){ window.location = "#bar"; }, delay);
-				</script> 
 			</div>
 			<div id="choice">
 				<br/>
 				<h1><a href="#bar">TAP</a></h1>
 				<a href="#bar"><table>
-					<tr><td id='d25' onclick="click(event)"></td></tr>
+				<tr><td id='d25' onclick="click(event)"></td></tr>
 				</table></a>	
 			</div>
 		</div>
 	</div><!-- /content -->
-
+		
 		<div data-role="footer">
 			<h4>Page Footer</h4>
 		</div><!-- /footer -->
@@ -76,8 +69,7 @@
 				<div id="board">
 					<table>
 						<tr>
-							<td id='d0' onclick="click(event)">
-							</td>
+							<td id='d0' onclick="click(event)"></td>
 							<td id='d1' onclick="click(event)"></td>
 							<td id='d2' onclick="click(event)"></td>
 							<td id='d3' onclick="click(event)"></td>
@@ -131,7 +123,7 @@
 		<h3>Best Score:</h3>
 		<p><strong>0</strong></p>
 		
-		<a href="#main" data-role="button" data-inline="true">Play Again</a>
+		<a href="#foo" data-role="button" data-inline="true" id="playAgain">Play Again</a>
 		<a href="index.html" data-role="button" data-inline="true">Quit Game</a>
 	</div>
 
@@ -139,4 +131,3 @@
 	
 </body>
 </html>
-

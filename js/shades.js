@@ -4,12 +4,26 @@ $(document).ready(function() {
 	var board = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 	var row1, row2, row3, row4, row5, col1, col2, col3, col4, col5, leftDiag, rightDiag;
 	var correct = 0;
-
 	var mute = 0;
-
-
+	var SoundfxNum = "0";
+	var fx1 = new Audio("sounds/fx1.mp3");
+	var fx2 = new Audio("sounds/fx2.mp3");
+	var fx3 = new Audio("sounds/fx3.mp3");
+	var fx4 = new Audio("sounds/fx4.mp3");
+	var fx5 = new Audio("sounds/fx5.mp3");
+	
+	function startGame() {
+		$("#timer").TimeCircles();
+		$("#timer").TimeCircles().start();
+		var delay = 3000; //Your delay in milliseconds
+		setTimeout(function() {window.location = "#bar"; $("#timer").TimeCircles().destroy();}, delay);
+	}
+	
+	$("#playButton").click(function(){startGame()});
+	$("#playAgain").click(function(){startGame()});
+	
 	//function to randomize the colors of the cell
-	function randomize() {
+	function randomize(color,shape) {
 		for (var i=0; i<board.length; i++) {
 			var num = Math.floor(Math.random()*3)
 			var color='';
@@ -49,11 +63,12 @@ $(document).ready(function() {
 
 	// making the pregame page not lose the color
 	$("#choice").click(function(){
-		//console.log(color);
+		console.log(color);
 	})
 
 	// function to get the color of a clicked cell
-	$("#board").click(function() {
+	$("td").click(function() {
+		playSoundFx(SoundfxNum);
 		var color = $(this).css("background-color");
 		var choiceColor = $("#choice td").css("background-color");
 		if (color === choiceColor) {
@@ -93,42 +108,66 @@ $(document).ready(function() {
 			randomShapes(svgContainers[i]);
 		}	
 	}
-
+	
 	// function to randomly make a shape
 	function randomShapes(svg) {
-		var num = Math.floor(Math.random()*6)
-		var shape;
-		var color;
-		switch (num) {
-			case 0:
-			color = "green"; 
-				svg.append("circle")
-				.attr("cx",25)
-				.attr("cy",25)
-				.attr("r",25)
-				.attr("fill", color);
+	var num = Math.floor(Math.random()*6)
+	var shape;
+	var color;
+	switch (num) {
+		case 0:
+		color = "green"; 
+		svg.append("circle")
+		.attr("cx",25)
+		.attr("cy",25)
+		.attr("r",25)
+		.attr("fill", color);
+		break;
+		case 1: 
+		color = "cyan";
+		svg.append("rect")
+		.attr("width",50)
+		.attr("height",50)
+		.attr("fill", color);
+		break;
+		case 2: 
+		
+		break;
+		case 3: 
+		break;
+		case 4: 
+		break;
+		case 5: 
+		break;
+		default: ;
+		console.log("not a valid shape");
+	}
+}
+	//sound effects
+	function playSoundFx(fx){
+		switch(fx){
+			case "0":
+				SoundfxNum = "1";
+				fx1.play();
 				break;
-			case 1: 
-				color = "cyan";
-				svg.append("rect")
-				.attr("width",50)
-				.attr("height",50)
-				.attr("fill", color);
+			case "1" :
+				SoundfxNum = "2";
+				fx2.play();
 				break;
-			case 2: 
-
+			case  "2":
+				SoundfxNum = "3";
+				fx3.play();
 				break;
-			case 3: 
+			case  "3":
+				SoundfxNum = "4";
+				fx4.play();
 				break;
-			case 4: 
+			case  "4":
+				SoundfxNum = "0";
+				fx5.play();
 				break;
-			case 5: 
-				break;
-			default: ;
-				console.log("not a valid shape");
 		}
 	}
-
 	// function that mute the sound 
 	$("#muteButton").click(function() {
 		if(mute == 0){
@@ -143,8 +182,5 @@ $(document).ready(function() {
 	});
 
 setColor();
-	//var svgContainer = d3.select("#d2").append("svg").attr("width", 50).attr("height", 50);
-	//var circle = svgContainer.append("circle").attr("cx", 30).attr("cy", 30).attr("r", 20);
-
 
 });
