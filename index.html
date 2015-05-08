@@ -30,7 +30,7 @@
 	</div>
 	
 	<!-- Start of the pregame page -->
-	<div data-role="page" id="foo">
+	<div data-role="page" id="pregame">
 
 		<div data-role="header">
 			<h1>Shades of Shapes</h1>
@@ -43,13 +43,13 @@
 					<script>
 						$("#timer").TimeCircles();
 						var delay = 2800; //Your delay in milliseconds
-						setTimeout(function(){ window.location = "#bar"; }, delay);
+						setTimeout(function(){ window.location = "#game"; }, delay);
 					</script> 
 				</div>
 				<div id="choice">
 					<br/>
-					<h1><a href="#bar">TAP</a></h1>
-					<a href="#bar"><table>
+					<h1><a href="#game">TAP</a></h1>
+					<a href="#game"><table>
 					<tr><td id='d25' onclick="click(event)"></td></tr>
 					</table></a>	
 				</div>
@@ -61,7 +61,7 @@
 	</div><!-- /page -->
 
 	<!-- Start of the game page -->
-	<div data-role="page" id="bar">
+	<div data-role="page" id="game">
 		<div id="GameHeader">
 			<h1>Shades Of Shapes</h1>
 		</div>
@@ -127,7 +127,7 @@
 		<h3>Best Score:</h3>
 		<p><strong>0</strong></p>
 		
-		<a  onclick="click(event)" href="#foo" data-role="button" data-inline="true">Play Again</a>
+		<a onclick="click(event)"href="#pregame" data-role="button" data-inline="true" id="restart">Play Again</a>
 		<a href="index.html" data-role="button" data-inline="true">Quit Game</a>
 	</div>
 
