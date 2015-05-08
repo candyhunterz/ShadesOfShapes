@@ -43,7 +43,7 @@
 			</div>
 			<div id="choice">
 				<br/>
-				<h1><a href="#bar">TAP</a></h1>
+				<h1 onclick="click(event)"><a href="#bar">TAP</a></h1>
 				<a href="#bar"><table>
 				<tr><td id='d25' onclick="click(event)"></td></tr>
 				</table></a>	
@@ -128,6 +128,15 @@
 	</div>
 
 	<!-- //////////////////// -->
+	<!-- Start of the gameover page -->
+	<div data-role="page" class="ui-content" id="clear">
+		<h1 style="fontsize: xx-large">LEVEL 1 CLEARED</h1>
+		<h3>Score:</h3>
+		
+		
+		<a href="#foo" data-role="button" data-inline="true" id="playAgain">Play Again</a>
+		<a href="index.html" data-role="button" data-inline="true">Quit Game</a>
+	</div>
 	
 </body>
 </html>
