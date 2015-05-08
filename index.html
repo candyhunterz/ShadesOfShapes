@@ -9,50 +9,57 @@
 	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 	<script src="js/shades.js"></script>
- 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 	<link rel="stylesheet" type="text/css" href="style/style.css"> 
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+	<script type="text/javascript" src="js/TimeCircles.js"></script>
 </head>
 <body>
+	<!--Audio file for music -->
 	<audio autoplay id="music">
 		<source src="sounds/elavator.mp3" type="audio/mpeg">
 	</audio>
+	
 	<!-- Start of the main page -->
 	<div data-role="page" id="main">
 		<img src="images/logo.png" alt="logo" id="logo">
 		<h1 id="mainHeader">Shades of Shapes</h1>
-		<a href="#pregame" data-role="button" data-inline="true" id="playButton">Play</a>
+		<a href="#foo" data-role="button" data-inline="true" id="playButton">Play</a>
 		<img src="images/sound.png" alt="mute" id="muteButton">
 	</div>
+	
 	<!-- Start of the pregame page -->
-	<div data-role="page" id="pregame">
-		<div data-role="header">
-			<h1>Pregame</h1>
-		</div><!-- /header -->
+	<div data-role="page" id="foo">
 
-		<div role="main" class="ui-content">
-			<h1><a href="#game">TAP</a></h1>
-			<div id="choice">
-				<a href="#game">
-					<table>
-						<tr>
-							<td id='d25' onclick="click(event)"></td>
-						</tr>
-					</table>
-				</a>
+	<div data-role="header">
+		<h1>Foo</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<div id ="container">	
+			<div id="timerdiv">
+				<div id="timer"></div>
 			</div>
-		</div><!-- /content -->
-
+			<div id="choice">
+				<br/>
+				<h1 onclick="click(event)"><a href="#bar">TAP</a></h1>
+				<a href="#bar"><table>
+				<tr><td id='d25' onclick="click(event)"></td></tr>
+				</table></a>	
+			</div>
+		</div>
+	</div><!-- /content -->
+		
 		<div data-role="footer">
 			<h4>Page Footer</h4>
 		</div><!-- /footer -->
 	</div><!-- /page -->
 
 	<!-- Start of the game page -->
-	<div data-role="page" id="game">
+	<div data-role="page" id="bar">
 		<div id="logo">
-			<h1 id="header">Shades Of Shapes</h1>
+			<h1>Shades Of Shapes</h1>
 		</div>
 		<div role="main" class="ui-content">
 			<div id='score'> 
@@ -62,39 +69,39 @@
 				<div id="board">
 					<table>
 						<tr>
-							<td id='d0' class='cell' onclick="click(event)"></td>
-							<td id='d1' class='cell' onclick="click(event)"></td>
-							<td id='d2' class='cell' onclick="click(event)"></td>
-							<td id='d3' class='cell' onclick="click(event)"></td>
-							<td id='d4' class='cell' onclick="click(event)"></td>
+							<td id='d0' onclick="click(event)"></td>
+							<td id='d1' onclick="click(event)"></td>
+							<td id='d2' onclick="click(event)"></td>
+							<td id='d3' onclick="click(event)"></td>
+							<td id='d4' onclick="click(event)"></td>
 						</tr>
 						<tr>
-							<td id='d5' class='cell' onclick="click(event)"></td>
-							<td id='d6' class='cell' onclick="click(event)"></td>
-							<td id='d7' class='cell' onclick="click(event)"></td>
-							<td id='d8' class='cell' onclick="click(event)"></td>
-							<td id='d9' class='cell' onclick="click(event)"></td>
+							<td id='d5' onclick="click(event)"></td>
+							<td id='d6' onclick="click(event)"></td>
+							<td id='d7' onclick="click(event)"></td>
+							<td id='d8' onclick="click(event)"></td>
+							<td id='d9' onclick="click(event)"></td>
 						</tr>
 						<tr>
-							<td id='d10' class='cell' onclick="click(event)"></td>
-							<td id='d11' class='cell' onclick="click(event)"></td>
-							<td id='d12' class='cell' onclick="click(event)"></td>
-							<td id='d13' class='cell' onclick="click(event)"></td>
-							<td id='d14' class='cell' onclick="click(event)"></td>
+							<td id='d10' onclick="click(event)"></td>
+							<td id='d11' onclick="click(event)"></td>
+							<td id='d12' onclick="click(event)"></td>
+							<td id='d13' onclick="click(event)"></td>
+							<td id='d14' onclick="click(event)"></td>
 						</tr>
 						<tr>
-							<td id='d15' class='cell' onclick="click(event)"></td>
-							<td id='d16' class='cell' onclick="click(event)"></td>
-							<td id='d17' class='cell' onclick="click(event)"></td>
-							<td id='d18' class='cell' onclick="click(event)"></td>
-							<td id='d19' class='cell' onclick="click(event)"></td>
+							<td id='d15' onclick="click(event)"></td>
+							<td id='d16' onclick="click(event)"></td>
+							<td id='d17' onclick="click(event)"></td>
+							<td id='d18' onclick="click(event)"></td>
+							<td id='d19' onclick="click(event)"></td>
 						</tr>
 						<tr>
-							<td id='d20' class='cell' onclick="click(event)"></td>
-							<td id='d21' class='cell' onclick="click(event)"></td>
-							<td id='d22' class='cell' onclick="click(event)"></td>
-							<td id='d23' class='cell' onclick="click(event)"></td>
-							<td id='d24' class='cell' onclick="click(event)"></td>
+							<td id='d20' onclick="click(event)"></td>
+							<td id='d21' onclick="click(event)"></td>
+							<td id='d22' onclick="click(event)"></td>
+							<td id='d23' onclick="click(event)"></td>
+							<td id='d24' onclick="click(event)"></td>
 						</tr>
 					</table>
 				</div>
@@ -116,11 +123,20 @@
 		<h3>Best Score:</h3>
 		<p><strong>0</strong></p>
 		
-		<a onclick="click(event)"href="#pregame" data-role="button" data-inline="true" id="restart">Play Again</a>
+		<a href="#foo" data-role="button" data-inline="true" id="playAgain">Play Again</a>
 		<a href="index.html" data-role="button" data-inline="true">Quit Game</a>
 	</div>
 
 	<!-- //////////////////// -->
+	<!-- Start of the gameover page -->
+	<div data-role="page" class="ui-content" id="clear">
+		<h1 style="fontsize: xx-large">LEVEL 1 CLEARED</h1>
+		<h3>Score:</h3>
+		
+		
+		<a href="#foo" data-role="button" data-inline="true" id="playAgain">Play Again</a>
+		<a href="index.html" data-role="button" data-inline="true">Quit Game</a>
+	</div>
 	
 </body>
 </html>
