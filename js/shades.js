@@ -16,16 +16,11 @@ $(document).ready(function() {
 		$("#timer").TimeCircles();
 		$("#timer").TimeCircles().start();
 		var delay = 3000; //Your delay in milliseconds
-		setTimeout(function(){ window.location = "#bar"; $("#timer").TimeCircles().destroy(); }, delay);
+		setTimeout(function() {window.location = "#bar"; $("#timer").TimeCircles().destroy();}, delay);
 	}
 	
-	$("#playButton").click(function() {
-		startGame();
-	});
-	
-	$("#playAgain").click(function() {
-		startGame();
-	});
+	$("#playButton").click(function(){startGame()});
+	$("#playAgain").click(function(){startGame()});
 	
 	//function to randomize the colors of the cell
 	function randomize(color,shape) {
@@ -185,7 +180,6 @@ $(document).ready(function() {
 			$(this).attr("src","images/sound.png");
 		}
 	});
-	
 
 setColor();
 
