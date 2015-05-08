@@ -143,8 +143,8 @@ circle {
 }
 
 #muteButton{
-	float:right;
+	right:0;
+	bottom:0;
 	height:50px;
-	top:270px;
-	position: relative;
+	position: absolute;
 }
