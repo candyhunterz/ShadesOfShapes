@@ -19,20 +19,22 @@ $(document).ready(function() {
 	var yellowClicked = 0;
 	
 	function startGame() {
+		window.location = "#foo";
+		$("#timer").TimeCircles().destroy();
 		$("#timer").TimeCircles();
-		$("#timer").TimeCircles().start();
-		var delay = 3000; //Your delay in milliseconds
+		var delay = 3800; //Your delay in milliseconds
 		setTimeout(function() {
 			window.location = "#bar"; 
-			$("#timer").TimeCircles().destroy();
 			for (var i=0; i<board.length; i++) {
-				d3.select("#d"+i).style("opacity", 1).transition().duration(20000).style("opacity", 0);
+				d3.select("#d"+i).style("opacity", 1).transition()
+				.duration(15000).style("opacity", 0);
 			}
 			}, delay)
 	}
 	
 	$("#playButton").click(function(){startGame()});
 	$("#playAgain").click(function(){startGame()});
+	$("#playAgain2").click(function(){startGame()});
 	
 	//function to randomize the colors of the cell
 	function randomize(color,shape) {
