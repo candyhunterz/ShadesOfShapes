@@ -103,6 +103,10 @@ circle {
 	padding-top:10px;
 }
 
+#main{
+	background:linear-gradient(#FFFFFF, #B8B8B8);
+}
+
 .time_circles {
     position: relative;
     width: 100%;

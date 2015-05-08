@@ -11,6 +11,27 @@ $(document).ready(function() {
 	var fx3 = new Audio("sounds/fx3.mp3");
 	var fx4 = new Audio("sounds/fx4.mp3");
 	var fx5 = new Audio("sounds/fx5.mp3");
+	var red = 0;
+	var blue = 0;
+	var yellow = 0;
+	var redClicked = 0;
+	var blueClicked = 0;
+	var yellowClicked = 0;
+	
+	function startGame() {
+		$("#timer").TimeCircles();
+		$("#timer").TimeCircles().start();
+		var delay = 3000; //Your delay in milliseconds
+		setTimeout(function() {
+			window.location = "#bar"; 
+			$("#timer").TimeCircles().destroy();}, delay);
+			for (var i=0; i<board.length; i++) {
+				d3.select("#d"+i).style("opacity", 1).transition().duration(20000).style("opacity", 0);
+		}
+	}
+	
+	$("#playButton").click(function(){startGame()});
+	$("#playAgain").click(function(){startGame()});
 	
 	//function to randomize the colors of the cell
 	function randomize(color,shape) {
@@ -36,6 +57,8 @@ $(document).ready(function() {
 	function setColor() {
 		randomize();
 		makeShapes();
+		countColor();
+		console.log("red: " + red + " blue: " + blue + " yellow: " + yellow);
 	}
 	
 	//function to return the color of selection box
@@ -45,14 +68,22 @@ $(document).ready(function() {
 
 
 	function reset() {
-		$("img").remove("#checkmark");
-		$("td").animate({
-		opacity: 1}, 0, function(){});
+		blue = 0;
+		red = 0;
+		yellow = 0;
+		window.location = "#foo";
+		$("svg").remove();
+
 		setColor();
 	}
 
 	// making the pregame page not lose the color
-	$("#choice").click(function(){
+	$("h1").click(function(){
+		$("svg").remove();
+		setColor();
+		for (var i=0; i<board.length; i++) {
+				d3.select("#d"+i).style("opacity", 1).transition().duration(20000).style("opacity", 0);
+		}
 		console.log(color);
 	})
 
@@ -62,12 +93,23 @@ $(document).ready(function() {
 		var color = $(this).css("background-color");
 		var choiceColor = $("#choice td").css("background-color");
 		if (color === choiceColor) {
-			$(this).css({backgroundColor: '#FFFFFF'});
-			$(this).animate({
-			opacity: 1}, 0, function(){});
-			correct += 1;
+			d3.select(this).style("opacity", 0).transition().duration(0).style("opacity", 1);
 		}
+		if (color === "rgb(255, 255, 0)")
+			yellowClicked++;
+		if (color === "rgb(0, 0, 255)")
+			blueClicked++;
+		if (color === "rgb(255, 0, 0)")
+			redClicked++;
+		if (yellowClicked == (yellow*2) || blueClicked == (blue*2) || redClicked == (red*2)) {
+			for (var i=0; i<board.length; i++) {
+				d3.select("#d"+i).style("opacity", 0).transition().duration(0).style("opacity", 1);
+		}
+			nextLevel();
+		}
+
 		console.log(color);
+		console.log(yellowClicked);
 	})
 
 	
@@ -170,6 +212,29 @@ $(document).ready(function() {
 			$(this).attr("src","images/sound.png");
 		}
 	});
+
+	// function that tally up all the colors
+	function countColor() {
+		color = [];
+		for (var i=0; i<board.length; i++) {
+			color[i] = $("#d" + i).css("background-color");
+			
+		}
+		for (var i=0; i<color.length; i++) {
+			if (color[i] === "rgb(0, 0, 255)")
+				blue++;
+			if (color[i] === "rgb(255, 0, 0)")
+				red++;
+			if (color[i] === "rgb(255, 255, 0)")
+				yellow++;
+
+		}
+
+	}
+
+	function nextLevel() {
+		window.location = "#clear"
+	}
 
 setColor();
 
