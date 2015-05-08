@@ -24,10 +24,11 @@ $(document).ready(function() {
 		var delay = 3000; //Your delay in milliseconds
 		setTimeout(function() {
 			window.location = "#bar"; 
-			$("#timer").TimeCircles().destroy();}, delay);
+			$("#timer").TimeCircles().destroy();
 			for (var i=0; i<board.length; i++) {
 				d3.select("#d"+i).style("opacity", 1).transition().duration(20000).style("opacity", 0);
-		}
+			}
+			}, delay)
 	}
 	
 	$("#playButton").click(function(){startGame()});
