@@ -82,6 +82,7 @@ $(document).ready(function() {
 	}
 
 	// making the pregame page not lose the color
+	/* 
 	$("h1").click(function(){
 		$("svg").remove();
 		setColor();
@@ -89,7 +90,7 @@ $(document).ready(function() {
 				d3.select("#d"+i).style("opacity", 1).transition().duration(20000).style("opacity", 0);
 		}
 		console.log(color);
-	})
+	}) */
 
 	// function to get the color of a clicked cell
 	$("td").click(function() {
