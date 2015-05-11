@@ -20,12 +20,12 @@ $(document).ready(function() {
 	
 	function startGame() {
 		reset();
-		window.location = "#foo";
+		window.location = "#pregame";
 		$("#timer").TimeCircles().destroy();
 		$("#timer").TimeCircles();
 		var delay = 3800; //Your delay in milliseconds
 		setTimeout(function() {
-			window.location = "#bar"; 
+			window.location = "#game"; 
 			for (var i=0; i<board.length; i++) {
 				d3.select("#d"+i).style("opacity", 1).transition()
 				.duration(15000).style("opacity", 0);
@@ -35,7 +35,7 @@ $(document).ready(function() {
 	
 	//Use the class tag so every Play and Playagain button can be referenced the same
 	$(".play").click(function(){startGame()});
-	
+
 	//function to randomize the colors of the cell
 	function randomize(color,shape) {
 		for (var i=0; i<board.length; i++) {
