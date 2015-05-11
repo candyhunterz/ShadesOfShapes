@@ -27,7 +27,7 @@
     };
     var secondsIn = {
         Seconds: 1,
-        Minutes: 3
+        Minutes: 4
     };
 
     /**
@@ -682,7 +682,7 @@
 	
     TC_Instance.prototype.default_options = {
 		ref_date: new Date(),
-        start: false,
+        start: true,
         animation: "smooth",
         count_past_zero: true,
         circle_bg_color: "Red",

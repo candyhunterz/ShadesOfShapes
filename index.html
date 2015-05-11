@@ -9,10 +9,10 @@
 	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-	<script src="js/shades.js"></script>
 	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-	<link rel="stylesheet" type="text/css" href="style/style.css"> 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="style/style.css"> 
+	<script src="js/shades.js"></script>
 	<script type="text/javascript" src="js/TimeCircles.js"></script>
 </head>
 <body>
@@ -25,32 +25,30 @@
 	<div data-role="page" id="main">
 		<img src="images/logo.png" alt="logo" id="logo">
 		<h1 id="mainHeader">Shades of Shapes</h1>
-		<a href="#foo" data-role="button" data-inline="true" id="playButton">Play</a>
+		<a data-role="button" data-inline="true"  class="play" id="playButton">Play</a>
 		<img src="images/sound.png" alt="mute" id="muteButton">
 	</div>
+	<!-- End of the main page -->
 	
 	<!-- Start of the pregame page -->
 	<div data-role="page" id="foo">
-
-	<div data-role="header">
-		<h1>Foo</h1>
-	</div><!-- /header -->
-
-	<div role="main" class="ui-content">
-		<div id ="container">	
-			<div id="timerdiv">
-				<div id="timer"></div>
+		<div data-role="header">
+			<h1>Foo</h1>
+		</div><!-- /header -->
+		<div role="main" class="ui-content">
+			<div id ="container">	
+				<div id="timerdiv">
+					<div id="timer"></div>
+				</div>
+				<div id="choice">
+					<br/>
+					<h1 onclick="click(event)"><a href="#bar">TAP</a></h1>
+					<a href="#bar"><table>
+					<tr><td id='d25' onclick="click(event)"></td></tr>
+					</table></a>	
+				</div>
 			</div>
-			<div id="choice">
-				<br/>
-				<h1 onclick="click(event)"><a href="#bar">TAP</a></h1>
-				<a href="#bar"><table>
-				<tr><td id='d25' onclick="click(event)"></td></tr>
-				</table></a>	
-			</div>
-		</div>
-	</div><!-- /content -->
-		
+		</div><!-- /content -->
 		<div data-role="footer">
 			<h4>Page Footer</h4>
 		</div><!-- /footer -->
@@ -122,19 +120,16 @@
 		<p><strong>0</strong></p>
 		<h3>Best Score:</h3>
 		<p><strong>0</strong></p>
-		
-		<a href="#foo" data-role="button" data-inline="true" id="playAgain">Play Again</a>
+		<a  data-role="button" data-inline="true" class="play">Play Again</a>
 		<a href="index.html" data-role="button" data-inline="true">Quit Game</a>
 	</div>
 
 	<!-- //////////////////// -->
 	<!-- Start of the gameover page -->
-	<div data-role="page" class="ui-content" id="clear">
-		<h1 style="fontsize: xx-large">LEVEL 1 CLEARED</h1>
+	<div data-role="page" class="ui-content " id="clear">
+		<h1 id="levelClear" style="fontsize: xx-large">LEVEL 1 CLEARED</h1>
 		<h3>Score:</h3>
-		
-		
-		<a href="#foo" data-role="button" data-inline="true" id="playAgain">Play Again</a>
+		<a data-role="button" data-inline="true" class="play">Play Again</a>
 		<a href="index.html" data-role="button" data-inline="true">Quit Game</a>
 	</div>
 	

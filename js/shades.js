@@ -19,19 +19,22 @@ $(document).ready(function() {
 	var yellowClicked = 0;
 	
 	function startGame() {
+		reset();
+		window.location = "#foo";
+		$("#timer").TimeCircles().destroy();
 		$("#timer").TimeCircles();
-		$("#timer").TimeCircles().start();
-		var delay = 3000; //Your delay in milliseconds
+		var delay = 3800; //Your delay in milliseconds
 		setTimeout(function() {
 			window.location = "#bar"; 
-			$("#timer").TimeCircles().destroy();}, delay);
 			for (var i=0; i<board.length; i++) {
-				d3.select("#d"+i).style("opacity", 1).transition().duration(20000).style("opacity", 0);
-		}
+				d3.select("#d"+i).style("opacity", 1).transition()
+				.duration(15000).style("opacity", 0);
+			}
+			}, delay)
 	}
 	
-	$("#playButton").click(function(){startGame()});
-	$("#playAgain").click(function(){startGame()});
+	//Use the class tag so every Play and Playagain button can be referenced the same
+	$(".play").click(function(){startGame()});
 	
 	//function to randomize the colors of the cell
 	function randomize(color,shape) {
@@ -71,9 +74,10 @@ $(document).ready(function() {
 		blue = 0;
 		red = 0;
 		yellow = 0;
-		window.location = "#foo";
+		redClicked = 0;
+		blueClicked = 0;
+		yellowClicked = 0;
 		$("svg").remove();
-
 		setColor();
 	}
 
@@ -104,18 +108,13 @@ $(document).ready(function() {
 		if (yellowClicked == (yellow*2) || blueClicked == (blue*2) || redClicked == (red*2)) {
 			for (var i=0; i<board.length; i++) {
 				d3.select("#d"+i).style("opacity", 0).transition().duration(0).style("opacity", 1);
-		}
+			}
 			nextLevel();
 		}
 
 		console.log(color);
 		console.log(yellowClicked);
 	})
-
-	
-	$("#restart").click(function() {
-		reset();
-	});
 
 	$("#timed").click(function() {
 		reset();
@@ -124,7 +123,6 @@ $(document).ready(function() {
 				opacity: 0, color: '#FFFFFF'}, 5000, function() {
 				});
 		}
-
 	});
 
 	// function to generate shapes into each cell using svg 
