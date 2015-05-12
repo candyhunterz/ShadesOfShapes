@@ -19,6 +19,7 @@ $(document).ready(function() {
 	var yellowClicked = 0;
 	var clicked = false;
 	
+	// starts the game
 	function startGame() {
 		reset();
 		window.location = "#pregame";
@@ -38,7 +39,7 @@ $(document).ready(function() {
 	$(".play").click(function(){startGame()});
 
 	//function to randomize the colors of the cell
-	function randomize(color,shape) {
+	function randomize(color) {
 		for (var i=0; i<board.length; i++) {
 			var num = Math.floor(Math.random()*3)
 			var color='';
@@ -235,7 +236,5 @@ $(document).ready(function() {
 	function nextLevel() {
 		window.location = "#clear"
 	}
-
-setColor();
 
 });
