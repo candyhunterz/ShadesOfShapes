@@ -17,6 +17,10 @@ $(document).ready(function() {
 	var redClicked = 0;
 	var blueClicked = 0;
 	var yellowClicked = 0;
+<<<<<<< HEAD
+=======
+	var clicked = false;
+>>>>>>> 06aeb0d084932b01ebcd348be9e60a9f0af199f3
 	
 	function startGame() {
 		reset();
