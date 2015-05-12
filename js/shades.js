@@ -17,14 +17,16 @@ $(document).ready(function() {
 	var redClicked = 0;
 	var blueClicked = 0;
 	var yellowClicked = 0;
+	var clicked = false;
 	
 	function startGame() {
-		window.location = "#foo";
+		reset();
+		window.location = "#pregame";
 		$("#timer").TimeCircles().destroy();
 		$("#timer").TimeCircles();
 		var delay = 3800; //Your delay in milliseconds
 		setTimeout(function() {
-			window.location = "#bar"; 
+			window.location = "#game"; 
 			for (var i=0; i<board.length; i++) {
 				d3.select("#d"+i).style("opacity", 1).transition()
 				.duration(15000).style("opacity", 0);
@@ -32,10 +34,9 @@ $(document).ready(function() {
 			}, delay)
 	}
 	
-	$("#playButton").click(function(){startGame()});
-	$("#playAgain").click(function(){startGame()});
-	$("#playAgain2").click(function(){startGame()});
-	
+	//Use the class tag so every Play and Playagain button can be referenced the same
+	$(".play").click(function(){startGame()});
+
 	//function to randomize the colors of the cell
 	function randomize(color,shape) {
 		for (var i=0; i<board.length; i++) {
@@ -74,13 +75,15 @@ $(document).ready(function() {
 		blue = 0;
 		red = 0;
 		yellow = 0;
-		window.location = "#foo";
+		redClicked = 0;
+		blueClicked = 0;
+		yellowClicked = 0;
 		$("svg").remove();
-
 		setColor();
 	}
 
 	// making the pregame page not lose the color
+	/* 
 	$("h1").click(function(){
 		$("svg").remove();
 		setColor();
@@ -88,7 +91,7 @@ $(document).ready(function() {
 				d3.select("#d"+i).style("opacity", 1).transition().duration(20000).style("opacity", 0);
 		}
 		console.log(color);
-	})
+	}) */
 
 	// function to get the color of a clicked cell
 	$("td").click(function() {
@@ -107,18 +110,13 @@ $(document).ready(function() {
 		if (yellowClicked == (yellow*2) || blueClicked == (blue*2) || redClicked == (red*2)) {
 			for (var i=0; i<board.length; i++) {
 				d3.select("#d"+i).style("opacity", 0).transition().duration(0).style("opacity", 1);
-		}
+			}
 			nextLevel();
 		}
 
 		console.log(color);
 		console.log(yellowClicked);
 	})
-
-	
-	$("#restart").click(function() {
-		reset();
-	});
 
 	$("#timed").click(function() {
 		reset();
@@ -127,7 +125,6 @@ $(document).ready(function() {
 				opacity: 0, color: '#FFFFFF'}, 5000, function() {
 				});
 		}
-
 	});
 
 	// function to generate shapes into each cell using svg 
