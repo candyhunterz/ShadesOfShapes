@@ -18,6 +18,7 @@ $(document).ready(function() {
 	var blueClicked = 0;
 	var yellowClicked = 0;
 	
+	// starts the game
 	function startGame() {
 		window.location = "#foo";
 		$("#timer").TimeCircles().destroy();
