@@ -238,4 +238,6 @@ $(document).ready(function() {
 	}
 
 
+setColor();
+
 });
