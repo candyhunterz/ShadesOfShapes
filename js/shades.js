@@ -150,38 +150,45 @@ $(document).ready(function() {
 	}
 	
 	// function to randomly make a shape
-	function randomShapes(svg) {
-	var num = Math.floor(Math.random()*6)
-	var shape;
-	var color = [];
-	switch (num) {
-		case 0:
-		color = randomColor(1); 
-		svg.append("circle")
-		.attr("cx",25)
-		.attr("cy",25)
-		.attr("r",25)
-		.attr("fill", color[0]);
-		break;
-		case 1: 
-		color = randomColor(1);
-		svg.append("rect")
-		.attr("width",50)
-		.attr("height",50)
-		.attr("fill", color[0]);
-		break;
-		case 2: 
+	function randomShapes(svg, snum) {
 		
-		break;
-		case 3: 
-		break;
-		case 4: 
-		break;
-		case 5: 
-		break;
-		default: ;
-		console.log("not a valid shape");
-	}
+		var shape;
+		var color = [];
+		var shapeList = [];
+		for (var i=0; i<snum; i++) {
+			var num = Math.floor(Math.random()*6)
+			switch (num) {
+				case 0:
+				color = randomColor(1); 
+				shape = svg.append("circle")
+				.attr("cx",25)
+				.attr("cy",25)
+				.attr("r",25)
+				.attr("fill", color[0]);
+				shapeList[i] = shape;
+				break;
+				case 1: 
+				color = randomColor(1);
+				shape = svg.append("rect")
+				.attr("width",50)
+				.attr("height",50)
+				.attr("fill", color[0]);
+				shapeList[i] = shape;
+				break;
+				case 2: 
+				break;
+				case 3: 
+				break;
+				case 4: 
+				break;
+				case 5: 
+				break;
+				default: ;
+				console.log("not a valid shape");
+			}
+		}
+		console.log(shapeList);
+		return shapeList;
 }
 	//sound effects
 	function playSoundFx(fx){
@@ -244,6 +251,7 @@ $(document).ready(function() {
 		window.location = "#clear"
 	}
 
+
 //////////////////////////////////////////////////////////////////////////////////
 
 	// new function to generate color
@@ -286,6 +294,5 @@ $(document).ready(function() {
 	}
 	
 
-setColor();
 
 });
