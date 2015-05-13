@@ -4,15 +4,15 @@ $(document).ready(function() {
 	var numShapes = 0;
 	var fadeTime = 18000;
 	
-	function startLevel(level) {
+	function startLevel() {
 		//TO-DO: put in start level
 		
-		if(level <= 7) {
+		if(gameLevel <= 7) {
 			//Easy Levels 1-7
 			if(numColors < 5) {
 				numColors++;
 			}
-		}else if(level <= 14) {
+		}else if(gameLevel <= 14) {
 			//Medium Levels 8-14
 			if(numShapes < 6) {
 				numShapes++;
