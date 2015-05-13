@@ -19,10 +19,11 @@ $(document).ready(function() {
 			}
 		}else {
 			//Hard Levels 15+
-			if(fadeTime > 5000) {
+			if(fadeTime > 3000) {
 				fadeTime -= 500;
 			}
 		}
+		gameLevel++;
 	}
 	
 	function newGame() {
