@@ -18,6 +18,9 @@ $(document).ready(function() {
 	var blueClicked = 0;
 	var yellowClicked = 0;
 	var clicked = false;
+
+	var score = 0;
+
 	
 	// starts the game
 	function startGame() {
@@ -39,7 +42,8 @@ $(document).ready(function() {
 	$(".play").click(function(){startGame()});
 
 	//function to randomize the colors of the cell
-	function randomize(color) {
+
+	function randomize() {
 		for (var i=0; i<board.length; i++) {
 			var num = Math.floor(Math.random()*3)
 			var color='';
@@ -79,6 +83,7 @@ $(document).ready(function() {
 		redClicked = 0;
 		blueClicked = 0;
 		yellowClicked = 0;
+		score = 0;
 		$("svg").remove();
 		setColor();
 	}
@@ -101,6 +106,8 @@ $(document).ready(function() {
 		var choiceColor = $("#choice td").css("background-color");
 		if (color === choiceColor) {
 			d3.select(this).style("opacity", 0).transition().duration(0).style("opacity", 1);
+			score += 100;
+			$("#score").html(score);
 		}
 		if (color === "rgb(255, 255, 0)")
 			yellowClicked++;
@@ -108,7 +115,7 @@ $(document).ready(function() {
 			blueClicked++;
 		if (color === "rgb(255, 0, 0)")
 			redClicked++;
-		if (yellowClicked == (yellow*2) || blueClicked == (blue*2) || redClicked == (red*2)) {
+		if ((yellowClicked == (yellow*2 ) && color===choiceColor) || (blueClicked == (blue*2) && color === choiceColor) || (redClicked == (red*2) && color === choiceColor)) {
 			for (var i=0; i<board.length; i++) {
 				d3.select("#d"+i).style("opacity", 0).transition().duration(0).style("opacity", 1);
 			}
@@ -146,22 +153,22 @@ $(document).ready(function() {
 	function randomShapes(svg) {
 	var num = Math.floor(Math.random()*6)
 	var shape;
-	var color;
+	var color = [];
 	switch (num) {
 		case 0:
-		color = "green"; 
+		color = randomColor(1); 
 		svg.append("circle")
 		.attr("cx",25)
 		.attr("cy",25)
 		.attr("r",25)
-		.attr("fill", color);
+		.attr("fill", color[0]);
 		break;
 		case 1: 
-		color = "cyan";
+		color = randomColor(1);
 		svg.append("rect")
 		.attr("width",50)
 		.attr("height",50)
-		.attr("fill", color);
+		.attr("fill", color[0]);
 		break;
 		case 2: 
 		
@@ -236,6 +243,49 @@ $(document).ready(function() {
 	function nextLevel() {
 		window.location = "#clear"
 	}
+
+
+//////////////////////////////////////////////////////////////////////////////////
+
+	// new function to generate color
+	// cnum from 0 to 5
+	// returns an array of random colors
+	function randomColor(cnum) {
+		var colorList = [];
+		for (var i=0; i<cnum; i++) {
+			var num = Math.floor(Math.random()*5);
+			var color;
+			switch (num) {
+				case 0: 
+					color = "blue";
+					colorList[i] = color;
+					break;
+				case 1:
+					color = "red";
+					colorList[i] = color;
+					break;
+				case 2:
+					color = "yellow";
+					colorList[i] = color;
+					break;
+				case 3:
+					color = "green";
+					colorList[i] = color;
+					break;
+				case 4:
+					color = "purple";
+					colorList[i] = color;
+					break;
+				default:
+					console.log("cnum too big");
+			}
+
+		}	
+		//console.log(colorList);
+		
+		return colorList;
+	}
+	
 
 
 });
