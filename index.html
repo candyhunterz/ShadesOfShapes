@@ -45,9 +45,9 @@
 				</div>
 				<div id="choice">
 					<br/>
-					<h1 onclick="click(event)"><a href="#pregame">TAP</a></h1>
+					<h1 onclick="click(event)">TAP</h1>
 					<table>
-					<tr><td id='d25' onclick="click(event)"></td></tr>
+					<tr><td id='d25' ></td></tr>
 					</table>
 				</div>
 			</div>
@@ -120,12 +120,19 @@
 	<div data-role="page" class="ui-content" id="LeaderboardPage">
 	
 		<h1 id="LeaderTitle" >Leaderboard</h1>
+		<!--
 		<div class="input-group">
-		  <input type="text" class="form-control" placeholder="Name">
+		  <input type="text" class="form-control" id="userID" placeholder="Name">
 		</div>
 		<div class="input-group">
-		  <input type="text" class="form-control" placeholder="Score">
+		  <input type="text" class="form-control" id="userScore" placeholder="Score">
 		</div>
+		-->
+		
+		 <input type="text" class="form-control" id="userID" placeholder="Name">
+		 <input type="text" class="form-control" id="userScore" placeholder="Score">
+		 
+		<div data-role="button" type="submit" class="btn btn-default" id="send">Submit</div>
 		<a  data-role="button" data-inline="true" class="menu">Main Menu</a>
 	</div>
 	
