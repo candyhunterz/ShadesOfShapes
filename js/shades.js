@@ -252,6 +252,7 @@ $(document).ready(function() {
 	}
 
 
+
 //////////////////////////////////////////////////////////////////////////////////
 
 	// new function to generate color
@@ -293,6 +294,7 @@ $(document).ready(function() {
 		return colorList;
 	}
 	
+
 
 
 });
