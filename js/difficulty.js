@@ -6,23 +6,12 @@ $(document).ready(function() {
 	
 	function difficulty(level) {
 		if(level <= 7) {
-			easy(numColors);
+			numColors++;
 		}else if(level <= 14) {
-			med(numColors, numShapes);
+			numShapes++;
 		}else {
-			hard(numColors, numShapes, fadeTime);
+			fadeTime -= 500;
 		}
 	}
 	
-	function easy(colors) {
-		numColors++;
-	}
-	
-	function med(colors, shapes) {
-		numShapes++
-	}
-	
-	function hard(colors, shapes, fade) {
-		fadeTime -= 500;
-	}
 });
