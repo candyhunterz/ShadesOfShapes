@@ -19,7 +19,7 @@
 </head>
 <body>
 	<!--Audio file for music -->
-	<audio autoplay id="music">
+	<audio id="music">
 		<source src="sounds/elavator.mp3" type="audio/mpeg">
 	</audio>
 	
@@ -70,39 +70,39 @@
 				<div id="board">
 					<table>
 						<tr>
-							<td id='d0' onclick="click(event)"></td>
-							<td id='d1' onclick="click(event)"></td>
-							<td id='d2' onclick="click(event)"></td>
-							<td id='d3' onclick="click(event)"></td>
-							<td id='d4' onclick="click(event)"></td>
+							<td id='d0' ></td>
+							<td id='d1' ></td>
+							<td id='d2' ></td>
+							<td id='d3' ></td>
+							<td id='d4' ></td>
 						</tr>
 						<tr>
-							<td id='d5' onclick="click(event)"></td>
-							<td id='d6' onclick="click(event)"></td>
-							<td id='d7' onclick="click(event)"></td>
-							<td id='d8' onclick="click(event)"></td>
-							<td id='d9' onclick="click(event)"></td>
+							<td id='d5' ></td>
+							<td id='d6' ></td>
+							<td id='d7' ></td>
+							<td id='d8' ></td>
+							<td id='d9' ></td>
 						</tr>
 						<tr>
-							<td id='d10' onclick="click(event)"></td>
-							<td id='d11' onclick="click(event)"></td>
-							<td id='d12' onclick="click(event)"></td>
-							<td id='d13' onclick="click(event)"></td>
-							<td id='d14' onclick="click(event)"></td>
+							<td id='d10'></td>
+							<td id='d11'></td>
+							<td id='d12'></td>
+							<td id='d13'></td>
+							<td id='d14'></td>
 						</tr>
 						<tr>
-							<td id='d15' onclick="click(event)"></td>
-							<td id='d16' onclick="click(event)"></td>
-							<td id='d17' onclick="click(event)"></td>
-							<td id='d18' onclick="click(event)"></td>
-							<td id='d19' onclick="click(event)"></td>
+							<td id='d15'></td>
+							<td id='d16'></td>
+							<td id='d17'></td>
+							<td id='d18'></td>
+							<td id='d19'></td>
 						</tr>
 						<tr>
-							<td id='d20' onclick="click(event)"></td>
-							<td id='d21' onclick="click(event)"></td>
-							<td id='d22' onclick="click(event)"></td>
-							<td id='d23' onclick="click(event)"></td>
-							<td id='d24' onclick="click(event)"></td>
+							<td id='d20'></td>
+							<td id='d21'></td>
+							<td id='d22'></td>
+							<td id='d23'></td>
+							<td id='d24'></td>
 						</tr>
 					</table>
 				</div>
@@ -120,12 +120,12 @@
 	<div data-role="page" class="ui-content" id="LeaderboardPage">
 	
 		<h1 id="LeaderTitle" >Leaderboard</h1>
-		<table>
-			<tr>
-				<td></td>
-				<td></td>
-			</tr>
-		</table>
+		<div class="input-group">
+		  <input type="text" class="form-control" placeholder="Name">
+		</div>
+		<div class="input-group">
+		  <input type="text" class="form-control" placeholder="Score">
+		</div>
 		<a  data-role="button" data-inline="true" class="menu">Main Menu</a>
 	</div>
 	
@@ -137,16 +137,17 @@
 		<h3>Best Score:</h3>
 		<p><strong>0</strong></p>
 		<a  data-role="button" data-inline="true" class="play">Play Again</a>
-		<a href="index.html" data-role="button" data-inline="true">Quit Game</a>
+		<a data-role="button" data-inline="true" class="menu">Quit Game</a>
+		<a data-role="button" data-inline="true"  class="board">Leaderboard</a>
 	</div>
 
-	<!-- //////////////////// -->
 	<!-- Start of the gameover page -->
 	<div data-role="page" class="ui-content " id="clear">
 		<h1 id="levelClear" style="fontsize: xx-large">LEVEL 1 CLEARED</h1>
 		<h3>Score:</h3>
 		<a data-role="button" data-inline="true" class="play">Play Again</a>
 		<a data-role="button" data-inline="true" class="menu">Quit Game</a>
+		<a data-role="button" data-inline="true"  class="board">Leaderboard</a>
 	</div>
 	
 </body>
