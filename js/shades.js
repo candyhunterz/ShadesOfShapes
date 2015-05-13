@@ -244,7 +244,6 @@ $(document).ready(function() {
 		window.location = "#clear"
 	}
 
-
 //////////////////////////////////////////////////////////////////////////////////
 
 	// new function to generate color
@@ -287,5 +286,6 @@ $(document).ready(function() {
 	}
 	
 
+setColor();
 
 });
