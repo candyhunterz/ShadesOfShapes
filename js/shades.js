@@ -18,7 +18,7 @@ $(document).ready(function() {
 	var blueClicked = 0;
 	var yellowClicked = 0;
 	var clicked = false;
-	
+	var score = 0;
 	function startGame() {
 		reset();
 		window.location = "#pregame";
@@ -38,7 +38,7 @@ $(document).ready(function() {
 	$(".play").click(function(){startGame()});
 
 	//function to randomize the colors of the cell
-	function randomize(color,shape) {
+	function randomize() {
 		for (var i=0; i<board.length; i++) {
 			var num = Math.floor(Math.random()*3)
 			var color='';
@@ -78,6 +78,7 @@ $(document).ready(function() {
 		redClicked = 0;
 		blueClicked = 0;
 		yellowClicked = 0;
+		score = 0;
 		$("svg").remove();
 		setColor();
 	}
@@ -100,6 +101,8 @@ $(document).ready(function() {
 		var choiceColor = $("#choice td").css("background-color");
 		if (color === choiceColor) {
 			d3.select(this).style("opacity", 0).transition().duration(0).style("opacity", 1);
+			score += 100;
+			$("#score").html(score);
 		}
 		if (color === "rgb(255, 255, 0)")
 			yellowClicked++;
@@ -107,7 +110,7 @@ $(document).ready(function() {
 			blueClicked++;
 		if (color === "rgb(255, 0, 0)")
 			redClicked++;
-		if (yellowClicked == (yellow*2) || blueClicked == (blue*2) || redClicked == (red*2)) {
+		if ((yellowClicked == (yellow*2 ) && color===choiceColor) || (blueClicked == (blue*2) && color === choiceColor) || (redClicked == (red*2) && color === choiceColor)) {
 			for (var i=0; i<board.length; i++) {
 				d3.select("#d"+i).style("opacity", 0).transition().duration(0).style("opacity", 1);
 			}
