@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
 	// init game constants
-	var board = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+	var board = [[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]];
 	var row1, row2, row3, row4, row5, col1, col2, col3, col4, col5, leftDiag, rightDiag;
 	var correct = 0;
 	var mute = 0;
@@ -47,7 +47,7 @@ $(document).ready(function() {
 		for (var i=0; i<board.length; i++) {
 			var num = Math.floor(Math.random()*3)
 			var color='';
-			board[i] = 0;
+			board[i][0] = 0;
 			if (num == 0) {
 				color = 'red';
 			}
@@ -58,6 +58,7 @@ $(document).ready(function() {
 				color = 'yellow';
 			}
 			$("#d"+i).css({backgroundColor: color});
+			board[i][0] = "d" + i;
 		}
 		$("#choice td").css({backgroundColor: color});
 	}
@@ -101,21 +102,28 @@ $(document).ready(function() {
 
 	// function to get the color of a clicked cell
 	$("td").click(function() {
-		playSoundFx(SoundfxNum);
-		var color = $(this).css("background-color");
-		var choiceColor = $("#choice td").css("background-color");
-		if (color === choiceColor) {
-			d3.select(this).style("opacity", 0).transition().duration(0).style("opacity", 1);
-			score += 100;
-			$("#score").html(score);
+		if(this.id != "d25"){
+			for(var i=0; i<board.length; i++) {
+				if(this.id == board[i][0] && board[i][1] == 0){
+					board[i][1] = 1;
+					playSoundFx(SoundfxNum);
+					var color = $(this).css("background-color");
+					var choiceColor = $("#choice td").css("background-color");
+					if (color === choiceColor) {
+						d3.select(this).style("opacity", 0).transition().duration(0).style("opacity", 1);
+						score += 100;
+						$(".score").html(score);
+					}
+					if (color === "rgb(255, 255, 0)")
+						yellowClicked++;
+					if (color === "rgb(0, 0, 255)")
+						blueClicked++;
+					if (color === "rgb(255, 0, 0)")
+						redClicked++;
+				}
+			}
 		}
-		if (color === "rgb(255, 255, 0)")
-			yellowClicked++;
-		if (color === "rgb(0, 0, 255)")
-			blueClicked++;
-		if (color === "rgb(255, 0, 0)")
-			redClicked++;
-		if ((yellowClicked == (yellow*2 ) && color===choiceColor) || (blueClicked == (blue*2) && color === choiceColor) || (redClicked == (red*2) && color === choiceColor)) {
+		if ((yellowClicked == (yellow ) && color===choiceColor) || (blueClicked == (blue) && color === choiceColor) || (redClicked == (red) && color === choiceColor)) {
 			for (var i=0; i<board.length; i++) {
 				d3.select("#d"+i).style("opacity", 0).transition().duration(0).style("opacity", 1);
 			}
@@ -124,7 +132,7 @@ $(document).ready(function() {
 
 		console.log(color);
 		console.log(yellowClicked);
-	})
+	});
 
 	$("#timed").click(function() {
 		reset();
@@ -248,6 +256,9 @@ $(document).ready(function() {
 	}
 
 	function nextLevel() {
+		for(var i=0; i<board.length; i++) {
+			board[i][1] =0;
+		}
 		window.location = "#clear"
 	}
 
@@ -288,7 +299,7 @@ $(document).ready(function() {
 			}
 
 		}	
-		//console.log(colorList);
+		console.log(colorList);
 		
 		return colorList;
 	}
