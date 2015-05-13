@@ -6,20 +6,20 @@ $(document).ready(function() {
 	$(".board").click(function(){
 		window.location = "#LeaderboardPage";
 	})
-	var ScoreName = 200;
 	
-	ScoreName = JSON.stringify(myObject);
-	
-	$.ajax({
-		type: "POST",
-		dataType: "json",
-		url: "data.php",
-		data: {myData:ScoreName},
-		success: function(data){
-			alert('Items added');
-		},
-		error: function(e){
-			console.log(e.message);
-		}
-	});
+	var name,num;
+	$("#send").click(function(){
+		var num = $('#userID').val();
+		var user = $('#userScore').val();
+		console.log(num);
+		$.ajax({
+			url: "https://api.mongolab.com/api/1/databases/sos/collections/leaderboard?apiKey=br10X-RgokMGFuGnyr5w4WHdKpa046Fr",
+			type: "POST",
+			data: JSON.stringify({name: user, score: num}),
+			contentType: "application/json"
+		}).done(function( msg ) {
+				console.log(msg);
+		});	
+		console.log(user);
+	}); 
 });
