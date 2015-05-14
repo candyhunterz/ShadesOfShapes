@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
 	// init game constants
-	var board = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+	var board = [[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]];
 	var row1, row2, row3, row4, row5, col1, col2, col3, col4, col5, leftDiag, rightDiag;
 	var correct = 0;
 	var mute = 0;
@@ -18,6 +18,9 @@ $(document).ready(function() {
 	var blueClicked = 0;
 	var yellowClicked = 0;
 	var clicked = false;
+
+	var score = 0;
+
 	
 	// starts the game
 	function startGame() {
@@ -39,11 +42,12 @@ $(document).ready(function() {
 	$(".play").click(function(){startGame()});
 
 	//function to randomize the colors of the cell
-	function randomize(color) {
+
+	function randomize() {
 		for (var i=0; i<board.length; i++) {
 			var num = Math.floor(Math.random()*3)
 			var color='';
-			board[i] = 0;
+			board[i][0] = 0;
 			if (num == 0) {
 				color = 'red';
 			}
@@ -54,6 +58,7 @@ $(document).ready(function() {
 				color = 'yellow';
 			}
 			$("#d"+i).css({backgroundColor: color});
+			board[i][0] = "d" + i;
 		}
 		$("#choice td").css({backgroundColor: color});
 	}
@@ -79,6 +84,7 @@ $(document).ready(function() {
 		redClicked = 0;
 		blueClicked = 0;
 		yellowClicked = 0;
+		score = 0;
 		$("svg").remove();
 		setColor();
 	}
@@ -96,19 +102,28 @@ $(document).ready(function() {
 
 	// function to get the color of a clicked cell
 	$("td").click(function() {
-		playSoundFx(SoundfxNum);
-		var color = $(this).css("background-color");
-		var choiceColor = $("#choice td").css("background-color");
-		if (color === choiceColor) {
-			d3.select(this).style("opacity", 0).transition().duration(0).style("opacity", 1);
+		if(this.id != "d25"){
+			for(var i=0; i<board.length; i++) {
+				if(this.id == board[i][0] && board[i][1] == 0){
+					board[i][1] = 1;
+					playSoundFx(SoundfxNum);
+					var color = $(this).css("background-color");
+					var choiceColor = $("#choice td").css("background-color");
+					if (color === choiceColor) {
+						d3.select(this).style("opacity", 0).transition().duration(0).style("opacity", 1);
+						score += 100;
+						$(".score").html(score);
+					}
+					if (color === "rgb(255, 255, 0)")
+						yellowClicked++;
+					if (color === "rgb(0, 0, 255)")
+						blueClicked++;
+					if (color === "rgb(255, 0, 0)")
+						redClicked++;
+				}
+			}
 		}
-		if (color === "rgb(255, 255, 0)")
-			yellowClicked++;
-		if (color === "rgb(0, 0, 255)")
-			blueClicked++;
-		if (color === "rgb(255, 0, 0)")
-			redClicked++;
-		if (yellowClicked == (yellow*2) || blueClicked == (blue*2) || redClicked == (red*2)) {
+		if ((yellowClicked == (yellow ) && color===choiceColor) || (blueClicked == (blue) && color === choiceColor) || (redClicked == (red) && color === choiceColor)) {
 			for (var i=0; i<board.length; i++) {
 				d3.select("#d"+i).style("opacity", 0).transition().duration(0).style("opacity", 1);
 			}
@@ -117,7 +132,7 @@ $(document).ready(function() {
 
 		console.log(color);
 		console.log(yellowClicked);
-	})
+	});
 
 	$("#timed").click(function() {
 		reset();
@@ -143,38 +158,45 @@ $(document).ready(function() {
 	}
 	
 	// function to randomly make a shape
-	function randomShapes(svg) {
-	var num = Math.floor(Math.random()*6)
-	var shape;
-	var color;
-	switch (num) {
-		case 0:
-		color = "green"; 
-		svg.append("circle")
-		.attr("cx",25)
-		.attr("cy",25)
-		.attr("r",25)
-		.attr("fill", color);
-		break;
-		case 1: 
-		color = "cyan";
-		svg.append("rect")
-		.attr("width",50)
-		.attr("height",50)
-		.attr("fill", color);
-		break;
-		case 2: 
+	function randomShapes(svg, snum) {
 		
-		break;
-		case 3: 
-		break;
-		case 4: 
-		break;
-		case 5: 
-		break;
-		default: ;
-		console.log("not a valid shape");
-	}
+		var shape;
+		var color = [];
+		var shapeList = [];
+		for (var i=0; i<snum; i++) {
+			var num = Math.floor(Math.random()*6)
+			switch (num) {
+				case 0:
+				color = randomColor(1); 
+				shape = svg.append("circle")
+				.attr("cx",25)
+				.attr("cy",25)
+				.attr("r",25)
+				.attr("fill", color[0]);
+				shapeList[i] = shape;
+				break;
+				case 1: 
+				color = randomColor(1);
+				shape = svg.append("rect")
+				.attr("width",50)
+				.attr("height",50)
+				.attr("fill", color[0]);
+				shapeList[i] = shape;
+				break;
+				case 2: 
+				break;
+				case 3: 
+				break;
+				case 4: 
+				break;
+				case 5: 
+				break;
+				default: ;
+				console.log("not a valid shape");
+			}
+		}
+		console.log(shapeList);
+		return shapeList;
 }
 	//sound effects
 	function playSoundFx(fx){
@@ -234,7 +256,50 @@ $(document).ready(function() {
 	}
 
 	function nextLevel() {
+		for(var i=0; i<board.length; i++) {
+			board[i][1] =0;
+		}
 		window.location = "#clear"
 	}
 
+//////////////////////////////////////////////////////////////////////////////////
+
+	// new function to generate color
+	// cnum from 0 to 5
+	// returns an array of random colors
+	function randomColor(cnum) {
+		var colorList = [];
+		for (var i=0; i<cnum; i++) {
+			var num = Math.floor(Math.random()*5);
+			var color;
+			switch (num) {
+				case 0: 
+					color = "blue";
+					colorList[i] = color;
+					break;
+				case 1:
+					color = "red";
+					colorList[i] = color;
+					break;
+				case 2:
+					color = "yellow";
+					colorList[i] = color;
+					break;
+				case 3:
+					color = "green";
+					colorList[i] = color;
+					break;
+				case 4:
+					color = "purple";
+					colorList[i] = color;
+					break;
+				default:
+					console.log("cnum too big");
+			}
+
+		}	
+		console.log(colorList);
+		
+		return colorList;
+	}
 });

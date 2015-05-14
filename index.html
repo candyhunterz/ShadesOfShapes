@@ -9,7 +9,7 @@
 	<script src="js/jquery.mobile-1.4.5.min.js"></script>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/jquery-ui.js"></script>
-	<script src="js/shades.js"></script>
+	<script type="text/javascript" src="js/shades.js"></script>
 	<script src="js/d3.v3.min.js" charset="utf-8"></script>
 	<link rel="stylesheet" type="text/css" href="style/style.css"> 
 	<link rel="stylesheet" href="style/bootstrap.min.css">
@@ -47,7 +47,7 @@
 					<br/>
 					<h1 onclick="click(event)">TAP</h1>
 					<table>
-					<tr><td id='d25' ></td></tr>
+						<tr><td id='d25'></td></tr>
 					</table>
 				</div>
 			</div>
@@ -63,8 +63,8 @@
 			<h1>Shades Of Shapes</h1>
 		</div>
 		<div role="main" class="ui-content">
-			<div id='score'> 
-				score: <p>0</p>
+			<div> 
+				score: <p class='score'>0</p>
 			</div>
 			<div class="background">
 				<div id="board">
@@ -140,7 +140,7 @@
 	<div data-role="page" class="ui-content" id="done">
 		<h1 id='gameover'>Game Over</h1>
 		<h3>Score:</h3>
-		<p><strong>0</strong></p>
+		<p class='score'><strong>0</strong></p>
 		<h3>Best Score:</h3>
 		<p><strong>0</strong></p>
 		<a  data-role="button" data-inline="true" class="play">Play Again</a>
@@ -152,9 +152,11 @@
 	<div data-role="page" class="ui-content " id="clear">
 		<h1 id="levelClear" style="fontsize: xx-large">LEVEL 1 CLEARED</h1>
 		<h3>Score:</h3>
+		<p class='score'><strong>0</strong></p>
 		<a data-role="button" data-inline="true" class="play">Play Again</a>
 		<a data-role="button" data-inline="true" class="menu">Quit Game</a>
 		<a data-role="button" data-inline="true"  class="board">Leaderboard</a>
+
 	</div>
 	
 </body>
