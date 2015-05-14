@@ -26,7 +26,7 @@ $(document).ready(function() {
 		gameLevel++;
 	}
 	
-	function newGame() {
+	function newGame() { //Resets global game variables for new game.
 		gameLevel = 1;
 		numColors = 2;
 		numShapes = 0;

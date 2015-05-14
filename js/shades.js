@@ -102,8 +102,9 @@ $(document).ready(function() {
 
 	// function to get the color of a clicked cell
 	$("td").click(function() {
-		if(this.id != "d25"){
+		if(this.id != "d25"){ //Can't click cell in pre-game page
 			for(var i=0; i<board.length; i++) {
+				//Each cell can only be clicked once
 				if(this.id == board[i][0] && board[i][1] == 0){
 					board[i][1] = 1;
 					playSoundFx(SoundfxNum);
@@ -257,6 +258,7 @@ $(document).ready(function() {
 
 	function nextLevel() {
 		for(var i=0; i<board.length; i++) {
+			//Sets all cells to be able for clicking again.
 			board[i][1] =0;
 		}
 		window.location = "#clear"
