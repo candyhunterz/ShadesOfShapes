@@ -86,7 +86,7 @@ $(document).ready(function() {
 
 	function randomize(cnum) {
 			for (var i=0; i<board.length; i++) {
-			var num = Math.floor(Math.random()*5)
+			var num = Math.floor(Math.random()*3)
 			var color='';
 			board[i][0] = 0;
 			if (num == 0) {
