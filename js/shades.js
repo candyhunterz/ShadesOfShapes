@@ -11,16 +11,8 @@ $(document).ready(function() {
 	var fx3 = new Audio("sounds/fx3.mp3");
 	var fx4 = new Audio("sounds/fx4.mp3");
 	var fx5 = new Audio("sounds/fx5.mp3");
-	var red = 0;
-	var blue = 0;
-	var yellow = 0;
-	var green = 0;
-	var purple = 0;
-	var redClicked = 0;
-	var blueClicked = 0;
-	var yellowClicked = 0;
-	var greenClicked = 0;
-	var purpleClicked = 0;
+	var correct = 0;
+	var correctClicked = 0;
 	var clicked = false;
 	var score = 0;
 	var gameLevel = 1;
@@ -66,7 +58,7 @@ $(document).ready(function() {
 			}
 		}else {
 			//Hard Levels 15+
-			if(fadeTime > 3000) {
+			if(fadeTime > 2000) {
 				fadeTime -= 500;
 			}
 		}
@@ -94,7 +86,7 @@ $(document).ready(function() {
 
 	function randomize(cnum) {
 			for (var i=0; i<board.length; i++) {
-			var num = Math.floor(Math.random()*3)
+			var num = Math.floor(Math.random()*5)
 			var color='';
 			board[i][0] = 0;
 			if (num == 0) {
@@ -106,6 +98,12 @@ $(document).ready(function() {
 			else if (num == 2) {
 				color = 'yellow';
 			}
+			else if (num == 3) {
+				color = 'green';
+			}
+			else if (num == 4) {
+				color = 'purple';
+			}
 			$("#d"+i).css({backgroundColor: color});
 			board[i][0] = "d" + i;
 		}
@@ -115,10 +113,9 @@ $(document).ready(function() {
 
 	// initialize game state
 	function setColor() {
-		randomize(3);
+		randomize(numColors);
 		//makeShapes();
 		countColor();
-		console.log("red: " + red + " blue: " + blue + " yellow: " + yellow);
 	}
 	
 	//function to return the color of selection box
@@ -128,13 +125,8 @@ $(document).ready(function() {
 
 
 	function reset() {
-		blue = 0;
-		red = 0;
-		yellow = 0;
-		redClicked = 0;
-		blueClicked = 0;
-		yellowClicked = 0;
-		
+		correct  = 0;
+		correctClicked = 0;
 		$("svg").remove();
 		
 	}
@@ -167,16 +159,13 @@ $(document).ready(function() {
 						score += 100;
 						$(".score").html(score);
 					}
-					if (color === "rgb(255, 255, 0)")
-						yellowClicked++;
-					if (color === "rgb(0, 0, 255)")
-						blueClicked++;
-					if (color === "rgb(255, 0, 0)")
-						redClicked++; 
+					if(color = choiceColor) {
+						correctClicked++;
+					}
 				}
 			}
 		}
-		if ((yellowClicked == (yellow ) && color===choiceColor) || (blueClicked == (blue) && color === choiceColor) || (redClicked == (red) && color === choiceColor)) {
+		if(correct == correctClicked) {
 			for (var i=0; i<board.length; i++) {
 				d3.select("#d"+i).style("opacity", 0).transition().duration(0).style("opacity", 1);
 			}
@@ -287,27 +276,14 @@ $(document).ready(function() {
 			$(this).attr("src","images/sound.png");
 		}
 	});
-
+	
 	// function that tally up all the colors
 	function countColor() {
-		color = [];
 		for (var i=0; i<board.length; i++) {
-			color[i] = $("#d" + i).css("background-color");
-			
+			if($("#d" + i).css("background-color") == $("#d25").css("background-color")) {
+				correct++;
+			}
 		}
-		for (var i=0; i<color.length; i++) {
-			if (color[i] === "rgb(0, 0, 255)")
-				blue++;
-			if (color[i] === "rgb(255, 0, 0)")
-				red++;
-			if (color[i] === "rgb(255, 255, 0)")
-				yellow++;
-			if (color[i] === "rgb(0, 255, 0)")
-				green++;
-			if (color[i] === "rgb(128, 0, 128)")
-				purple++;
-		}
-
 	}
 
 	function nextLevel() {
