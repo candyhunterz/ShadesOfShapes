@@ -14,37 +14,81 @@ $(document).ready(function() {
 	var red = 0;
 	var blue = 0;
 	var yellow = 0;
+	var green = 0;
+	var purple = 0;
 	var redClicked = 0;
 	var blueClicked = 0;
 	var yellowClicked = 0;
+	var greenClicked = 0;
+	var purpleClicked = 0;
 	var clicked = false;
-
 	var score = 0;
+	var gameLevel = 1;
+	var numColors = 3;
+	var numShapes = 0;
+	var fadeTime = 15000;
 
 	
 	// starts the game
 	function startGame() {
-		reset();
+		$("svg").remove();
 		window.location = "#pregame";
 		$("#timer").TimeCircles().destroy();
 		$("#timer").TimeCircles();
 		var delay = 3800; //Your delay in milliseconds
+		startLevel();
 		setTimeout(function() {
 			window.location = "#game"; 
 			for (var i=0; i<board.length; i++) {
 				d3.select("#d"+i).style("opacity", 1).transition()
-				.duration(15000).style("opacity", 0);
+				.duration(fadeTime).style("opacity", 0);
 			}
 			}, delay)
 	}
 	
+	function startLevel() {
+		// starts level
+		setColor();
+		if(gameLevel <= 5) {
+			//Easy Levels 1-7
+			if(numColors < 5) {
+				numColors++;
+			}
+		}else if(gameLevel <= 10) {
+			//Medium Levels 8-14
+			randomChoice(2);
+			makeShapes(2);
+
+			if(numShapes < 6) {
+				numShapes++;
+			}
+		}else {
+			//Hard Levels 15+
+			if(fadeTime > 3000) {
+				fadeTime -= 500;
+			}
+		}
+		gameLevel++;
+	}
 	//Use the class tag so every Play and Playagain button can be referenced the same
-	$(".play").click(function(){startGame()});
+	$(".play").click(function(){
+		reset();
+		startGame()
+	});
+
+	// function to randomize the choice cell
+	function randomChoice(num) {
+		svgContainer = d3.select("#d25").append("svg")
+			.attr("width", 50)
+			.attr("height", 50);
+			randomShapes(svgContainer, num);
+
+	}
 
 	//function to randomize the colors of the cell
 
-	function randomize() {
-		for (var i=0; i<board.length; i++) {
+	function randomize(cnum) {
+			for (var i=0; i<board.length; i++) {
 			var num = Math.floor(Math.random()*3)
 			var color='';
 			board[i][0] = 0;
@@ -61,12 +105,13 @@ $(document).ready(function() {
 			board[i][0] = "d" + i;
 		}
 		$("#choice td").css({backgroundColor: color});
+	
 	}
 
 	// initialize game state
 	function setColor() {
-		randomize();
-		makeShapes();
+		randomize(3);
+		//makeShapes();
 		countColor();
 		console.log("red: " + red + " blue: " + blue + " yellow: " + yellow);
 	}
@@ -84,9 +129,9 @@ $(document).ready(function() {
 		redClicked = 0;
 		blueClicked = 0;
 		yellowClicked = 0;
-		score = 0;
+		
 		$("svg").remove();
-		setColor();
+		
 	}
 
 	// making the pregame page not lose the color
@@ -102,6 +147,7 @@ $(document).ready(function() {
 
 	// function to get the color of a clicked cell
 	$("td").click(function() {
+		$(".level").html(gameLevel); 	
 		if(this.id != "d25"){
 			for(var i=0; i<board.length; i++) {
 				if(this.id == board[i][0] && board[i][1] == 0){
@@ -109,6 +155,8 @@ $(document).ready(function() {
 					playSoundFx(SoundfxNum);
 					var color = $(this).css("background-color");
 					var choiceColor = $("#choice td").css("background-color");
+					var choiceSVG = d3.select("svg");
+					var colorSVG = $(this).css("fill");
 					if (color === choiceColor) {
 						d3.select(this).style("opacity", 0).transition().duration(0).style("opacity", 1);
 						score += 100;
@@ -130,8 +178,7 @@ $(document).ready(function() {
 			nextLevel();
 		}
 
-		console.log(color);
-		console.log(yellowClicked);
+		
 	});
 
 	$("#timed").click(function() {
@@ -145,7 +192,7 @@ $(document).ready(function() {
 
 	// function to generate shapes into each cell using svg 
 	// using D3.js to make things easier
-	function makeShapes() {
+	function makeShapes(num) {
 		var svgContainers = [];
 		var shape;
 		// making svg containers in all squares
@@ -153,7 +200,7 @@ $(document).ready(function() {
 			svgContainers[i] = d3.select("#d"+i).append("svg")
 			.attr("width", 50)
 			.attr("height", 50);
-			randomShapes(svgContainers[i]);
+			randomShapes(svgContainers[i], num);
 		}	
 	}
 	
@@ -250,16 +297,24 @@ $(document).ready(function() {
 				red++;
 			if (color[i] === "rgb(255, 255, 0)")
 				yellow++;
-
+			if (color[i] === "rgb(0, 255, 0)")
+				green++;
+			if (color[i] === "rgb(128, 0, 128)")
+				purple++;
 		}
 
 	}
 
 	function nextLevel() {
+		$("#levelClear").html("LEVEL " + gameLevel + " CLEARED");
+		if (fadeTime > 5000)
+			fadeTime -= 500;
+		
 		for(var i=0; i<board.length; i++) {
 			board[i][1] =0;
 		}
 		window.location = "#clear"
+		$(".score").html(score);
 	}
 
 
