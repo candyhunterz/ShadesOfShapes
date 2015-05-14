@@ -167,7 +167,7 @@ $(document).ready(function() {
 					if (color === "rgb(0, 0, 255)")
 						blueClicked++;
 					if (color === "rgb(255, 0, 0)")
-						redClicked++;
+						redClicked++; 
 				}
 			}
 		}
