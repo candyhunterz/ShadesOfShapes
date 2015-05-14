@@ -9,8 +9,8 @@ $(document).ready(function() {
 	
 	var name,num;
 	$("#send").click(function(){
-		var num = $('#userID').val();
-		var user = $('#userScore').val();
+		var num = $('#userScore').val();
+		var user = $('#userID').val();
 		console.log(num);
 		$.ajax({
 			url: "https://api.mongolab.com/api/1/databases/sos/collections/leaderboard?apiKey=br10X-RgokMGFuGnyr5w4WHdKpa046Fr",
@@ -22,4 +22,12 @@ $(document).ready(function() {
 		});	
 		console.log(user);
 	}); 
+	
+	$("#LeaderTitle").click(function(){
+		$.getJSON("https://api.mongolab.com/api/1/databases/sos/collections/leaderboard?apiKey=br10X-RgokMGFuGnyr5w4WHdKpa046Fr", function(result){
+			$.each(result, function(i, field){
+				$("#testShow").append(field + " ");
+            });
+		});
+	});
 });
