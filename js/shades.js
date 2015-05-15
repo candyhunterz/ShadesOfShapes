@@ -358,7 +358,5 @@ $(document).ready(function() {
 		
 		return colorList;
 	}
-	
-
 
 });
