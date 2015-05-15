@@ -18,7 +18,7 @@ $(document).ready(function() {
 	var gameLevel = 1;
 	var numColors = 3;
 	var numShapes = 0;
-	var fadeTime = 15000;
+	var fadeTime = 10000;
 
 	
 	// starts the game
@@ -29,6 +29,7 @@ $(document).ready(function() {
 		$("#timer").TimeCircles();
 		var delay = 3800; //Your delay in milliseconds
 		$(".level").html(gameLevel);
+		$("#gameLevel").html(gameLevel);
 		$(".score").html(score);
 		startLevel();
 		setTimeout(function() {
@@ -291,6 +292,9 @@ $(document).ready(function() {
 		if (fadeTime > 5000)
 			fadeTime -= 500;
 		gameLevel++;
+		
+		
+		
 		for(var i=0; i<board.length; i++) {
 			//Sets all cells to be able for clicking again.
 			board[i][1] =0;
@@ -340,7 +344,5 @@ $(document).ready(function() {
 		
 		return colorList;
 	}
-	
-
 
 });
