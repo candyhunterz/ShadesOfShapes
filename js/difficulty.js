@@ -2,7 +2,7 @@ $(document).ready(function() {
 	var gameLevel = 1;
 	var numColors = 2;
 	var numShapes = 0;
-	var fadeTime = 18000;
+	var fadeTime = 15000;
 	
 	//function startLevel() {
 		//TO-DO: put in start level
@@ -26,11 +26,11 @@ $(document).ready(function() {
 	//	gameLevel++;
 	//}
 	
-	function newGame() {
+	function newGame() { //Resets global game variables for new game.
 		gameLevel = 1;
 		numColors = 2;
 		numShapes = 0;
-		fadeTime = 18000;
+		fadeTime = 15000;
 	}
 	
 });
