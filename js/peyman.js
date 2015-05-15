@@ -11,7 +11,7 @@ $(document).ready(function() {
 	
 	var name,num;
 	$("#send").click(function(){
-		var num = $('#userScore').val();
+		var num = parseInt($('#userScore').val());
 		var user = $('#userID').val();
 		console.log(num);
 		$.ajax({

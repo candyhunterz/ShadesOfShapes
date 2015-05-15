@@ -140,7 +140,7 @@ circle {
 	width:300px;
 }
 
-.board{
+#leaderBoard{
 	position: relative;
 	top:50px;
 	margin-left:auto;
