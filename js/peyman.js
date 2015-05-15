@@ -25,13 +25,13 @@ $(document).ready(function() {
 		console.log(user);
 	}); 
 	
-	$(".board").click(function(){
+	$("#LeaderTitle").click(function(){
 		if(!show) {
 			show = true;
-			$.getJSON("https://api.mongolab.com/api/1/databases/sos/collections/leaderboard?apiKey=br10X-RgokMGFuGnyr5w4WHdKpa046Fr", function(result){
+			$.getJSON("https://api.mongolab.com/api/1/databases/sos/collections/leaderboard?apiKey=br10X-RgokMGFuGnyr5w4WHdKpa046Fr&s={%22score%22:-1}", function(result){
 				var j = 1;
 				$.each(result, function(i, field){
-					$("#scoreDisplay tr:last").after('<tr> <td>'+j+'</td> <td>'+field.name+'</td> <td>'+field.score+'</td> </tr>');
+					$("#bodyLeader").append('<tr> <td>'+j+'</td> <td>'+field.name+'</td> <td>'+field.score+'</td> </tr>');
 					j++;
 				});
 			});

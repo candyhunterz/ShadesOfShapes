@@ -11,16 +11,8 @@ $(document).ready(function() {
 	var fx3 = new Audio("sounds/fx3.mp3");
 	var fx4 = new Audio("sounds/fx4.mp3");
 	var fx5 = new Audio("sounds/fx5.mp3");
-	var red = 0;
-	var blue = 0;
-	var yellow = 0;
-	var green = 0;
-	var purple = 0;
-	var redClicked = 0;
-	var blueClicked = 0;
-	var yellowClicked = 0;
-	var greenClicked = 0;
-	var purpleClicked = 0;
+	var correct = 0;
+	var correctClicked = 0;
 	var clicked = false;
 	var score = 0;
 	var gameLevel = 1;
@@ -36,6 +28,8 @@ $(document).ready(function() {
 		$("#timer").TimeCircles().destroy();
 		$("#timer").TimeCircles();
 		var delay = 3800; //Your delay in milliseconds
+		$(".level").html(gameLevel);
+		$(".score").html(score);
 		startLevel();
 		setTimeout(function() {
 			window.location = "#game"; 
@@ -64,16 +58,19 @@ $(document).ready(function() {
 			}
 		}else {
 			//Hard Levels 15+
-			if(fadeTime > 3000) {
+			if(fadeTime > 2000) {
 				fadeTime -= 500;
 			}
 		}
-		gameLevel++;
 	}
 	//Use the class tag so every Play and Playagain button can be referenced the same
 	$(".play").click(function(){
+		if(this.id == "playButton" || this.id == "playAgain") {
+			gameLevel = 1;
+			score = 0;
+		}
 		reset();
-		startGame()
+		startGame();
 	});
 
 	// function to randomize the choice cell
@@ -101,6 +98,12 @@ $(document).ready(function() {
 			else if (num == 2) {
 				color = 'yellow';
 			}
+			else if (num == 3) {
+				color = 'green';
+			}
+			else if (num == 4) {
+				color = 'purple';
+			}
 			$("#d"+i).css({backgroundColor: color});
 			board[i][0] = "d" + i;
 		}
@@ -110,10 +113,9 @@ $(document).ready(function() {
 
 	// initialize game state
 	function setColor() {
-		randomize(3);
+		randomize(numColors);
 		//makeShapes();
 		countColor();
-		console.log("red: " + red + " blue: " + blue + " yellow: " + yellow);
 	}
 	
 	//function to return the color of selection box
@@ -123,13 +125,8 @@ $(document).ready(function() {
 
 
 	function reset() {
-		blue = 0;
-		red = 0;
-		yellow = 0;
-		redClicked = 0;
-		blueClicked = 0;
-		yellowClicked = 0;
-		
+		correct  = 0;
+		correctClicked = 0;
 		$("svg").remove();
 		
 	}
@@ -147,9 +144,9 @@ $(document).ready(function() {
 
 	// function to get the color of a clicked cell
 	$("td").click(function() {
-		$(".level").html(gameLevel); 	
-		if(this.id != "d25"){
+		if(this.id != "d25"){ //Can't click cell in pre-game page
 			for(var i=0; i<board.length; i++) {
+				//Each cell can only be clicked once
 				if(this.id == board[i][0] && board[i][1] == 0){
 					board[i][1] = 1;
 					playSoundFx(SoundfxNum);
@@ -162,16 +159,13 @@ $(document).ready(function() {
 						score += 100;
 						$(".score").html(score);
 					}
-					if (color === "rgb(255, 255, 0)")
-						yellowClicked++;
-					if (color === "rgb(0, 0, 255)")
-						blueClicked++;
-					if (color === "rgb(255, 0, 0)")
-						redClicked++; 
+					if(color = choiceColor) {
+						correctClicked++;
+					}
 				}
 			}
 		}
-		if ((yellowClicked == (yellow ) && color===choiceColor) || (blueClicked == (blue) && color === choiceColor) || (redClicked == (red) && color === choiceColor)) {
+		if(correct == correctClicked) {
 			for (var i=0; i<board.length; i++) {
 				d3.select("#d"+i).style("opacity", 0).transition().duration(0).style("opacity", 1);
 			}
@@ -282,35 +276,23 @@ $(document).ready(function() {
 			$(this).attr("src","images/sound.png");
 		}
 	});
-
+	
 	// function that tally up all the colors
 	function countColor() {
-		color = [];
 		for (var i=0; i<board.length; i++) {
-			color[i] = $("#d" + i).css("background-color");
-			
+			if($("#d" + i).css("background-color") == $("#d25").css("background-color")) {
+				correct++;
+			}
 		}
-		for (var i=0; i<color.length; i++) {
-			if (color[i] === "rgb(0, 0, 255)")
-				blue++;
-			if (color[i] === "rgb(255, 0, 0)")
-				red++;
-			if (color[i] === "rgb(255, 255, 0)")
-				yellow++;
-			if (color[i] === "rgb(0, 255, 0)")
-				green++;
-			if (color[i] === "rgb(128, 0, 128)")
-				purple++;
-		}
-
 	}
 
 	function nextLevel() {
 		$("#levelClear").html("LEVEL " + gameLevel + " CLEARED");
 		if (fadeTime > 5000)
 			fadeTime -= 500;
-		
+		gameLevel++;
 		for(var i=0; i<board.length; i++) {
+			//Sets all cells to be able for clicking again.
 			board[i][1] =0;
 		}
 		window.location = "#clear"
