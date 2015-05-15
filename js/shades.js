@@ -159,7 +159,7 @@ $(document).ready(function() {
 						score += 100;
 						$(".score").html(score);
 					}
-					if(color = choiceColor) {
+					if(color === choiceColor) {
 						correctClicked++;
 					}
 				}
