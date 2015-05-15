@@ -1,18 +1,98 @@
 $(document).ready(function() {
 
 	// init game constants
-	var board = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+	var board = [[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]];
 	var row1, row2, row3, row4, row5, col1, col2, col3, col4, col5, leftDiag, rightDiag;
 	var correct = 0;
-	
+	var mute = 0;
+	var SoundfxNum = "0";
+	var fx1 = new Audio("sounds/fx1.mp3");
+	var fx2 = new Audio("sounds/fx2.mp3");
+	var fx3 = new Audio("sounds/fx3.mp3");
+	var fx4 = new Audio("sounds/fx4.mp3");
+	var fx5 = new Audio("sounds/fx5.mp3");
+	var red = 0;
+	var blue = 0;
+	var yellow = 0;
+	var green = 0;
+	var purple = 0;
+	var redClicked = 0;
+	var blueClicked = 0;
+	var yellowClicked = 0;
+	var greenClicked = 0;
+	var purpleClicked = 0;
+	var clicked = false;
+	var score = 0;
+	var gameLevel = 1;
+	var numColors = 3;
+	var numShapes = 0;
+	var fadeTime = 15000;
+    var muteSoundFx = false;
 
 	
+	// starts the game
+	function startGame() {
+		$("svg").remove();
+		window.location = "#pregame";
+		$("#timer").TimeCircles().destroy();
+		$("#timer").TimeCircles();
+		var delay = 3800; //Your delay in milliseconds
+		startLevel();
+		setTimeout(function() {
+			window.location = "#game"; 
+			for (var i=0; i<board.length; i++) {
+				d3.select("#d"+i).style("opacity", 1).transition()
+				.duration(fadeTime).style("opacity", 0);
+			}
+			}, delay)
+	}
+	
+	function startLevel() {
+		// starts level
+		setColor();
+		if(gameLevel <= 5) {
+			//Easy Levels 1-7
+			if(numColors < 5) {
+				numColors++;
+			}
+		}else if(gameLevel <= 10) {
+			//Medium Levels 8-14
+			randomChoice(2);
+			makeShapes(2);
+
+			if(numShapes < 6) {
+				numShapes++;
+			}
+		}else {
+			//Hard Levels 15+
+			if(fadeTime > 3000) {
+				fadeTime -= 500;
+			}
+		}
+		gameLevel++;
+	}
+	//Use the class tag so every Play and Playagain button can be referenced the same
+	$(".play").on('click touchstart', function(){
+		reset();
+		startGame()
+	});
+
+	// function to randomize the choice cell
+	function randomChoice(num) {
+		svgContainer = d3.select("#d25").append("svg")
+			.attr("width", 50)
+			.attr("height", 50);
+			randomShapes(svgContainer, num);
+
+	}
+
 	//function to randomize the colors of the cell
-	function randomize() {
-		for (var i=0; i<board.length; i++) {
+
+	function randomize(cnum) {
+			for (var i=0; i<board.length; i++) {
 			var num = Math.floor(Math.random()*3)
 			var color='';
-			board[i] = 0;
+			board[i][0] = 0;
 			if (num == 0) {
 				color = 'red';
 			}
@@ -23,14 +103,18 @@ $(document).ready(function() {
 				color = 'yellow';
 			}
 			$("#d"+i).css({backgroundColor: color});
+			board[i][0] = "d" + i;
 		}
 		$("#choice td").css({backgroundColor: color});
+	
 	}
 
 	// initialize game state
 	function setColor() {
-		randomize();
-		makeShapes();
+		randomize(3);
+		//makeShapes();
+		countColor();
+		console.log("red: " + red + " blue: " + blue + " yellow: " + yellow);
 	}
 	
 	//function to return the color of selection box
@@ -40,46 +124,77 @@ $(document).ready(function() {
 
 
 	function reset() {
-		$("img").remove("#checkmark");
-		$("td").animate({
-		opacity: 1}, 0, function(){});
-		setColor();
+		blue = 0;
+		red = 0;
+		yellow = 0;
+		redClicked = 0;
+		blueClicked = 0;
+		yellowClicked = 0;
+		
+		$("svg").remove();
+		
 	}
-	// function to get the color of a clicked cell
-	$("td").click(function() {
-		var color = $(this).css("background-color");
-		var choiceColor = $("#choice td").css("background-color")
-		makeShape('rect');
-		if (color === choiceColor) {
-			$(this).css({backgroundColor: '#FFFFFF'});
-			$(this).animate({
-			opacity: 1}, 0, function(){});
-			correct += 1;
+
+	// making the pregame page not lose the color
+	/* 
+	$("h1").on('click touchstart', function(){
+		$("svg").remove();
+		setColor();
+		for (var i=0; i<board.length; i++) {
+				d3.select("#d"+i).style("opacity", 1).transition().duration(20000).style("opacity", 0);
 		}
 		console.log(color);
-	})
+	}) */
 
-	
-	$("#restart").click(function() {
-		reset();
+	// function to get the color of a clicked cell
+	$("td").on('click touchstart', function() {
+		$(".level").html(gameLevel); 	
+		if(this.id != "d25"){
+			for(var i=0; i<board.length; i++) {
+				if(this.id == board[i][0] && board[i][1] == 0){
+					board[i][1] = 1;
+					// plays sound effect
+                    playSoundFx(SoundfxNum);
+					var color = $(this).css("background-color");
+					var choiceColor = $("#choice td").css("background-color");
+					var choiceSVG = d3.select("svg");
+					var colorSVG = $(this).css("fill");
+					if (color === choiceColor) {
+						d3.select(this).style("opacity", 0).transition().duration(0).style("opacity", 1);
+						score += 100;
+						$(".score").html(score);
+					}
+					if (color === "rgb(255, 255, 0)")
+						yellowClicked++;
+					if (color === "rgb(0, 0, 255)")
+						blueClicked++;
+					if (color === "rgb(255, 0, 0)")
+						redClicked++; 
+				}
+			}
+		}
+		if ((yellowClicked == (yellow ) && color===choiceColor) || (blueClicked == (blue) && color === choiceColor) || (redClicked == (red) && color === choiceColor)) {
+			for (var i=0; i<board.length; i++) {
+				d3.select("#d"+i).style("opacity", 0).transition().duration(0).style("opacity", 1);
+			}
+			nextLevel();
+		}
+
+		
 	});
 
-	$("#timed").click(function() {
+	$("#timed").on('click touchstart', function() {
 		reset();
 		for (var i=0; i<board.length; i++) {
 			$("#d" + i).animate({
 				opacity: 0, color: '#FFFFFF'}, 5000, function() {
-
 				});
-
-			
 		}
-
 	});
 
 	// function to generate shapes into each cell using svg 
 	// using D3.js to make things easier
-	function makeShapes() {
+	function makeShapes(num) {
 		var svgContainers = [];
 		var shape;
 		// making svg containers in all squares
@@ -87,54 +202,165 @@ $(document).ready(function() {
 			svgContainers[i] = d3.select("#d"+i).append("svg")
 			.attr("width", 50)
 			.attr("height", 50);
-			randomShapes(svgContainers[i]);
+			randomShapes(svgContainers[i], num);
 		}	
 	}
-
+	
 	// function to randomly make a shape
-	function randomShapes(svg) {
-		var num = Math.floor(Math.random()*6)
+	function randomShapes(svg, snum) {
+		
 		var shape;
-		var color;
-		switch (num) {
-			case 0:
-			color = "green"; 
-				svg.append("circle")
+		var color = [];
+		var shapeList = [];
+		for (var i=0; i<snum; i++) {
+			var num = Math.floor(Math.random()*6)
+			switch (num) {
+				case 0:
+				color = randomColor(1); 
+				shape = svg.append("circle")
 				.attr("cx",25)
 				.attr("cy",25)
 				.attr("r",25)
-				.attr("fill", color);
+				.attr("fill", color[0]);
+				shapeList[i] = shape;
 				break;
-			case 1: 
-				color = "cyan";
-				svg.append("rect")
+				case 1: 
+				color = randomColor(1);
+				shape = svg.append("rect")
 				.attr("width",50)
 				.attr("height",50)
-				.attr("fill", color);
+				.attr("fill", color[0]);
+				shapeList[i] = shape;
 				break;
-			case 2: 
-
+				case 2: 
 				break;
-			case 3: 
+				case 3: 
 				break;
-			case 4: 
+				case 4: 
 				break;
-			case 5: 
+				case 5: 
 				break;
-			default: ;
+				default: ;
 				console.log("not a valid shape");
+			}
+		}
+		console.log(shapeList);
+		return shapeList;
+}
+	//sound effects
+	function playSoundFx(fx){
+		switch(fx){
+			case "0":
+				SoundfxNum = "1";
+				fx1.play();
+				break;
+			case "1" :
+				SoundfxNum = "2";
+				fx2.play();
+				break;
+			case  "2":
+				SoundfxNum = "3";
+				fx3.play();
+				break;
+			case  "3":
+				SoundfxNum = "4";
+				fx4.play();
+				break;
+			case  "4":
+				SoundfxNum = "0";
+				fx5.play();
+				break;
 		}
 	}
+	// function that mute the sound 
+	$("#muteButton").on('click touchstart', function() {
+		if(mute == 0){
+			mute = 1;
+			document.getElementById("music").pause();
+			$(this).attr("src","images/mute.png");
+		} else {
+			mute = 0;
+			document.getElementById("music").play();
+			$(this).attr("src","images/sound.png");
+		}
+	});
+
+	// function that tally up all the colors
+	function countColor() {
+		color = [];
+		for (var i=0; i<board.length; i++) {
+			color[i] = $("#d" + i).css("background-color");
+			
+		}
+		for (var i=0; i<color.length; i++) {
+			if (color[i] === "rgb(0, 0, 255)")
+				blue++;
+			if (color[i] === "rgb(255, 0, 0)")
+				red++;
+			if (color[i] === "rgb(255, 255, 0)")
+				yellow++;
+			if (color[i] === "rgb(0, 255, 0)")
+				green++;
+			if (color[i] === "rgb(128, 0, 128)")
+				purple++;
+		}
+
+	}
+
+	function nextLevel() {
+		$("#levelClear").html("LEVEL " + gameLevel + " CLEARED");
+		if (fadeTime > 5000)
+			fadeTime -= 500;
+		
+		for(var i=0; i<board.length; i++) {
+			board[i][1] =0;
+		}
+		window.location = "#clear"
+		$(".score").html(score);
+	}
+
+
+//////////////////////////////////////////////////////////////////////////////////
+
+	// new function to generate color
+	// cnum from 0 to 5
+	// returns an array of random colors
+	function randomColor(cnum) {
+		var colorList = [];
+		for (var i=0; i<cnum; i++) {
+			var num = Math.floor(Math.random()*5);
+			var color;
+			switch (num) {
+				case 0: 
+					color = "blue";
+					colorList[i] = color;
+					break;
+				case 1:
+					color = "red";
+					colorList[i] = color;
+					break;
+				case 2:
+					color = "yellow";
+					colorList[i] = color;
+					break;
+				case 3:
+					color = "green";
+					colorList[i] = color;
+					break;
+				case 4:
+					color = "purple";
+					colorList[i] = color;
+					break;
+				default:
+					console.log("cnum too big");
+			}
+
+		}	
+		console.log(colorList);
+		
+		return colorList;
+	}
 	
-	// fades game board timer set to 5 sec
-	$(".cell").fadeTo(5000, 0);
-
-
-
-
-setColor();
-	//var svgContainer = d3.select("#d2").append("svg").attr("width", 50).attr("height", 50);
-	//var circle = svgContainer.append("circle").attr("cx", 30).attr("cy", 30).attr("r", 20);
 
 
 });
