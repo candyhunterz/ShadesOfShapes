@@ -1,4 +1,6 @@
 $(document).ready(function() {
+	var show = false;
+	
 	$(".menu").click(function(){
 		window.location = "#main";
 	})
@@ -23,13 +25,16 @@ $(document).ready(function() {
 		console.log(user);
 	}); 
 	
-	$("#LeaderTitle").click(function(){
-		var i = 1;
-		$.getJSON("https://api.mongolab.com/api/1/databases/sos/collections/leaderboard?apiKey=br10X-RgokMGFuGnyr5w4WHdKpa046Fr", function(result){
-			$.each(result, function(i, field){
-				$("#scoreDisplay tr:last").after('<tr> <td>'+i+'</td> <td>'+field.name+'</td> <td>'+field.score+'</td> </tr>');
-				i++;
-            });
-		});
+	$(".board").click(function(){
+		if(!show) {
+			show = true;
+			$.getJSON("https://api.mongolab.com/api/1/databases/sos/collections/leaderboard?apiKey=br10X-RgokMGFuGnyr5w4WHdKpa046Fr", function(result){
+				var j = 1;
+				$.each(result, function(i, field){
+					$("#scoreDisplay tr:last").after('<tr> <td>'+j+'</td> <td>'+field.name+'</td> <td>'+field.score+'</td> </tr>');
+					j++;
+				});
+			});
+		}
 	});
 });

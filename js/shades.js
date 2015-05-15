@@ -26,7 +26,7 @@ $(document).ready(function() {
 	var gameLevel = 1;
 	var numColors = 3;
 	var numShapes = 0;
-	var fadeTime = 15000;
+	var fadeTime = 10000;
 
 	
 	// starts the game
