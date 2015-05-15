@@ -4,25 +4,33 @@ $(document).ready(function() {
 	var numShapes = 0;
 	var fadeTime = 18000;
 	
-	function difficulty(level) {
-		if(level <= 7) {
-			easy(numColors);
-		}else if(level <= 14) {
-			med(numColors, numShapes);
-		}else {
-			hard(numColors, numShapes, fadeTime);
-		}
+	//function startLevel() {
+		//TO-DO: put in start level
+		
+		//if(gameLevel <= 7) {
+			//Easy Levels 1-7
+		//	if(numColors < 5) {
+		//		numColors++;
+	//		}
+	//	}else if(gameLevel <= 14) {
+			//Medium Levels 8-14
+	//		if(numShapes < 6) {
+	//			numShapes++;
+	//		}
+	//	}else {
+			//Hard Levels 15+
+	//		if(fadeTime > 3000) {
+	//			fadeTime -= 500;
+	//		}
+	//	}
+	//	gameLevel++;
+	//}
+	
+	function newGame() {
+		gameLevel = 1;
+		numColors = 2;
+		numShapes = 0;
+		fadeTime = 18000;
 	}
 	
-	function easy(colors) {
-		numColors++;
-	}
-	
-	function med(colors, shapes) {
-		numShapes++
-	}
-	
-	function hard(colors, shapes, fade) {
-		fadeTime -= 500;
-	}
 });

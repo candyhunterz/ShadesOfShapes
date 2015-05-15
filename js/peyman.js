@@ -24,9 +24,11 @@ $(document).ready(function() {
 	}); 
 	
 	$("#LeaderTitle").click(function(){
+		var i = 1;
 		$.getJSON("https://api.mongolab.com/api/1/databases/sos/collections/leaderboard?apiKey=br10X-RgokMGFuGnyr5w4WHdKpa046Fr", function(result){
 			$.each(result, function(i, field){
-				$("#testShow").append(field + " ");
+				$("#scoreDisplay tr:last").after('<tr> <td>'+i+'</td> <td>'+field.name+'</td> <td>'+field.score+'</td> </tr>');
+				i++;
             });
 		});
 	});

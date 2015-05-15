@@ -9,17 +9,17 @@
 	<script src="js/jquery.mobile-1.4.5.min.js"></script>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/jquery-ui.js"></script>
-	<script src="js/shades.js"></script>
+	<script type="text/javascript" src="js/shades.js"></script>
 	<script src="js/d3.v3.min.js" charset="utf-8"></script>
-	<link rel="stylesheet" type="text/css" href="style/style.css"> 
 	<link rel="stylesheet" href="style/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="style/style.css"> 
 	<script type="text/javascript" src="js/TimeCircles.js"></script>
 	<script type="text/javascript" src="js/difficulty.js"></script>
 	<script type="text/javascript" src="js/peyman.js"></script>
 </head>
 <body>
 	<!--Audio file for music -->
-	<audio id="music">
+	<audio autoplay id="music">
 		<source src="sounds/elavator.mp3" type="audio/mpeg">
 	</audio>
 	
@@ -45,9 +45,9 @@
 				</div>
 				<div id="choice">
 					<br/>
-					<h1 onclick="click(event)">TAP</h1>
+					<h1 onclick="click(event)"><a href="#pregame">TAP</a></h1>
 					<table>
-					<tr><td id='d25' ></td></tr>
+					<tr><td id='d25'></td></tr>
 					</table>
 				</div>
 			</div>
@@ -63,46 +63,46 @@
 			<h1>Shades Of Shapes</h1>
 		</div>
 		<div role="main" class="ui-content">
-			<div id='score'> 
-				score: <p>0</p>
+			<div> 
+				score: <p class='score'>0</p>
 			</div>
 			<div class="background">
 				<div id="board">
-					<table>
+					<table class="gametable">
 						<tr>
-							<td id='d0' ></td>
-							<td id='d1' ></td>
-							<td id='d2' ></td>
-							<td id='d3' ></td>
-							<td id='d4' ></td>
-						</tr>
-						<tr>
-							<td id='d5' ></td>
-							<td id='d6' ></td>
-							<td id='d7' ></td>
-							<td id='d8' ></td>
-							<td id='d9' ></td>
-						</tr>
-						<tr>
-							<td id='d10'></td>
-							<td id='d11'></td>
-							<td id='d12'></td>
-							<td id='d13'></td>
-							<td id='d14'></td>
-						</tr>
-						<tr>
-							<td id='d15'></td>
-							<td id='d16'></td>
-							<td id='d17'></td>
-							<td id='d18'></td>
-							<td id='d19'></td>
-						</tr>
-						<tr>
-							<td id='d20'></td>
-							<td id='d21'></td>
-							<td id='d22'></td>
-							<td id='d23'></td>
-							<td id='d24'></td>
+							<td class="gametd" id='d0' ></td>
+							<td class="gametd" id='d1' ></td>
+							<td class="gametd" id='d2' ></td>
+							<td class="gametd" id='d3' ></td>
+							<td class="gametd" id='d4' ></td>
+						</tr>             
+						<tr>              
+							<td class="gametd" id='d5' ></td>
+							<td class="gametd" id='d6' ></td>
+							<td class="gametd" id='d7' ></td>
+							<td class="gametd" id='d8' ></td>
+							<td class="gametd" id='d9' ></td>
+						</tr>             
+						<tr>              
+							<td class="gametd" id='d10'></td>
+							<td class="gametd" id='d11'></td>
+							<td class="gametd" id='d12'></td>
+							<td class="gametd" id='d13'></td>
+							<td class="gametd" id='d14'></td>
+						</tr>             
+						<tr>              
+							<td class="gametd" id='d15'></td>
+							<td class="gametd" id='d16'></td>
+							<td class="gametd" id='d17'></td>
+							<td class="gametd" id='d18'></td>
+							<td class="gametd" id='d19'></td>
+						</tr>           
+						<tr>            
+							<td class="gametd" id='d20'></td>
+							<td class="gametd" id='d21'></td>
+							<td class="gametd" id='d22'></td>
+							<td class="gametd" id='d23'></td>
+							<td class="gametd" id='d24'></td>
 						</tr>
 					</table>
 				</div>
@@ -110,8 +110,8 @@
 			<a href="#done">done</a>
 		</div><!-- /content -->
 		<div data-role="footer">
-			<div id="level">
-				Level: <p>0</p>
+			<div >
+				Level: <p class='level'>1</p>
 			</div>
 		</div><!-- /footer -->
 	</div><!-- /page -->
@@ -120,18 +120,28 @@
 	<div data-role="page" class="ui-content" id="LeaderboardPage">
 	
 		<h1 id="LeaderTitle" >Leaderboard</h1>
-		<!--
-		<div class="input-group">
-		  <input type="text" class="form-control" id="userID" placeholder="Name">
-		</div>
-		<div class="input-group">
-		  <input type="text" class="form-control" id="userScore" placeholder="Score">
-		</div>
-		-->
 		
 		 <input type="text" class="form-control" id="userID" placeholder="Name">
 		 <input type="text" class="form-control" id="userScore" placeholder="Score">
 		 <div id="testShow"></div>
+		<div class="panel panel-default">
+			<!-- Default panel contents -->
+			<div class="panel-heading">Panel heading</div>
+			
+			<!-- Table -->
+			<table class="table">
+				<thead>
+					<tr>
+						<td>#</td>
+						<td>NAME</td>
+						<td>SCORE</td>
+					</tr>
+				</thead>
+				<tbody id="scoreDisplay">
+					<tr></tr>
+				</tbody>
+			</table>
+		</div>
 		<div data-role="button" type="submit" class="btn btn-default" id="send">Submit</div>
 		<a  data-role="button" data-inline="true" class="menu">Main Menu</a>
 	</div>
@@ -140,21 +150,21 @@
 	<div data-role="page" class="ui-content" id="done">
 		<h1 id='gameover'>Game Over</h1>
 		<h3>Score:</h3>
-		<p><strong>0</strong></p>
+		<p class='score'><strong>0</strong></p>
 		<h3>Best Score:</h3>
 		<p><strong>0</strong></p>
 		<a  data-role="button" data-inline="true" class="play">Play Again</a>
-		<a data-role="button" data-inline="true" class="menu">Quit Game</a>
-		<a data-role="button" data-inline="true"  class="board">Leaderboard</a>
+		<a href="index.html" data-role="button" data-inline="true">Quit Game</a>
 	</div>
 
+	<!-- //////////////////// -->
 	<!-- Start of the gameover page -->
 	<div data-role="page" class="ui-content " id="clear">
 		<h1 id="levelClear" style="fontsize: xx-large">LEVEL 1 CLEARED</h1>
 		<h3>Score:</h3>
-		<a data-role="button" data-inline="true" class="play">Play Again</a>
-		<a data-role="button" data-inline="true" class="menu">Quit Game</a>
-		<a data-role="button" data-inline="true"  class="board">Leaderboard</a>
+		<p class='score'><strong>0</strong></p>
+		<a data-role="button" data-inline="true" class="play">Next level</a>
+		<a href="index.html" data-role="button" data-inline="true" class="menu">Quit Game</a>
 	</div>
 	
 </body>
