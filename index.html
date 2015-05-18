@@ -16,6 +16,8 @@
 	<script type="text/javascript" src="js/TimeCircles.js"></script>
 	<script type="text/javascript" src="js/difficulty.js"></script>
 	<script type="text/javascript" src="js/peyman.js"></script>
+    <link rel="stylesheet" href="themes/theme.min.css" />
+	<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
 </head>
 <body>
 	<!--Audio file for music -->
@@ -25,47 +27,49 @@
 	
 	<!-- Start of the main page -->
 	<div data-role="page" id="main">
-		<img src="images/logo.png" alt="logo" id="logo">
-		<h1 id="mainHeader">Shades of Shapes</h1>
-		<a data-role="button" data-inline="true"  class="play" id="playButton">Play</a>
-		<a data-role="button" data-inline="true"  class="board" id="leaderBoard">Leaderboard</a>
-		<img src="images/sound.png" alt="mute" id="muteButton">
+        <div data-role="header">
+            <img src="images/teamlogo.png" alt="logo" >
+            <h1 id="mainHeader">Shades of Shapes</h1>
+            <img src="images/logo.png" alt="logo" id="logo">
+        </div>
+        <div data-role="main">
+            <a data-role="button" data-inline="false"  class="play" id="playButton">Play</a>
+            <a data-role="button" data-inline="false"  class="board" id="leaderBoard">Leaderboard</a>
+            <a data-role="button" data-inline="false"  class="board" id="leaderBoard">Settings</a>
+            <img src="images/sound.png" alt="mute" id="muteButton">
+        </div>
 	</div>
 	<!-- End of the main page -->
 	
 	<!-- Start of the pregame page -->
 	<div data-role="page" id="pregame">
-		<div data-role="header">
-			<h1>Foo</h1>
-		</div><!-- /header -->
+        <div data-role="header">
+			<h1>Get Ready To</h1>
+        </div>
 		<div role="main" class="ui-content">
-			<div id ="container">	
-				<div id="timerdiv">
-					<div id="timer"></div>
-				</div>
-				<div id="choice">
-					<br/>
-					<h1>TAP</h1>
-					<table>
-						<tr><td id='d25'></td></tr>
-					</table>
-				</div>
+			<div id="timecontainer">	
+                <div id="timewrapper">
+                    <div id="timerdiv">
+                        <div id="timer"></div>
+                    </div>
+                    <div id="choice">
+                        <br/>
+                        <h1>TAP</h1>
+                        <table>
+                            <tr><td id='d25'></td></tr>
+                        </table>
+                    </div>
+                </div>
 			</div>
 		</div><!-- /content -->
-		<div data-role="footer">
-			<h4>Page Footer</h4>
-		</div><!-- /footer -->
 	</div><!-- /page -->
 
 	<!-- Start of the game page -->
 	<div data-role="page" id="game">
-		<div id="logo">
-			<h1>Shades Of Shapes</h1>
-		</div>
+        <div data-role="header">
+			<p class='score'>0</p>
+        </div>
 		<div role="main" class="ui-content">
-			<div> 
-				score: <p class='score'>0</p>
-			</div>
 			<div class="background">
 				<div id="board">
 					<table id="gametable">
@@ -142,24 +146,28 @@
 	
 	<!-- Start of the gameover page -->
 	<div data-role="page" class="ui-content" id="done">
-		<h1 id='gameover'>Game Over</h1>
+        <div data-role="header">
+            <h1 id='gameover'>Game Over</h1>
+        </div>
 		<h3>Score:</h3>
 		<p class='score'><strong>0</strong></p>
 		<h3>Best Score:</h3>
 		<p><strong>0</strong></p>
-		<a  data-role="button" data-inline="true" class="play">Play Again</a>
-		<a data-role="button" data-inline="true" class="menu">Quit Game</a>
-		<a data-role="button" data-inline="true"  class="board">Leaderboard</a>
+		<a  data-role="button" data-inline="false" class="play">Play Again</a>
+		<a data-role="button" data-inline="false" class="menu">Quit Game</a>
+		<a data-role="button" data-inline="false"  class="board">Leaderboard</a>
 	</div>
 
 	<!-- Start of the gameover page -->
 	<div data-role="page" class="ui-content " id="clear">
-		<h1 id="levelClear" style="fontsize: xx-large">LEVEL 1 CLEARED</h1>
+        <div data-role="header">
+            <h1 id="levelClear" style="fontsize: xx-large">LEVEL 1 CLEARED</h1>
+        </div>
 		<h3>Score:</h3>
 		<p class='score'><strong>0</strong></p>
-		<a data-role="button" data-inline="true" class="play">Next Level</a>
-		<a data-role="button" data-inline="true" class="menu">Quit Game</a>
-		<a data-role="button" data-inline="true"  class="board">Leaderboard</a>
+		<a data-role="button" data-inline="false" class="play">Next Level</a>
+		<a data-role="button" data-inline="false" class="menu">Quit Game</a>
+		<a data-role="button" data-inline="false"  class="board">Leaderboard</a>
 
 	</div>
 	

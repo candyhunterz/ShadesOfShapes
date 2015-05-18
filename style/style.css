@@ -8,13 +8,14 @@ body, #board {
 	padding-bottom: 10px;
 }
 
-#container {
+#timecontainer {
 	position:relative;
 	width: 300px;
 	margin-left:-150px;
 	left: 50%;
 	padding-bottom: 60px;
 	min-height: 300px;
+    margin-top: 200px;
 }
 
 #choice {
@@ -113,17 +114,12 @@ circle {
     height: 100%;
 }
 
-#main{
-	background:linear-gradient(#FFFFFF, #B8B8B8);
-}
-
 #logo{
 	width:300px;
 	height:150px;
-	position: relative;
-	top:50px;
 }
 
+/*
 #mainHeader{
 	position: relative;
 	top:50px;
@@ -149,6 +145,7 @@ circle {
 	height:60px;
 	width:300px;
 }
+*/
 
 #gameover {
 	color: blue;
