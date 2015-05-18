@@ -58,16 +58,18 @@ img {
 	padding: 0;
 }
 
-#level {
-	text-align: left;
+#score p {
 	display: inline;
-	position: relative;
+	margin: 0;
+	padding: 0;
 }
 
-#lives{
-	text-align: right;
-	position: relative;
+#level p {
+	text-align: left;
 	display: inline;
+}
+#level {
+	text-align: left;
 }
 
 #hex {
@@ -122,13 +124,6 @@ circle {
 	top:50px;
 }
 
-#gamePageLogo{
-	height:100px;
-	position: relative;
-	top:40px;
-	width: 100%;
-}
-
 #mainHeader{
 	position: relative;
 	top:50px;
@@ -136,6 +131,16 @@ circle {
 }
 
 #playButton{
+	position: relative;
+	top:50px;
+	margin-left:auto;
+	margin-right:auto;
+	font-size:20px;
+	height:60px;
+	width:300px;
+}
+
+#leaderBoard{
 	position: relative;
 	top:50px;
 	margin-left:auto;

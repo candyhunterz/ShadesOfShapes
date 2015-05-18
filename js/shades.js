@@ -18,6 +18,7 @@ $(document).ready(function() {
 	var blueClicked = 0;
 	var yellowClicked = 0;
 	var clicked = false;
+	var muteSoundFX = false;
 
 	getMute();
 

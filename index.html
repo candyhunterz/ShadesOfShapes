@@ -9,7 +9,7 @@
 	<script src="js/jquery.mobile-1.4.5.min.js"></script>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/jquery-ui.js"></script>
-	<script src="js/shades.js"></script>
+	<script type="text/javascript" src="js/shades.js"></script>
 	<script src="js/d3.v3.min.js" charset="utf-8"></script>
 	<link rel="stylesheet" type="text/css" href="style/style.css"> 
 	<link rel="stylesheet" href="style/bootstrap.min.css">
@@ -19,7 +19,7 @@
 </head>
 <body>
 	<!--Audio file for music -->
-	<audio autoplay id="music">
+	<audio id="music">
 		<source src="sounds/elavator.mp3" type="audio/mpeg">
 	</audio>
 	
@@ -28,8 +28,8 @@
 		<img src="images/logo.png" alt="logo" id="logo">
 		<h1 id="mainHeader">Shades of Shapes</h1>
 		<a data-role="button" data-inline="true"  class="play" id="playButton">Play</a>
-		<a data-role="button" data-inline="true"  class="board" id="playButton">Leaderboard</a>
-		<img id="muteButton">
+		<a data-role="button" data-inline="true"  class="board" id="leaderBoard">Leaderboard</a>
+		<img src="images/sound.png" alt="mute" id="muteButton">
 	</div>
 	<!-- End of the main page -->
 	
@@ -45,12 +45,11 @@
 				</div>
 				<div id="choice">
 					<br/>
-					<h1 onclick="click(event)">TAP</h1>
+					<h1>TAP</h1>
 					<table>
-					<tr><td id='d25' ></td></tr>
+						<tr><td id='d25'></td></tr>
 					</table>
 				</div>
-				<img id="muteButton">
 			</div>
 		</div><!-- /content -->
 		<div data-role="footer">
@@ -60,61 +59,59 @@
 
 	<!-- Start of the game page -->
 	<div data-role="page" id="game">
-		<div id="gamePageLogo">
+		<div id="logo">
 			<h1>Shades Of Shapes</h1>
 		</div>
 		<div role="main" class="ui-content">
-			<div id='score'> 
-				<h3>Score: </h3><h3 id="gameScore">0</h3>
+			<div> 
+				score: <p class='score'>0</p>
 			</div>
 			<div class="background">
 				<div id="board">
-					<table>
+					<table id="gametable">
 						<tr>
-							<td id='d0' ></td>
-							<td id='d1' ></td>
-							<td id='d2' ></td>
-							<td id='d3' ></td>
-							<td id='d4' ></td>
+							<td id='d0' class"gametd"></td>
+							<td id='d1' class"gametd"></td>
+							<td id='d2' class"gametd"></td>
+							<td id='d3' class"gametd"></td>
+							<td id='d4' class"gametd"></td>
 						</tr>
 						<tr>
-							<td id='d5' ></td>
-							<td id='d6' ></td>
-							<td id='d7' ></td>
-							<td id='d8' ></td>
-							<td id='d9' ></td>
+							<td id='d5' class"gametd"></td>
+							<td id='d6' class"gametd"></td>
+							<td id='d7' class"gametd"></td>
+							<td id='d8' class"gametd"></td>
+							<td id='d9' class"gametd"></td>
 						</tr>
 						<tr>
-							<td id='d10'></td>
-							<td id='d11'></td>
-							<td id='d12'></td>
-							<td id='d13'></td>
-							<td id='d14'></td>
+							<td id='d10' class"gametd"></td>
+							<td id='d11' class"gametd"></td>
+							<td id='d12' class"gametd"></td>
+							<td id='d13' class"gametd"></td>
+							<td id='d14' class"gametd"></td>
 						</tr>
 						<tr>
-							<td id='d15'></td>
-							<td id='d16'></td>
-							<td id='d17'></td>
-							<td id='d18'></td>
-							<td id='d19'></td>
+							<td id='d15' class"gametd"></td>
+							<td id='d16' class"gametd"></td>
+							<td id='d17' class"gametd"></td>
+							<td id='d18' class"gametd"></td>
+							<td id='d19' class"gametd"></td>
 						</tr>
 						<tr>
-							<td id='d20'></td>
-							<td id='d21'></td>
-							<td id='d22'></td>
-							<td id='d23'></td>
-							<td id='d24'></td>
+							<td id='d20' class"gametd"></td>
+							<td id='d21' class"gametd"></td>
+							<td id='d22' class"gametd"></td>
+							<td id='d23' class"gametd"></td>
+							<td id='d24' class"gametd"></td>
 						</tr>
 					</table>
 				</div>
 			</div>
-			<img id="muteButton">
 			<a href="#done">done</a>
 		</div><!-- /content -->
 		<div data-role="footer">
-			<div>
-				<h3 id="level">Level: </h3><h3 id="level">0</h3>
-				<h3 id="lives">Lives: </h3><h3 id="lives">0</h3>
+			<div id="level">
+				Level: <p id="gameLevel">0</p>
 			</div>
 		</div><!-- /footer -->
 	</div><!-- /page -->
@@ -123,30 +120,34 @@
 	<div data-role="page" class="ui-content" id="LeaderboardPage">
 	
 		<h1 id="LeaderTitle" >Leaderboard</h1>
-		<!--
-		<div class="input-group">
-		  <input type="text" class="form-control" id="userID" placeholder="Name">
-		</div>
-		<div class="input-group">
-		  <input type="text" class="form-control" id="userScore" placeholder="Score">
-		</div>
-		-->
 		
 		 <input type="text" class="form-control" id="userID" placeholder="Name">
 		 <input type="text" class="form-control" id="userScore" placeholder="Score">
 		 
+		<table class="table" id="scoreDisplay">
+			<thead>
+				<tr>
+					<td>#</td>
+					<td>NAME</td>
+					<td>SCORE</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr></tr>
+			</tbody>
+		</table>
 		<div data-role="button" type="submit" class="btn btn-default" id="send">Submit</div>
-		<div data-role="button" data-inline="true" class="menu btn btn-default">Main Menu</a>
+		<a  data-role="button" data-inline="true" class="menu">Main Menu</a>
 	</div>
 	
 	<!-- Start of the gameover page -->
 	<div data-role="page" class="ui-content" id="done">
 		<h1 id='gameover'>Game Over</h1>
 		<h3>Score:</h3>
-		<p><strong>0</strong></p>
+		<p class='score'><strong>0</strong></p>
 		<h3>Best Score:</h3>
 		<p><strong>0</strong></p>
-		<a data-role="button" data-inline="true" class="play">Play Again</a>
+		<a  data-role="button" data-inline="true" class="play">Play Again</a>
 		<a data-role="button" data-inline="true" class="menu">Quit Game</a>
 		<a data-role="button" data-inline="true"  class="board">Leaderboard</a>
 	</div>
@@ -155,10 +156,11 @@
 	<div data-role="page" class="ui-content " id="clear">
 		<h1 id="levelClear" style="fontsize: xx-large">LEVEL 1 CLEARED</h1>
 		<h3>Score:</h3>
-		<a data-role="button" data-inline="true" class="play">Play Again</a>
+		<p class='score'><strong>0</strong></p>
+		<a data-role="button" data-inline="true" class="play">Next Level</a>
 		<a data-role="button" data-inline="true" class="menu">Quit Game</a>
 		<a data-role="button" data-inline="true"  class="board">Leaderboard</a>
-		<img id="muteButton">
+
 	</div>
 	
 </body>
