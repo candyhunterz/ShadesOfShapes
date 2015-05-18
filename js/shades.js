@@ -19,6 +19,7 @@ $(document).ready(function() {
 	var yellowClicked = 0;
 	var clicked = false;
 	var muteSoundFX = false;
+	var lives = 3;
 
 	getMute();
 
@@ -104,6 +105,14 @@ $(document).ready(function() {
 		var choiceColor = $("#choice td").css("background-color");
 		if (color === choiceColor) {
 			d3.select(this).style("opacity", 0).transition().duration(0).style("opacity", 1);
+		} else {
+			lives--;
+			if(lives === 0){
+				lives = 3;
+				window.location = "#done";
+			}
+			$("#gameLives").text(lives);
+
 		}
 		if (color === "rgb(255, 255, 0)")
 			yellowClicked++;
@@ -116,7 +125,7 @@ $(document).ready(function() {
 				d3.select("#d"+i).style("opacity", 0).transition().duration(0).style("opacity", 1);
 			}
 			nextLevel();
-		}
+		} 
 
 		console.log(color);
 		console.log(yellowClicked);
