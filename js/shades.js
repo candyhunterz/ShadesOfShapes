@@ -408,7 +408,7 @@ $(document).ready(function() {
 	}
 
 	//example on making a cookie and checking for it
-	function checkCookie(check) {
+	function checkCookie() {
 		var user = getCookie("username");
 		if (user != "") {
 			alert("Welcome again " + user);
@@ -419,4 +419,8 @@ $(document).ready(function() {
 			}
 		}
 	}
+	
+	$("#cookie").click(function(){
+		checkCookie();
+	});
 });
