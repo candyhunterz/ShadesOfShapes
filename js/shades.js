@@ -19,7 +19,6 @@ $(document).ready(function() {
 	var numColors = 3;
 	var numShapes = 0;
 	var fadeTime = 10000;
-
 	
 	// starts the game
 	function startGame() {
@@ -292,9 +291,6 @@ $(document).ready(function() {
 		if (fadeTime > 5000)
 			fadeTime -= 500;
 		gameLevel++;
-		
-		
-		
 		for(var i=0; i<board.length; i++) {
 			//Sets all cells to be able for clicking again.
 			board[i][1] =0;
@@ -391,12 +387,12 @@ $(document).ready(function() {
 		document.cookie = cname + "=" + cvalue + "; " + expires;	
 	}
 	/*	
-		Take the cookiename as parameter (cname).
-		Create a variable (name) with the text to search for (cname + "=").
-		Split document.cookie on semicolons into an array called ca (ca = document.cookie.split(';')).
-		Loop through the ca array (i=0;i<ca.length;i++), and read out each value c=ca[i]).
-		If the cookie is found (c.indexOf(name) == 0), return the value of the cookie (c.substring(name.length,c.length).
-		If the cookie is not found, return "".
+	Take the cookiename as parameter (cname).
+	Create a variable (name) with the text to search for (cname + "=").
+	Split document.cookie on semicolons into an array called ca (ca = document.cookie.split(';')).
+	Loop through the ca array (i=0;i<ca.length;i++), and read out each value c=ca[i]).
+	If the cookie is found (c.indexOf(name) == 0), return the value of the cookie (c.substring(name.length,c.length).
+	If the cookie is not found, return "".
 	 */
 	function getCookie(cname) {
 		var name = cname + "=";
@@ -412,7 +408,7 @@ $(document).ready(function() {
 	}
 
 	//example on making a cookie and checking for it
-	function checkCookie() {
+	function checkCookie(check) {
 		var user = getCookie("username");
 		if (user != "") {
 			alert("Welcome again " + user);
