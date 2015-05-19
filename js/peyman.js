@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	var show = false;
 	
 	$(".menu").click(function(){
 		window.location = "#main";
@@ -10,7 +11,7 @@ $(document).ready(function() {
 	
 	var name,num;
 	$("#send").click(function(){
-		var num = $('#userScore').val();
+		var num = parseInt($('#userScore').val());
 		var user = $('#userID').val();
 		console.log(num);
 		$.ajax({
@@ -24,32 +25,56 @@ $(document).ready(function() {
 		console.log(user);
 	}); 
 	
-	$(".board").click(function(){
-		LBlist= [];
-		$(".LBscore").remove();
-		$.getJSON("https://api.mongolab.com/api/1/databases/sos/collections/leaderboard?apiKey=br10X-RgokMGFuGnyr5w4WHdKpa046Fr", function(result){
-			var j = 1;
-			$.each(result, function(i, field) {
-				LBlist[i] = [];
-				LBlist[i][0] = field.name;
-				LBlist[i][1] = parseInt(field.score);
+	$("#LeaderTitle").click(function(){
+		if(!show) {
+			show = true;
+			$.getJSON("https://api.mongolab.com/api/1/databases/sos/collections/leaderboard?apiKey=br10X-RgokMGFuGnyr5w4WHdKpa046Fr&s={%22score%22:-1}", function(result){
+				var j = 1;
+				$.each(result, function(i, field){
+					$("#bodyLeader").append('<tr> <td>'+j+'</td> <td>'+field.name+'</td> <td>'+field.score+'</td> </tr>');
+					j++;
+				});
 			});
-			
-			LBlist.sort(compareSecondColumn);
-			
-			for(var i=0; i<LBlist.length; i++) {
-				$("#bodyLeader").append('<tr class="LBscore"> <td>'+j+'</td> <td>'+LBlist[i][0]+'</td> <td>'+LBlist[i][1]+'</td> </tr>');
-				j++;
-			}
-		});
+		}
 	});
 	
-	function compareSecondColumn(a, b) {
-		if (a[1] === b[1]) {
-			return 0;
+	function setCookie(cname, cvalue, exdays) {
+		var d = new Date();
+		d.setTime(d.getTime() + (exdays*24*60*60*1000));
+		var expires = "expires="+d.toUTCString();
+		document.cookie = cname + "=" + cvalue + "; " + expires;	
+	}
+	/*	
+	Take the cookiename as parameter (cname).
+	Create a variable (name) with the text to search for (cname + "=").
+	Split document.cookie on semicolons into an array called ca (ca = document.cookie.split(';')).
+	Loop through the ca array (i=0;i<ca.length;i++), and read out each value c=ca[i]).
+	If the cookie is found (c.indexOf(name) == 0), return the value of the cookie (c.substring(name.length,c.length).
+	If the cookie is not found, return "".
+	*/
+	function getCookie(cname) {
+		var name = cname + "=";
+		var ca = document.cookie.split(';');
+		for(var i=0; i<ca.length; i++) {
+			var c = ca[i];
+			while (c.charAt(0)==' ') 
+				c = c.substring(1);
+			if (c.indexOf(name) == 0) 
+				return c.substring(name.length, c.length);
 		}
-		else {
-			return (a[1] > b[1]) ? -1 : 1;
+		return "";
+	}
+
+	//example on making a cookie and checking for it
+	function checkCookie() {
+		var user = getCookie("username");
+		if (user != "") {
+			alert("Welcome again " + user);
+		} else {
+			user = prompt("Please enter your name:", "");
+			if (user != "" && user != null) {
+				setCookie("username", user, 365);
+			}
 		}
 	}
 });
