@@ -29,6 +29,7 @@ $(document).ready(function() {
 		$("#timer").TimeCircles();
 		var delay = 3800; //Your delay in milliseconds
 		$(".level").html(gameLevel);
+		$("#gameLevel").html(gameLevel);
 		$(".score").html(score);
 		startLevel();
 		setTimeout(function() {
@@ -64,7 +65,7 @@ $(document).ready(function() {
 		}
 	}
 	//Use the class tag so every Play and Playagain button can be referenced the same
-	$(".play").click(function(){
+	$(".play").on('click touchstart', function(){
 		if(this.id == "playButton" || this.id == "playAgain") {
 			gameLevel = 1;
 			score = 0;
@@ -133,7 +134,7 @@ $(document).ready(function() {
 
 	// making the pregame page not lose the color
 	/* 
-	$("h1").click(function(){
+	$("h1").on('click touchstart', function(){
 		$("svg").remove();
 		setColor();
 		for (var i=0; i<board.length; i++) {
@@ -143,7 +144,7 @@ $(document).ready(function() {
 	}) */
 
 	// function to get the color of a clicked cell
-	$("td").click(function() {
+	$("td").on('click touchstart', function() {
 		if(this.id != "d25"){ //Can't click cell in pre-game page
 			for(var i=0; i<board.length; i++) {
 				//Each cell can only be clicked once
@@ -159,7 +160,7 @@ $(document).ready(function() {
 						score += 100;
 						$(".score").html(score);
 					}
-					if(color = choiceColor) {
+					if(color === choiceColor) {
 						correctClicked++;
 					}
 				}
@@ -175,7 +176,7 @@ $(document).ready(function() {
 		
 	});
 
-	$("#timed").click(function() {
+	$("#timed").on('click touchstart', function() {
 		reset();
 		for (var i=0; i<board.length; i++) {
 			$("#d" + i).animate({
@@ -265,7 +266,7 @@ $(document).ready(function() {
 		}
 	}
 	// function that mute the sound 
-	$("#muteButton").click(function() {
+	$("#muteButton").on('click touchstart', function() {
 		if(mute == 0){
 			mute = 1;
 			document.getElementById("music").pause();
@@ -291,6 +292,9 @@ $(document).ready(function() {
 		if (fadeTime > 5000)
 			fadeTime -= 500;
 		gameLevel++;
+		
+		
+		
 		for(var i=0; i<board.length; i++) {
 			//Sets all cells to be able for clicking again.
 			board[i][1] =0;
