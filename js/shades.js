@@ -155,12 +155,12 @@ $(document).ready(function() {
 					var choiceColor = $("#choice td").css("background-color");
 					var choiceSVG = d3.select("svg");
 					var colorSVG = $(this).css("fill");
+					classa = this.className;
+					console.log(classa);
 					if (color === choiceColor) {
 						d3.select(this).style("opacity", 0).transition().duration(0).style("opacity", 1);
 						score += 100;
 						$(".score").html(score);
-					}
-					if(color === choiceColor) {
 						correctClicked++;
 					}
 				}
@@ -195,7 +195,8 @@ $(document).ready(function() {
 			svgContainers[i] = d3.select("#d"+i).append("svg")
 			.attr("width", 50)
 			.attr("height", 50);
-			randomShapes(svgContainers[i], num);
+			var shapeType = randomShapes(svgContainers[i], num);
+			$("#d"+i).addClass(shapeType);
 		}	
 	}
 	
@@ -216,6 +217,7 @@ $(document).ready(function() {
 				.attr("r",25)
 				.attr("fill", color[0]);
 				shapeList[i] = shape;
+				return "circle";
 				break;
 				case 1: 
 				color = randomColor(1);
@@ -224,6 +226,7 @@ $(document).ready(function() {
 				.attr("height",50)
 				.attr("fill", color[0]);
 				shapeList[i] = shape;
+				return "rect";
 				break;
 				case 2: 
 				break;
@@ -238,7 +241,7 @@ $(document).ready(function() {
 			}
 		}
 		console.log(shapeList);
-		return shapeList;
+		//return shapeList;
 }
 	//sound effects
 	function playSoundFx(fx){
