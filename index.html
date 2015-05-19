@@ -11,11 +11,11 @@
 	<script src="js/jquery-ui.js"></script>
 	<script type="text/javascript" src="js/shades.js"></script>
 	<script src="js/d3.v3.min.js" charset="utf-8"></script>
-	<link rel="stylesheet" type="text/css" href="style/style.css"> 
 	<link rel="stylesheet" href="style/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="style/style.css"> 
 	<script type="text/javascript" src="js/TimeCircles.js"></script>
 	<script type="text/javascript" src="js/difficulty.js"></script>
-	<script type="text/javascript" src="js/peyman.js"></script>
+	<!-- <script type="text/javascript" src="js/peyman.js"></script> -->
     <link rel="stylesheet" href="themes/theme.min.css" />
 	<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
 </head>
@@ -137,8 +137,7 @@
 					<td>SCORE</td>
 				</tr>
 			</thead>
-			<tbody>
-				<tr></tr>
+			<tbody id="bodyLeader">
 			</tbody>
 		</table>
 		<a data-role="button" data-inline="false" type="submit" class="btn btn-default" id="send">Submit</a>
@@ -168,7 +167,7 @@
 		<a data-role="button" data-inline="false" class="play">Next Level</a>
 		<a data-role="button" data-inline="false"  class="board">Submit Score</a>
 		<a data-role="button" data-inline="false" class="menu">Quit Game</a>
-
+		<a data-role="button" data-inline="false"  class="board">Leaderboard</a>
 	</div>
 	
 </body>
