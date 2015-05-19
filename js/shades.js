@@ -27,6 +27,7 @@ $(document).ready(function() {
 	function startGame() {
 		reset();
 		window.location = "#pregame";
+		getMute();
 		$("#timer").TimeCircles().destroy();
 		$("#timer").TimeCircles();
 		var delay = 3800; //Your delay in milliseconds
@@ -107,7 +108,7 @@ $(document).ready(function() {
 			d3.select(this).style("opacity", 0).transition().duration(0).style("opacity", 1);
 		} else {
 			lives--;
-			if(lives === 0){
+			if(lives <= 0){
 				lives = 3;
 				window.location = "#done";
 			}
@@ -199,23 +200,24 @@ $(document).ready(function() {
 				SoundfxNum = "2";
 				fx2.play();
 				break;
-			case  "2":
+			case "2":
 				SoundfxNum = "3";
 				fx3.play();
 				break;
-			case  "3":
+			case "3":
 				SoundfxNum = "4";
 				fx4.play();
 				break;
-			case  "4":
+			case "4":
 				SoundfxNum = "0";
 				fx5.play();
 				break;
 		}
 	}
 
+	// Displaying mute button in pages
 	function getMute(){
-		if(mute == 0){
+		if(mute === 0){
 			$("#muteButton").attr("src","images/sound.png");
 		} else {
 			$("#muteButton").attr("src","images/mute.png");
@@ -224,7 +226,7 @@ $(document).ready(function() {
 	
 	// function that mute the sound 
 	$("#muteButton").click(function() {
-		if(mute == 0){
+		if(mute === 0){
 			mute = 1;
 			document.getElementById("music").pause();
 			$(this).attr("src","images/mute.png");
@@ -257,5 +259,9 @@ $(document).ready(function() {
 	function nextLevel() {
 		window.location = "#clear"
 	}
+
+	$("#achievementsButton").click(function(){
+		window.location = "#achievements"
+	});
 
 });
