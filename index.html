@@ -122,8 +122,9 @@
 	
 	<!-- Start of the Leaderboard page -->
 	<div data-role="page" class="ui-content" id="LeaderboardPage">
-	
-		<h1 id="LeaderTitle" >Leaderboard</h1>
+		<div data-role="header">
+			<h1 id="LeaderTitle" >Leaderboard</h1>
+        </div>
 		
 		 <input type="text" class="form-control" id="userID" placeholder="Name">
 		 <input type="text" class="form-control" id="userScore" placeholder="Score">
@@ -139,8 +140,8 @@
 			<tbody id="bodyLeader">
 			</tbody>
 		</table>
-		<div data-role="button" type="submit" class="btn btn-default" id="send">Submit</div>
-		<a  data-role="button" data-inline="true" class="menu">Main Menu</a>
+		<a data-role="button" data-inline="false" type="submit" class="btn btn-default" id="send">Submit</a>
+		<a data-role="button" data-inline="false" class="menu">Main Menu</a>
 	</div>
 	
 	<!-- Start of the gameover page -->
@@ -152,9 +153,8 @@
 		<p class='score'><strong>0</strong></p>
 		<h3>Best Score:</h3>
 		<p><strong>0</strong></p>
-		<a  data-role="button" data-inline="false" class="play">Play Again</a>
+		<a data-role="button" data-inline="false"  class="board">Submit Score</a>
 		<a data-role="button" data-inline="false" class="menu">Quit Game</a>
-		<a data-role="button" data-inline="false"  class="board">Leaderboard</a>
 	</div>
 
 	<!-- Start of the gameover page -->
@@ -165,6 +165,7 @@
 		<h3>Score:</h3>
 		<p class='score'><strong>0</strong></p>
 		<a data-role="button" data-inline="false" class="play">Next Level</a>
+		<a data-role="button" data-inline="false"  class="board">Submit Score</a>
 		<a data-role="button" data-inline="false" class="menu">Quit Game</a>
 		<a data-role="button" data-inline="false"  class="board">Leaderboard</a>
 	</div>
