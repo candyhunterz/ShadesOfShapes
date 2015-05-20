@@ -3,7 +3,6 @@ $(document).ready(function() {
 	// init game constants
 	var board = [[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]];
 	var row1, row2, row3, row4, row5, col1, col2, col3, col4, col5, leftDiag, rightDiag;
-	var correct = 0;
 	var mute = 0;
 	var SoundfxNum = "0";
 	var fx1 = new Audio("sounds/fx1.mp3");
@@ -11,9 +10,11 @@ $(document).ready(function() {
 	var fx3 = new Audio("sounds/fx3.mp3");
 	var fx4 = new Audio("sounds/fx4.mp3");
 	var fx5 = new Audio("sounds/fx5.mp3");
+	var achv = new Audio("sounds/AchievementUnlocked.mp3");
 	var correct = 0;
 	var correctClicked = 0;
 	var clicked = false;
+	var hasShape = true;
 	var score = 0;
 	var gameLevel = 1;
 	var numColors = 3;
@@ -44,6 +45,9 @@ $(document).ready(function() {
 	function startLevel() {
 		// starts level
 		setColor();
+		
+		hasShape = $.contains("#d25" ,"svg");
+		console.log(hasShape);
 		if(gameLevel <= 5) {
 			//Easy Levels 1-7
 			if(numColors < 5) {
@@ -51,6 +55,7 @@ $(document).ready(function() {
 			}
 		}else if(gameLevel <= 10) {
 			//Medium Levels 8-14
+			
 			randomChoice(2);
 			makeShapes(2);
 
@@ -155,12 +160,11 @@ $(document).ready(function() {
 					var choiceColor = $("#choice td").css("background-color");
 					var choiceSVG = d3.select("svg");
 					var colorSVG = $(this).css("fill");
+					classa = this.className;
 					if (color === choiceColor) {
 						d3.select(this).style("opacity", 0).transition().duration(0).style("opacity", 1);
 						score += 100;
 						$(".score").html(score);
-					}
-					if(color === choiceColor) {
 						correctClicked++;
 					}
 				}
@@ -171,6 +175,7 @@ $(document).ready(function() {
 				d3.select("#d"+i).style("opacity", 0).transition().duration(0).style("opacity", 1);
 			}
 			nextLevel();
+			achievements();
 		}
 
 		
@@ -195,7 +200,8 @@ $(document).ready(function() {
 			svgContainers[i] = d3.select("#d"+i).append("svg")
 			.attr("width", 50)
 			.attr("height", 50);
-			randomShapes(svgContainers[i], num);
+			var shapeType = randomShapes(svgContainers[i], num);
+			$("#d"+i).addClass(shapeType);
 		}	
 	}
 	
@@ -210,12 +216,13 @@ $(document).ready(function() {
 			switch (num) {
 				case 0:
 				color = randomColor(1); 
-				shape = svg.append("circle")
+				svg.append("circle")
 				.attr("cx",25)
 				.attr("cy",25)
 				.attr("r",25)
 				.attr("fill", color[0]);
-				shapeList[i] = shape;
+				shapeList[i] = "circle";
+				return "circle";
 				break;
 				case 1: 
 				color = randomColor(1);
@@ -223,9 +230,14 @@ $(document).ready(function() {
 				.attr("width",50)
 				.attr("height",50)
 				.attr("fill", color[0]);
-				shapeList[i] = shape;
+				shapeList[i] = "rect";
+				return "rect";
 				break;
 				case 2: 
+				color = randomColor(1);
+				svg.append("polygon").attr("points", "25, 0 0, 50 50,50").attr("fill", color[0]);
+				shapeList[i] = "triangle";
+				return "triangle";
 				break;
 				case 3: 
 				break;
@@ -238,7 +250,7 @@ $(document).ready(function() {
 			}
 		}
 		console.log(shapeList);
-		return shapeList;
+		//return shapeList;
 }
 	//sound effects
 	function playSoundFx(fx){
@@ -291,15 +303,17 @@ $(document).ready(function() {
 		$("#levelClear").html("LEVEL " + gameLevel + " CLEARED");
 		if (fadeTime > 5000)
 			fadeTime -= 500;
-		gameLevel++;
+		
 		
 		
 		
 		for(var i=0; i<board.length; i++) {
 			//Sets all cells to be able for clicking again.
 			board[i][1] =0;
+			$("#d"+i).removeClass().addClass("gametd");
 		}
 		window.location = "#clear"
+		gameLevel++;
 		$(".score").html(score);
 	}
 
@@ -422,5 +436,19 @@ $(document).ready(function() {
 				setCookie("username", user, 365);
 			}
 		}
+	}
+
+	// ---------------------------------------------------
+	// ACHIEVEMENTS //
+	function achievements() {
+		
+
+		
+			achv.play();
+			$("#ac").prepend('<img id="ach1" src="images/a1.png" />').hide();
+			$("#ac").show().slideDown("slow", function() {
+				$("#ach1").fadeOut(5000);
+			});
+		
 	}
 });
