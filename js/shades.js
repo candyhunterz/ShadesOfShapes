@@ -492,19 +492,19 @@ $(document).ready(function() {
 			
 		}
 
-		$("#achievementsButton").click(function(){
-			window.location="#achievements";
-		});
-
-		$("#leaderBoard").click(function(){
-			window.location="#LeaderboardPage";
-		});
-
-		$(".settingButton").click(function(){
-			window.location = "#setting";
-		});	
-		
 	}
+	
+	$("#achievementsButton").click(function(){
+		window.location="#achievements";
+	});
+
+	$("#leaderBoard").click(function(){
+		window.location="#LeaderboardPage";
+	});
+
+	$(".settingButton").click(function(){
+		window.location = "#setting";
+	});	
 
 });
 
