@@ -10,11 +10,10 @@ $(document).ready(function() {
 	var fx3 = new Audio("sounds/fx3.mp3");
 	var fx4 = new Audio("sounds/fx4.mp3");
 	var fx5 = new Audio("sounds/fx5.mp3");
-	var achv = new Audio("sounds/AchievementUnlocked.mp3");
 	var correct = 0;
 	var correctClicked = 0;
 	var clicked = false;
-	var hasShape = true;
+	var hasShape = false;
 	var score = 0;
 	var gameLevel = 1;
 	var numColors = 3;
@@ -41,9 +40,9 @@ $(document).ready(function() {
 		$("#timer").TimeCircles().destroy();
 		$("#timer").TimeCircles();
 		var delay = 3800; //Your delay in milliseconds
+		$(".score").html(score);
 		$(".level").html(gameLevel);
 		$("#gameLevel").html(gameLevel);
-		$(".score").html(score);
 		startLevel();
 		setTimeout(function() {
 			window.location = "#game"; 
@@ -64,9 +63,6 @@ $(document).ready(function() {
 	function startLevel() {
 		// starts level
 		setColor();
-		
-		hasShape = $.contains("#d25" ,"svg");
-		console.log(hasShape);
 		if(gameLevel <= 5) {
 			//Easy Levels 1-7
 			if(numColors < 5) {
@@ -74,7 +70,6 @@ $(document).ready(function() {
 			}
 		}else if(gameLevel <= 10) {
 			//Medium Levels 8-14
-			
 			randomChoice(2);
 			makeShapes(2);
 
@@ -87,6 +82,8 @@ $(document).ready(function() {
 				fadeTime -= 500;
 			}
 		}
+		hasShape = ($("#d25").hasClass("svg")?true:false);
+		countColor();
 	}
 	//Use the class tag so every Play and Playagain button can be referenced the same
 	$(".play").on('click touchstart', function(){
@@ -101,9 +98,13 @@ $(document).ready(function() {
 	// function to randomize the choice cell
 	function randomChoice(num) {
 		svgContainer = d3.select("#d25").append("svg")
-			.attr("width", 50)
-			.attr("height", 50);
-			randomShapes(svgContainer, num);
+			.attr("width", 52)
+			.attr("height", 52);
+			var shapeType = randomShapes(svgContainer, num)
+			if(shapeType) {
+				$("#d25").addClass(shapeType);
+				$("#d25").addClass("svg");
+			}
 
 	}
 
@@ -111,7 +112,7 @@ $(document).ready(function() {
 
 	function randomize(cnum) {
 			for (var i=0; i<board.length; i++) {
-			var num = Math.floor(Math.random()*3)
+			var num = Math.floor(Math.random()*cnum)
 			var color='';
 			board[i][0] = 0;
 			if (num == 0) {
@@ -140,7 +141,6 @@ $(document).ready(function() {
 	function setColor() {
 		randomize(numColors);
 		//makeShapes();
-		countColor();
 	}
 	
 	//function to return the color of selection box
@@ -179,8 +179,7 @@ $(document).ready(function() {
 					var choiceColor = $("#choice td").css("background-color");
 					var choiceSVG = d3.select("svg");
 					var colorSVG = $(this).css("fill");
-					classa = this.className;
-					if (color === choiceColor) {
+					if (color === choiceColor && (!hasShape && (this.className == "gametd svg" || this.className == "gametd") || $("#d"+i).hasClass($("#d25").attr("class")))) {
 						d3.select(this).style("opacity", 0).transition().duration(0).style("opacity", 1);
 						score += 100;
 						$(".score").html(score);
@@ -195,7 +194,6 @@ $(document).ready(function() {
 			}
 			gameLevel++;
 			nextLevel();
-			achievements();
 		}
 
 		
@@ -217,11 +215,10 @@ $(document).ready(function() {
 		var shape;
 		// making svg containers in all squares
 		for (var i=0; i<board.length; i++) {
-			svgContainers[i] = d3.select("#d"+i).append("svg")
-			.attr("width", 50)
-			.attr("height", 50);
+			svgContainers[i] = d3.select("#d"+i).append("svg");
 			var shapeType = randomShapes(svgContainers[i], num);
 			$("#d"+i).addClass(shapeType);
+			$("#d"+i).addClass("svg");
 		}	
 	}
 	
@@ -236,26 +233,36 @@ $(document).ready(function() {
 			switch (num) {
 				case 0:
 				color = randomColor(1); 
-				svg.append("circle")
-				.attr("cx",25)
-				.attr("cy",25)
+				shape = svg.append("circle")
+				.attr("cx",27)
+				.attr("cy",27)
 				.attr("r",25)
+				.attr("stroke", "turquoise")
+				.attr("stroke-width" , 3)
 				.attr("fill", color[0]);
-				shapeList[i] = "circle";
+				shapeList[i] = shape;
 				return "circle";
 				break;
 				case 1: 
 				color = randomColor(1);
 				shape = svg.append("rect")
+				.attr("x", 2)
+				.attr("y", 2)
 				.attr("width",50)
 				.attr("height",50)
+				.attr("stroke", "turquoise")
+				.attr("stroke-width" , 3)
 				.attr("fill", color[0]);
-				shapeList[i] = "rect";
+				shapeList[i] = shape;
 				return "rect";
 				break;
 				case 2: 
 				color = randomColor(1);
-				svg.append("polygon").attr("points", "25, 0 0, 50 50,50").attr("fill", color[0]);
+				svg.append("polygon")
+				.attr("points", "25, 0 0, 50 50,50")
+				.attr("stroke", "turquoise")
+				.attr("stroke-width" , 3)
+				.attr("fill", color[0]);
 				shapeList[i] = "triangle";
 				return "triangle";
 				break;
@@ -269,7 +276,7 @@ $(document).ready(function() {
 				console.log("not a valid shape");
 			}
 		}
-		console.log(shapeList);
+		//console.log(shapeList);
 		//return shapeList;
 }
 	//sound effects
@@ -313,7 +320,7 @@ $(document).ready(function() {
 	// function that tally up all the colors
 	function countColor() {
 		for (var i=0; i<board.length; i++) {
-			if($("#d" + i).css("background-color") == $("#d25").css("background-color")) {
+			if($("#d" + i).css("background-color") == $("#d25").css("background-color") && (!hasShape && (document.getElementById("d"+i).className == "gametd svg" || document.getElementById("d"+i).className == "gametd") || $("#d"+i).hasClass($("#d25").attr("class")))) {
 				correct++;
 			}
 		}
@@ -324,7 +331,7 @@ $(document).ready(function() {
 		$("#levelClear").html("LEVEL " + gameLevel + " CLEARED");
 		if (fadeTime > 5000)
 			fadeTime -= 500;
-		
+		gameLevel++;
 		
 		
 		
@@ -333,8 +340,10 @@ $(document).ready(function() {
 			board[i][1] =0;
 			$("#d"+i).removeClass().addClass("gametd");
 		}
+		$("#d25").removeClass();
 		window.location = "#clear"
 		//gameLevel++;
+		
 		$(".score").html(score);
 	}
 
@@ -375,7 +384,7 @@ $(document).ready(function() {
 			}
 
 		}	
-		console.log(colorList);
+		//console.log(colorList);
 		
 		return colorList;
 	}
@@ -458,7 +467,6 @@ $(document).ready(function() {
 			}
 		}
 	}
-
 	// ---------------------------------------------------
 	// ACHIEVEMENTS //
 	function achievements() {
@@ -498,3 +506,4 @@ $(document).ready(function() {
 	}
 
 });
+
