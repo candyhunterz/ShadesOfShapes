@@ -3,7 +3,6 @@ $(document).ready(function() {
 	// init game constants
 	var board = [[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]];
 	var row1, row2, row3, row4, row5, col1, col2, col3, col4, col5, leftDiag, rightDiag;
-	var correct = 0;
 	var mute = 0;
 	var SoundfxNum = "0";
 	var fx1 = new Audio("sounds/fx1.mp3");
@@ -11,9 +10,11 @@ $(document).ready(function() {
 	var fx3 = new Audio("sounds/fx3.mp3");
 	var fx4 = new Audio("sounds/fx4.mp3");
 	var fx5 = new Audio("sounds/fx5.mp3");
+	var achv = new Audio("sounds/AchievementUnlocked.mp3");
 	var correct = 0;
 	var correctClicked = 0;
 	var clicked = false;
+	var hasShape = true;
 	var score = 0;
 	var gameLevel = 1;
 	var numColors = 3;
@@ -28,7 +29,7 @@ $(document).ready(function() {
 			 time+=1000;
 		}, 1000);
 	}
-
+	
 	// starts the game
 	function startGame() {
 		$("svg").remove();
@@ -40,23 +41,24 @@ $(document).ready(function() {
 		$("#gameLevel").html(gameLevel);
 		$(".score").html(score);
 		startLevel();
-		setTimeout(function() {
-			window.location = "#game";
-			if(stopWatch != null){
-				clearInterval(stopWatch);
-				time = 0;
-			}
-			startTime(); 
-			for (var i=0; i<board.length; i++) {
-				d3.select("#d"+i).style("opacity", 1).transition()
-				.duration(fadeTime).style("opacity", 0);
-			}
-			}, delay)
+		window.location = "#game";
+		if(stopWatch != null){
+			clearInterval(stopWatch);
+			time = 0;
+		}
+		startTime();
+		for (var i=0; i<board.length; i++) {
+			d3.select("#d"+i).style("opacity", 1).transition()
+			.duration(fadeTime).style("opacity", 0);
+		}
 	}
 	
 	function startLevel() {
 		// starts level
 		setColor();
+		
+		hasShape = $.contains("#d25" ,"svg");
+		console.log(hasShape);
 		if(gameLevel <= 5) {
 			//Easy Levels 1-7
 			if(numColors < 5) {
@@ -64,6 +66,7 @@ $(document).ready(function() {
 			}
 		}else if(gameLevel <= 10) {
 			//Medium Levels 8-14
+			
 			randomChoice(2);
 			makeShapes(2);
 
@@ -190,6 +193,7 @@ $(document).ready(function() {
 				d3.select("#d"+i).style("opacity", 0).transition().duration(0).style("opacity", 1);
 			}
 			nextLevel();
+			achievements();
 		}
 
 		
@@ -214,7 +218,8 @@ $(document).ready(function() {
 			svgContainers[i] = d3.select("#d"+i).append("svg")
 			.attr("width", 50)
 			.attr("height", 50);
-			randomShapes(svgContainers[i], num);
+			var shapeType = randomShapes(svgContainers[i], num);
+			$("#d"+i).addClass(shapeType);
 		}	
 	}
 	
@@ -229,12 +234,13 @@ $(document).ready(function() {
 			switch (num) {
 				case 0:
 				color = randomColor(1); 
-				shape = svg.append("circle")
+				svg.append("circle")
 				.attr("cx",25)
 				.attr("cy",25)
 				.attr("r",25)
 				.attr("fill", color[0]);
-				shapeList[i] = shape;
+				shapeList[i] = "circle";
+				return "circle";
 				break;
 				case 1: 
 				color = randomColor(1);
@@ -242,9 +248,14 @@ $(document).ready(function() {
 				.attr("width",50)
 				.attr("height",50)
 				.attr("fill", color[0]);
-				shapeList[i] = shape;
+				shapeList[i] = "rect";
+				return "rect";
 				break;
 				case 2: 
+				color = randomColor(1);
+				svg.append("polygon").attr("points", "25, 0 0, 50 50,50").attr("fill", color[0]);
+				shapeList[i] = "triangle";
+				return "triangle";
 				break;
 				case 3: 
 				break;
@@ -310,15 +321,13 @@ $(document).ready(function() {
 		$("#levelClear").html("LEVEL " + gameLevel + " CLEARED");
 		if (fadeTime > 5000)
 			fadeTime -= 500;
-		gameLevel++;
-		
-		
-		
 		for(var i=0; i<board.length; i++) {
 			//Sets all cells to be able for clicking again.
 			board[i][1] =0;
+			$("#d"+i).removeClass().addClass("gametd");
 		}
 		window.location = "#clear"
+		gameLevel++;
 		$(".score").html(score);
 	}
 
@@ -368,12 +377,21 @@ $(document).ready(function() {
 
 	$(".menu").click(function(){
 		window.location = "#main";
-	})
+	});
 
-	$(".sumbit").click(function(){
+	$(".board").click(function(){
+		window.location = "#LeaderboardPage";
+	});
+
+	var name,num;
+	$("#send").click(function(){
+		var num = parseInt($('#userScore').val());
+	});
+	
+	$(".submit").click(function(){
 		window.location = "#sumbitPage";
 		$("#scoreSumbit").text(score);
-	})
+	});
 
 	var name,num;
 	$("#sumbitButton").click(function(){
@@ -396,7 +414,7 @@ $(document).ready(function() {
 		if(!show) {
 			show = true;
 			$.getJSON("https://api.mongolab.com/api/1/databases/sos/collections/leaderboard?apiKey=br10X-RgokMGFuGnyr5w4WHdKpa046Fr&s={%22score%22:-1}", function(result){
-				var j = 1;
+				var j = 0;
 				$.each(result, function(i, field){
 					$("#bodyLeader").append('<tr> <td>'+j+'</td> <td>'+field.name+'</td> <td>'+field.score+'</td> </tr>');
 					j++;
@@ -445,7 +463,7 @@ $(document).ready(function() {
 		}
 	}
 
-	$("#achievementsButton").click(function(){
+	$(".achievementsButton").click(function(){
 		window.location="#achievements";
 	});
 
@@ -453,5 +471,41 @@ $(document).ready(function() {
 		window.location="#LeaderboardPage";
 	});	
 
+	//example on making a cookie and checking for it
+	function checkCookie() {
+		var user = getCookie("username");
+		if (user != "") {
+			alert("Welcome again " + user);
+		} else {
+			user = prompt("Please enter your name:", "");
+			if (user != "" && user != null) {
+				setCookie("username", user, 365);
+			}
+		}
+	}
+	
+	$("#cookie").click(function(){
+		checkCookie();
+	});
+	
+	$(".trophy").click(function(){
+		$(this).attr("src", 'images/Trophy_color.png');
+	});
+	// ---------------------------------------------------
+	// ACHIEVEMENTS //
+	function achievements() {
+		
 
+		
+			achv.play();
+			$("#ac").prepend('<img id="ach1" src="images/a1.png" />').hide();
+			$("#ac").show().slideDown("slow", function() {
+				$("#ach1").fadeOut(5000);
+			});
+		
+	}
+
+	$(".settingButton").click(function(){
+		window.location = "#setting";
+	});
 });
