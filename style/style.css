@@ -7,7 +7,7 @@ body, #board {
 	padding-bottom: 104px;
 }
 
-#timerwrapper {
+#timecontainer {
 	position:relative;
 	width: 300px;
 	margin-left:-150px;
@@ -25,8 +25,9 @@ body, #board {
 }
 
 
-#gametable table, td  {
+table, td  {
 	border: 1px solid black;
+	
 	width: 72.5px;
 	height: 72.5px;
 	text-align: center;
@@ -61,7 +62,6 @@ img {
 	display: inline;
 	margin: 0;
 	padding: 0;
-    font-weight: bold;
 }
 
 #level p {
@@ -115,13 +115,8 @@ circle {
 	padding-top:10px;
 }
 
-#main.ui-page{
-    background: url(../images/bg/6.jpg) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    background-size:100% 100%;
+#main{
+	background:linear-gradient(#FFFFFF, #B8B8B8);
 }
 
 .time_circles {
@@ -133,14 +128,15 @@ circle {
 #logo{
 	width:300px;
 	height:150px;
-    margin: 50px 0px 0px 0px;
 }
 
-
-#mainHeader{
-	margin: 20px 0px 40px 0px;
-}
 /*
+#mainHeader{
+	position: relative;
+	top:50px;
+	font-size: 40px;
+}
+
 #playButton{
 	position: relative;
 	top:50px;
@@ -150,7 +146,6 @@ circle {
 	height:60px;
 	width:300px;
 }
-*/
 
 #leaderBoard{
 	position: relative;
@@ -187,122 +182,3 @@ circle {
 	display: inline;
 }
 
-.trophy{
-	width: 150px;
-}
-
-#level {
-    text-align: center;
-}
-
-.ui-btn {
-	font-size: 24px;
-	line-height: 1.3;
-	font-family: sans-serif /*{global-font-family}*/;
-    width: 225px;
-    margin-left:auto;
-	margin-right:auto;
-    padding: 10px;
-}
-
-.lbtable {
-	margin:0px;padding:0px;
-	width:100%;
-	box-shadow: 10px 10px 5px #888888;
-	border:1px solid #ffffff;
-	
-	-moz-border-radius-bottomleft:0px;
-	-webkit-border-bottom-left-radius:0px;
-	border-bottom-left-radius:0px;
-	
-	-moz-border-radius-bottomright:0px;
-	-webkit-border-bottom-right-radius:0px;
-	border-bottom-right-radius:0px;
-	
-	-moz-border-radius-topright:0px;
-	-webkit-border-top-right-radius:0px;
-	border-top-right-radius:0px;
-	
-	-moz-border-radius-topleft:0px;
-	-webkit-border-top-left-radius:0px;
-	border-top-left-radius:0px;
-}.lbtable table{
-    border-collapse: collapse;
-        border-spacing: 0;
-	width:100%;
-	height:100%;
-	margin:0px;padding:0px;
-}.lbtable tr:last-child td:last-child {
-	-moz-border-radius-bottomright:0px;
-	-webkit-border-bottom-right-radius:0px;
-	border-bottom-right-radius:0px;
-}
-.lbtable table tr:first-child td:first-child {
-	-moz-border-radius-topleft:0px;
-	-webkit-border-top-left-radius:0px;
-	border-top-left-radius:0px;
-}
-.lbtable table tr:first-child td:last-child {
-	-moz-border-radius-topright:0px;
-	-webkit-border-top-right-radius:0px;
-	border-top-right-radius:0px;
-}.lbtable tr:last-child td:first-child{
-	-moz-border-radius-bottomleft:0px;
-	-webkit-border-bottom-left-radius:0px;
-	border-bottom-left-radius:0px;
-}.lbtable tr:hover td{
-	
-}
-.lbtable tr:nth-child(odd){ background-color:#ffbfff; }
-.lbtable tr:nth-child(even)    { background-color:#ffeaff; }.lbtable td{
-	vertical-align:middle;
-	
-	
-	border:1px solid #ffffff;
-	border-width:0px 1px 1px 0px;
-	text-align:center;
-	padding:9px;
-	font-size:12px;
-	font-family:Arial;
-	font-weight:normal;
-	color:#000000;
-}.lbtable tr:last-child td{
-	border-width:0px 1px 0px 0px;
-}.lbtable tr td:last-child{
-	border-width:0px 0px 1px 0px;
-}.lbtable tr:last-child td:last-child{
-	border-width:0px 0px 0px 0px;
-}
-.lbtable tr:first-child td{
-		background:-o-linear-gradient(bottom, #ed00ed 5%, #ff49ff 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ed00ed), color-stop(1, #ff49ff) );
-	background:-moz-linear-gradient( center top, #ed00ed 5%, #ff49ff 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#ed00ed", endColorstr="#ff49ff");	background: -o-linear-gradient(top,#ed00ed,ff49ff);
-
-	background-color:#ed00ed;
-	border:0px solid #ffffff;
-	text-align:center;
-	border-width:0px 0px 1px 1px;
-	font-size:14px;
-	font-family:Arial;
-	font-weight:bold;
-	color:#ffffff;
-}
-.lbtable tr:first-child:hover td{
-	background:-o-linear-gradient(bottom, #ed00ed 5%, #ff49ff 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ed00ed), color-stop(1, #ff49ff) );
-	background:-moz-linear-gradient( center top, #ed00ed 5%, #ff49ff 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#ed00ed", endColorstr="#ff49ff");	background: -o-linear-gradient(top,#ed00ed,ff49ff);
-
-	background-color:#ed00ed;
-}
-.lbtable tr:first-child td:first-child{
-	border-width:0px 0px 1px 0px;
-}
-.lbtable tr:first-child td:last-child{
-	border-width:0px 0px 1px 1px;
-
-}
-
-.score {
-	font-size: xx-large;
-	color: #00FFFF;
-}
