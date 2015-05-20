@@ -142,8 +142,6 @@ circle {
 	top:50px;
 	margin-left:auto;
 	margin-right:auto;
-<<<<<<< HEAD
-=======
 	font-size:20px;
 	height:60px;
 	width:300px;
@@ -154,7 +152,6 @@ circle {
 	top:50px;
 	margin-left:auto;
 	margin-right:auto;
->>>>>>> 25e034fa32ed78ec0ba180a9503eebf6e03b3456
 	font-size:20px;
 	height:60px;
 	width:300px;
@@ -181,9 +178,6 @@ circle {
 	bottom:0;
 	height:50px;
 	position: absolute;
-<<<<<<< HEAD
-}
-=======
 }
 
 .def{
@@ -199,4 +193,7 @@ circle {
 	display: inline;
 }
 
->>>>>>> 25e034fa32ed78ec0ba180a9503eebf6e03b3456
+.trophy{
+	width: 150px;
+}
+
