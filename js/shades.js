@@ -473,7 +473,7 @@ $(document).ready(function() {
 			
 		}
 
-		if (time > fadeTime && achiev2 == false) {
+		if (time >= fadeTime && achiev2 == false) {
 			achiev2 = true;
 			achv.play();
 			$("#ac").prepend('<img id="ach2" src="images/a2.png" />').hide();
@@ -483,7 +483,7 @@ $(document).ready(function() {
 			
 		}
 
-		$(".achievementsButton").click(function(){
+		$("#achievementsButton").click(function(){
 			window.location="#achievements";
 		});
 
