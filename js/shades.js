@@ -376,8 +376,9 @@ $(document).ready(function() {
 	})
 
 	var name,num;
-	$("#send").click(function(){
-		var num = parseInt($('#userScore').val());
+	$("#sumbitButton").click(function(){
+		window.location = "#LeaderboardPage";
+		var num = score;
 		var user = $('#userID').val();
 		console.log(num);
 		$.ajax({
