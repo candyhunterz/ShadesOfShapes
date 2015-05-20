@@ -3,7 +3,6 @@ $(document).ready(function() {
 	// init game constants
 	var board = [[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]];
 	var row1, row2, row3, row4, row5, col1, col2, col3, col4, col5, leftDiag, rightDiag;
-	var correct = 0;
 	var mute = 0;
 	var SoundfxNum = "0";
 	var fx1 = new Audio("sounds/fx1.mp3");
@@ -14,6 +13,7 @@ $(document).ready(function() {
 	var correct = 0;
 	var correctClicked = 0;
 	var clicked = false;
+	var hasShape = true;
 	var score = 0;
 	var gameLevel = 1;
 	var numColors = 3;
@@ -43,6 +43,8 @@ $(document).ready(function() {
 	function startLevel() {
 		// starts level
 		setColor();
+		hasShape = $.contains("#d25" ,"svg");
+		console.log(hasShape);
 		if(gameLevel <= 5) {
 			//Easy Levels 1-7
 			if(numColors < 5) {
@@ -154,12 +156,11 @@ $(document).ready(function() {
 					var choiceColor = $("#choice td").css("background-color");
 					var choiceSVG = d3.select("svg");
 					var colorSVG = $(this).css("fill");
+					classa = this.className;
 					if (color === choiceColor) {
 						d3.select(this).style("opacity", 0).transition().duration(0).style("opacity", 1);
 						score += 100;
 						$(".score").html(score);
-					}
-					if(color === choiceColor) {
 						correctClicked++;
 					}
 				}
@@ -194,7 +195,8 @@ $(document).ready(function() {
 			svgContainers[i] = d3.select("#d"+i).append("svg")
 			.attr("width", 50)
 			.attr("height", 50);
-			randomShapes(svgContainers[i], num);
+			var shapeType = randomShapes(svgContainers[i], num);
+			$("#d"+i).addClass(shapeType);
 		}	
 	}
 	
@@ -215,6 +217,7 @@ $(document).ready(function() {
 				.attr("r",25)
 				.attr("fill", color[0]);
 				shapeList[i] = shape;
+				return "circle";
 				break;
 				case 1: 
 				color = randomColor(1);
@@ -223,6 +226,7 @@ $(document).ready(function() {
 				.attr("height",50)
 				.attr("fill", color[0]);
 				shapeList[i] = shape;
+				return "rect";
 				break;
 				case 2: 
 				break;
@@ -237,7 +241,7 @@ $(document).ready(function() {
 			}
 		}
 		console.log(shapeList);
-		return shapeList;
+		//return shapeList;
 }
 	//sound effects
 	function playSoundFx(fx){
@@ -294,6 +298,7 @@ $(document).ready(function() {
 		for(var i=0; i<board.length; i++) {
 			//Sets all cells to be able for clicking again.
 			board[i][1] =0;
+			$("#d"+i).removeClass().addClass("gametd");
 		}
 		window.location = "#clear"
 		$(".score").html(score);
