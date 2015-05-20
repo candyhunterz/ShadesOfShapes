@@ -372,6 +372,7 @@ $(document).ready(function() {
 
 	$(".sumbit").click(function(){
 		window.location = "#sumbitPage";
+		$("#scoreSumbit").text(score);
 	})
 
 	var name,num;

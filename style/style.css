@@ -3,7 +3,8 @@ body, #board {
 }
 
 #board {
-	padding-top: 80px;
+	padding-top: 105px;
+	padding-bottom: 104px;
 }
 
 #timecontainer {
@@ -175,5 +176,9 @@ circle {
 #buttons{
 	position: relative;
 	top:50px;
+}
+
+#scoreSumbit{
+	display: inline;
 }
 

@@ -112,7 +112,7 @@
 				</div>
 			</div>
 		</div><!-- /content -->
-		<div data-role="footer" data-position="fixed">
+		<div data-role="footer">
 			<div id="level">
 				Level: <p id="gameLevel">0</p>
 			</div>
@@ -188,16 +188,21 @@
 		<h3>Score:</h3>
 		<p class='score'><strong>0</strong></p>
 		<a data-role="button" data-inline="false" class="play">Next Level</a>
-		<a data-role="button" data-inline="false"  class="board">Submit Score</a>
+		<a data-role="button" data-inline="false"  class="sumbit">Submit Score</a>
 		<a data-role="button" data-inline="false" class="menu">Quit Game</a>
 		<a data-role="button" data-inline="false"  class="board">Leaderboard</a>
 	</div>
 	
 	<!-- Start of Sumbit Score Page -->
 	<div data-role="page" class="ui-content" id="sumbitPage">
-		<h1>Sumbit Score Page</h1>
+		<div data-role="header">
+            <h1>Sumbit Score</h1>
+        </div>
 		<input type="text" class="form-control" id="userID" placeholder="Name">
+		Score: <h1 id="scoreSumbit">0</h1>
+		<br />
 		<a data-role="button" data-inline="false" type="submit" class="btn btn-default" id="send">Submit</a>
+		<a data-role="button" data-inline="false" class="menu">Main Menu</a>
 	</div>
 </body>
 </html>
