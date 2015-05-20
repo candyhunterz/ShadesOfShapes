@@ -11,58 +11,65 @@
 	<script src="js/jquery-ui.js"></script>
 	<script type="text/javascript" src="js/shades.js"></script>
 	<script src="js/d3.v3.min.js" charset="utf-8"></script>
-	<link rel="stylesheet" type="text/css" href="style/style.css"> 
 	<link rel="stylesheet" href="style/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="style/style.css"> 
 	<script type="text/javascript" src="js/TimeCircles.js"></script>
 	<script type="text/javascript" src="js/difficulty.js"></script>
-	<script type="text/javascript" src="js/peyman.js"></script>
+	<!-- <script type="text/javascript" src="js/peyman.js"></script> -->
+    <link rel="stylesheet" href="themes/theme.min.css" />
+	<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
 </head>
 <body>
 	<!--Audio file for music -->
-	<audio autoplay loop id="music">
+	<audio id="music">
 		<source src="sounds/elavator.mp3" type="audio/mpeg">
 	</audio>
 	
 	<!-- Start of the main page -->
 	<div data-role="page" id="main">
-		<img src="images/logo.png" alt="logo" id="logo">
-		<h1 id="mainHeader">Shades of Shapes</h1>
-		<a data-role="button" data-inline="true"  class="play" id="playButton">Play</a>
-		<br />
-		<a data-role="button" data-inline="true"  class="board" id="leaderBoard">Leaderboard</a>
-		<br />
-		<a data-role="button" data-inline="true" id="achievementsButton">Achievements</a>
-		<img alt="mute" id="muteButton">
+        <div data-role="header">
+            <img src="images/teamlogo.png" alt="logo" >
+            <h1 id="mainHeader">Shades of Shapes</h1>
+            <img src="images/logo.png" alt="logo" id="logo">
+        </div>
+        <div data-role="main">
+            <a data-role="button" data-inline="false"  class="play" id="playButton">Play</a>
+            <a data-role="button" data-inline="false"  class="board" id="leaderBoard">Leaderboard</a>
+            <a data-role="button" data-inline="false"  class="board" id="leaderBoard">Settings</a>
+            <img src="images/sound.png" alt="mute" id="muteButton">
+        </div>
 	</div>
 	<!-- End of the main page -->
 	
 	<!-- Start of the pregame page -->
 	<div data-role="page" id="pregame">
-		<h1>Pre-Game Page</h1>
+        <div data-role="header">
+			<h1>Get Ready To</h1>
+        </div>
 		<div role="main" class="ui-content">
-			<div id ="container">	
-				<div id="timerdiv">
-					<div id="timer"></div>
-				</div>
-				<div id="choice">
-					<br/>
-					<h1>TAP</h1>
-					<table>
-						<tr><td id='d25'></td></tr>
-					</table>
-				</div>
+			<div id="timecontainer">	
+                <div id="timewrapper">
+                    <div id="timerdiv">
+                        <div id="timer"></div>
+                    </div>
+                    <div id="choice">
+                        <br/>
+                        <h1>TAP</h1>
+                        <table>
+                            <tr><td id='d25'></td></tr>
+                        </table>
+                    </div>
+                </div>
 			</div>
 		</div><!-- /content -->
-		<img alt="mute" id="muteButton">
 	</div><!-- /page -->
 
 	<!-- Start of the game page -->
 	<div data-role="page" id="game">
-		<h1>Shades of Shapes</h1>
+        <div data-role="header">
+			<p class='score'>0</p>
+        </div>
 		<div role="main" class="ui-content">
-			<div> 
-				score: <p id='score'>0</p>
-			</div>
 			<div class="background">
 				<div id="board">
 					<table id="gametable">
@@ -106,21 +113,18 @@
 			</div>
 			<a href="#done">done</a>
 		</div><!-- /content -->
-		<img alt="mute" id="gameMute">
 		<div data-role="footer">
 			<div id="level">
 				Level: <p id="gameLevel">0</p>
-			</div>
-			<div id="lives">
-				Lives: <p id="gameLives">3</p>
 			</div>
 		</div><!-- /footer -->
 	</div><!-- /page -->
 	
 	<!-- Start of the Leaderboard page -->
 	<div data-role="page" class="ui-content" id="LeaderboardPage">
-	
-		<h1 id="LeaderTitle" >Leaderboard</h1>
+		<div data-role="header">
+			<h1 id="LeaderTitle" >Leaderboard</h1>
+        </div>
 		
 		 <input type="text" class="form-control" id="userID" placeholder="Name">
 		 <input type="text" class="form-control" id="userScore" placeholder="Score">
@@ -133,63 +137,42 @@
 					<td>SCORE</td>
 				</tr>
 			</thead>
-			<tbody>
-				<tr></tr>
+			<tbody id="bodyLeader">
 			</tbody>
 		</table>
-		<div data-role="button" type="submit" class="btn btn-default" id="send">Submit</div>
-		<a  data-role="button" data-inline="true" class="menu">Main Menu</a>
-		<img alt="mute" id="muteButton">
+		<a data-role="button" data-inline="false" type="submit" class="btn btn-default" id="send">Submit</a>
+		<a data-role="button" data-inline="false" class="menu">Main Menu</a>
 	</div>
 	
 	<!-- Start of the gameover page -->
 	<div data-role="page" class="ui-content" id="done">
-		<h1 id='gameover'>Game Over</h1>
+        <div data-role="header">
+            <h1 id='gameover'>Game Over</h1>
+        </div>
 		<h3>Score:</h3>
 		<p class='score'><strong>0</strong></p>
 		<h3>Best Score:</h3>
 		<p><strong>0</strong></p>
-		<a  data-role="button" data-inline="true" class="play">Play Again</a>
-		<a data-role="button" data-inline="true" class="menu">Quit Game</a>
-		<a data-role="button" data-inline="true"  class="board">Leaderboard</a>
-		<a data-role="button" data-inline="true" id="achievementsButton">Achievements</a>
-		<img alt="mute" id="muteButton">
+		<a data-role="button" data-inline="false"  class="board">Submit Score</a>
+		<a data-role="button" data-inline="false" class="menu">Quit Game</a>
 	</div>
 
 	<!-- Start of the gameover page -->
-	<div data-role="page" class="ui-content" id="clear">
-		<h1 id="levelClear" style="fontsize: xx-large">LEVEL 1 CLEARED</h1>
+	<div data-role="page" class="ui-content " id="clear">
+        <div data-role="header">
+            <h1 id="levelClear" style="fontsize: xx-large">LEVEL 1 CLEARED</h1>
+        </div>
 		<h3>Score:</h3>
 		<p class='score'><strong>0</strong></p>
-		<a data-role="button" data-inline="true" class="play">Next Level</a>
-		<a data-role="button" data-inline="true" class="menu">Quit Game</a>
-		<a data-role="button" data-inline="true"  class="board">Leaderboard</a>
-		<a data-role="button" data-inline="true" id="achievementsButton">Achievements</a>
-		<img alt="mute" id="muteButton">
-	</div>
-
-	<!-- Start of achievements page -->
-	<div data-role="page" class="ui-content" id="achievements">
-		<h1>Achievements</h1>
-		<table class="table table-stripped">
-			<tr>
-				<td class="def">First achievements</td>
-				<td class="trophy">Trophy</td>
-			</tr>
-			<tr>
-				<td class="def">First achievements</td>
-				<td class="trophy">Trophy</td>
-			</tr>
-			<tr>
-				<td class="def">First achievements</td>
-				<td class="trophy">Trophy</td>
-			</tr>
-		</table>
-		<a data-role="button" data-inline="true" class="play">Play</a>
-		<a data-role="button" data-inline="true" class="menu">Main Menu</a>
-		<a data-role="button" data-inline="true"  class="board">Leaderboard</a>
-
+		<a data-role="button" data-inline="false" class="play">Next Level</a>
+		<a data-role="button" data-inline="false"  class="board">Submit Score</a>
+		<a data-role="button" data-inline="false" class="menu">Quit Game</a>
+		<a data-role="button" data-inline="false"  class="board">Leaderboard</a>
 	</div>
 	
+	<!-- Start of Sumbit Score Page -->
+	<div data-role="page" class="ui-content" id="sumbitPage">
+	<h1>Sumbit Score Page</h1>
+	</div>
 </body>
 </html>
