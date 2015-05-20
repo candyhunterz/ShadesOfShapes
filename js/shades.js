@@ -21,6 +21,7 @@ $(document).ready(function() {
 	var fadeTime = 10000;
 	var time = 0;
 	var stopWatch;
+	var lives = 3;
 
 	function startTime(){
 		stopWatch = setInterval(function(){
@@ -172,9 +173,14 @@ $(document).ready(function() {
 						var timeDifference = (fadeTime - time)/1000;
 						score = score + ((gameLevel * 10)  * timeDifference) + 100;
 						$(".score").html(score);
-					}
-					if(color === choiceColor) {
 						correctClicked++;
+					} else {
+						lives--;
+						if(lives <= 0){
+							window.location="#done";
+							lives = 3;
+						}
+						$("#gameLives").text(lives);
 					}
 				}
 			}
@@ -364,8 +370,8 @@ $(document).ready(function() {
 		window.location = "#main";
 	})
 
-	$(".board").click(function(){
-		window.location = "#LeaderboardPage";
+	$(".sumbit").click(function(){
+		window.location = "#sumbitPage";
 	})
 
 	var name,num;
@@ -436,4 +442,14 @@ $(document).ready(function() {
 			}
 		}
 	}
+
+	$("#achievementsButton").click(function(){
+		window.location="#achievements";
+	});
+
+	$("#leaderBoard").click(function(){
+		window.location="#LeaderboardPage";
+	});	
+
+
 });
