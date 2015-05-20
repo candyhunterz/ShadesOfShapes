@@ -369,21 +369,21 @@ $(document).ready(function() {
 
 	$(".menu").click(function(){
 		window.location = "#main";
-	})
+	});
 
 	$(".board").click(function(){
 		window.location = "#LeaderboardPage";
-	})
+	});
 
 	var name,num;
 	$("#send").click(function(){
 		var num = parseInt($('#userScore').val());
-	})
+	});
 	
 	$(".sumbit").click(function(){
 		window.location = "#sumbitPage";
 		$("#scoreSumbit").text(score);
-	})
+	});
 
 	var name,num;
 	$("#sumbitButton").click(function(){
@@ -478,5 +478,9 @@ $(document).ready(function() {
 	
 	$("#cookie").click(function(){
 		checkCookie();
+	});
+	
+	$(".trophy").click(function(){
+		$(this).attr("src", 'images/Trophy_color.png');
 	});
 });
