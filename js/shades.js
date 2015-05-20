@@ -69,7 +69,7 @@ $(document).ready(function() {
 	//Use the class tag so every Play and Playagain button can be referenced the same
 	$(".play").on('click touchstart', function(){
 		if(this.id == "playButton" || this.id == "playAgain") {
-			gameLevel = 6;
+			gameLevel = 1;
 			score = 0;
 		}
 		reset();
