@@ -10,6 +10,7 @@ $(document).ready(function() {
 	var fx3 = new Audio("sounds/fx3.mp3");
 	var fx4 = new Audio("sounds/fx4.mp3");
 	var fx5 = new Audio("sounds/fx5.mp3");
+	var achv = new Audio("sounds/AchievementUnlocked.mp3");
 	var correct = 0;
 	var correctClicked = 0;
 	var clicked = false;
@@ -192,7 +193,7 @@ $(document).ready(function() {
 			for (var i=0; i<board.length; i++) {
 				d3.select("#d"+i).style("opacity", 0).transition().duration(0).style("opacity", 1);
 			}
-			gameLevel++;
+			achievements();
 			nextLevel();
 		}
 
