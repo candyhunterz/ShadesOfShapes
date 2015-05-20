@@ -19,16 +19,8 @@ $(document).ready(function() {
 	var numColors = 3;
 	var numShapes = 0;
 	var fadeTime = 10000;
-	var time = 0;
-	var stopWatch;
-	var lives = 3;
 
-	function startTime(){
-		stopWatch = setInterval(function(){
-			 time+=1000;
-		}, 1000);
-	}
-
+	
 	// starts the game
 	function startGame() {
 		$("svg").remove();
@@ -41,12 +33,7 @@ $(document).ready(function() {
 		$(".score").html(score);
 		startLevel();
 		setTimeout(function() {
-			window.location = "#game";
-			if(stopWatch != null){
-				clearInterval(stopWatch);
-				time = 0;
-			}
-			startTime(); 
+			window.location = "#game"; 
 			for (var i=0; i<board.length; i++) {
 				d3.select("#d"+i).style("opacity", 1).transition()
 				.duration(fadeTime).style("opacity", 0);
@@ -170,17 +157,11 @@ $(document).ready(function() {
 					var colorSVG = $(this).css("fill");
 					if (color === choiceColor) {
 						d3.select(this).style("opacity", 0).transition().duration(0).style("opacity", 1);
-						var timeDifference = (fadeTime - time)/1000;
-						score = score + ((gameLevel * 10)  * timeDifference) + 100;
+						score += 100;
 						$(".score").html(score);
+					}
+					if(color === choiceColor) {
 						correctClicked++;
-					} else {
-						lives--;
-						if(lives <= 0){
-							window.location="#done";
-							lives = 3;
-						}
-						$("#gameLives").text(lives);
 					}
 				}
 			}
@@ -370,15 +351,13 @@ $(document).ready(function() {
 		window.location = "#main";
 	})
 
-	$(".sumbit").click(function(){
-		window.location = "#sumbitPage";
-		$("#scoreSumbit").text(score);
+	$(".board").click(function(){
+		window.location = "#LeaderboardPage";
 	})
 
 	var name,num;
-	$("#sumbitButton").click(function(){
-		window.location = "#LeaderboardPage";
-		var num = score;
+	$("#send").click(function(){
+		var num = parseInt($('#userScore').val());
 		var user = $('#userID').val();
 		console.log(num);
 		$.ajax({
@@ -444,14 +423,4 @@ $(document).ready(function() {
 			}
 		}
 	}
-
-	$("#achievementsButton").click(function(){
-		window.location="#achievements";
-	});
-
-	$("#leaderBoard").click(function(){
-		window.location="#LeaderboardPage";
-	});	
-
-
 });
