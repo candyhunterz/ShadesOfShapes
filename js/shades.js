@@ -19,6 +19,15 @@ $(document).ready(function() {
 	var numColors = 3;
 	var numShapes = 0;
 	var fadeTime = 10000;
+	var time = 0;
+	var stopWatch;
+	var lives = 3;
+
+	function startTime(){
+		stopWatch = setInterval(function(){
+			 time+=1000;
+		}, 1000);
+	}
 	
 	// starts the game
 	function startGame() {
@@ -31,13 +40,16 @@ $(document).ready(function() {
 		$("#gameLevel").html(gameLevel);
 		$(".score").html(score);
 		startLevel();
-		setTimeout(function() {
-			window.location = "#game"; 
-			for (var i=0; i<board.length; i++) {
-				d3.select("#d"+i).style("opacity", 1).transition()
-				.duration(fadeTime).style("opacity", 0);
-			}
-			}, delay)
+		window.location = "#game";
+		if(stopWatch != null){
+			clearInterval(stopWatch);
+			time = 0;
+		}
+		startTime();
+		for (var i=0; i<board.length; i++) {
+			d3.select("#d"+i).style("opacity", 1).transition()
+			.duration(fadeTime).style("opacity", 0);
+		}
 	}
 	
 	function startLevel() {
@@ -156,12 +168,19 @@ $(document).ready(function() {
 					var choiceColor = $("#choice td").css("background-color");
 					var choiceSVG = d3.select("svg");
 					var colorSVG = $(this).css("fill");
-					classa = this.className;
 					if (color === choiceColor) {
 						d3.select(this).style("opacity", 0).transition().duration(0).style("opacity", 1);
-						score += 100;
+						var timeDifference = (fadeTime - time)/1000;
+						score = score + ((gameLevel * 10)  * timeDifference) + 100;
 						$(".score").html(score);
 						correctClicked++;
+					} else {
+						lives--;
+						if(lives <= 0){
+							window.location="#done";
+							lives = 3;
+						}
+						$("#gameLives").text(lives);
 					}
 				}
 			}
@@ -241,7 +260,7 @@ $(document).ready(function() {
 			}
 		}
 		console.log(shapeList);
-		//return shapeList;
+		return shapeList;
 }
 	//sound effects
 	function playSoundFx(fx){
@@ -359,6 +378,17 @@ $(document).ready(function() {
 	var name,num;
 	$("#send").click(function(){
 		var num = parseInt($('#userScore').val());
+	})
+	
+	$(".sumbit").click(function(){
+		window.location = "#sumbitPage";
+		$("#scoreSumbit").text(score);
+	})
+
+	var name,num;
+	$("#sumbitButton").click(function(){
+		window.location = "#LeaderboardPage";
+		var num = score;
 		var user = $('#userID').val();
 		console.log(num);
 		$.ajax({
@@ -392,12 +422,12 @@ $(document).ready(function() {
 		document.cookie = cname + "=" + cvalue + "; " + expires;	
 	}
 	/*	
-	Take the cookiename as parameter (cname).
-	Create a variable (name) with the text to search for (cname + "=").
-	Split document.cookie on semicolons into an array called ca (ca = document.cookie.split(';')).
-	Loop through the ca array (i=0;i<ca.length;i++), and read out each value c=ca[i]).
-	If the cookie is found (c.indexOf(name) == 0), return the value of the cookie (c.substring(name.length,c.length).
-	If the cookie is not found, return "".
+		Take the cookiename as parameter (cname).
+		Create a variable (name) with the text to search for (cname + "=").
+		Split document.cookie on semicolons into an array called ca (ca = document.cookie.split(';')).
+		Loop through the ca array (i=0;i<ca.length;i++), and read out each value c=ca[i]).
+		If the cookie is found (c.indexOf(name) == 0), return the value of the cookie (c.substring(name.length,c.length).
+		If the cookie is not found, return "".
 	 */
 	function getCookie(cname) {
 		var name = cname + "=";
@@ -411,6 +441,27 @@ $(document).ready(function() {
 		}
 		return "";
 	}
+
+	//example on making a cookie and checking for it
+	function checkCookie() {
+		var user = getCookie("username");
+		if (user != "") {
+			alert("Welcome again " + user);
+		} else {
+			user = prompt("Please enter your name:", "");
+			if (user != "" && user != null) {
+				setCookie("username", user, 365);
+			}
+		}
+	}
+
+	$(".achievementsButton").click(function(){
+		window.location="#achievements";
+	});
+
+	$("#leaderBoard").click(function(){
+		window.location="#LeaderboardPage";
+	});	
 
 	//example on making a cookie and checking for it
 	function checkCookie() {

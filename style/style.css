@@ -1,11 +1,10 @@
 body, #board {
 	text-align: center;
-	
 }
 
 #board {
-	padding-top: 10px;
-	padding-bottom: 10px;
+	padding-top: 105px;
+	padding-bottom: 104px;
 }
 
 #timecontainer {
@@ -71,6 +70,18 @@ img {
 }
 #level {
 	text-align: left;
+	position: relative;
+	top:15px;
+}
+
+#lives p {
+	text-align: right;
+	display: inline;
+}
+#lives {
+	text-align: right;
+	position: relative;
+	bottom:15px;
 }
 
 #hex {
@@ -131,10 +142,24 @@ circle {
 	top:50px;
 	margin-left:auto;
 	margin-right:auto;
+<<<<<<< HEAD
+=======
 	font-size:20px;
 	height:60px;
 	width:300px;
 }
+
+#leaderBoard{
+	position: relative;
+	top:50px;
+	margin-left:auto;
+	margin-right:auto;
+>>>>>>> 25e034fa32ed78ec0ba180a9503eebf6e03b3456
+	font-size:20px;
+	height:60px;
+	width:300px;
+}
+*/
 
 #leaderBoard{
 	position: relative;
@@ -156,4 +181,22 @@ circle {
 	bottom:0;
 	height:50px;
 	position: absolute;
+<<<<<<< HEAD
 }
+=======
+}
+
+.def{
+	width: 30%;
+}
+
+#buttons{
+	position: relative;
+	top:50px;
+}
+
+#scoreSumbit{
+	display: inline;
+}
+
+>>>>>>> 25e034fa32ed78ec0ba180a9503eebf6e03b3456

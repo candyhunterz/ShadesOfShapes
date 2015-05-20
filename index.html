@@ -36,6 +36,7 @@
             <a data-role="button" data-inline="false"  class="play" id="playButton">Play</a>
             <a data-role="button" data-inline="false"  class="board" id="leaderBoard">Leaderboard</a>
             <a data-role="button" data-inline="false"  class="board" id="leaderBoard">Settings</a>
+            <a data-role="button" data-inline="false"  class="achievementsButton" id="achievementsButton">Achievements</a>
             <img src="images/sound.png" alt="mute" id="muteButton">
         </div>
 	</div>
@@ -111,11 +112,13 @@
 					</table>
 				</div>
 			</div>
-			<a href="#done">done</a>
 		</div><!-- /content -->
 		<div data-role="footer">
 			<div id="level">
 				Level: <p id="gameLevel">0</p>
+			</div>
+			<div id="lives">
+				Lives: <p id="gameLives">3</p>
 			</div>
 		</div><!-- /footer -->
 	</div><!-- /page -->
@@ -125,10 +128,8 @@
 		<div data-role="header">
 			<h1 id="LeaderTitle" >Leaderboard</h1>
         </div>
-		
 		 <input type="text" class="form-control" id="userID" placeholder="Name">
-		 <input type="text" class="form-control" id="userScore" placeholder="Score">
-		 
+		 <input type="text" class="form-control" id="userScore" placeholder="Score"> 
 		<table class="table" id="scoreDisplay">
 			<thead>
 				<tr>
@@ -141,8 +142,8 @@
 			</tbody>
 		</table>
 		<a  data-role="button" data-inline="true" class="cookie">Cookie Check</a>
-		<div data-role="button" type="submit" class="btn btn-default" id="send">Submit</div>
-		<a  data-role="button" data-inline="true" class="menu">Main Menu</a>
+		<a data-role="button" data-inline="false" type="submit" class="btn btn-default" id="send">Submit</a>
+		<a data-role="button" data-inline="false" class="menu">Main Menu</a>
 	</div>
 	
 	<!-- Start of the gameover page -->
@@ -154,11 +155,33 @@
 		<p class='score'><strong>0</strong></p>
 		<h3>Best Score:</h3>
 		<p><strong>0</strong></p>
-		<a data-role="button" data-inline="false"  class="board">Submit Score</a>
+		<a data-role="button" data-inline="false"  class="sumbit">Submit Score</a>
 		<a data-role="button" data-inline="false" class="menu">Quit Game</a>
 	</div>
 
-	<!-- Start of the gameover page -->
+	<!--Start of Achievements Page-->
+	<div data-role="page" class="ui-content" id="achievements">
+		<div data-role="header">
+			<h1 id="LeaderTitle" >Achievements</h1>
+        </div>
+        <table class="table">
+        	<tr>
+        		<td class="def">First Achievement</td>
+        		<td class="trophy">Trophy</td>
+        	</tr>
+        	<tr>
+        		<td class="def">First Achievement</td>
+        		<td class="trophy">Trophy</td>
+        	</tr>
+        	<tr>
+        		<td class="def">First Achievement</td>
+        		<td class="trophy">Trophy</td>
+        	</tr>
+		</table>
+		<a data-role="button" data-inline="false" class="menu">Main Menu</a>
+	</div>
+
+	<!-- Start of the LEVEL CLEAR -->
 	<div data-role="page" class="ui-content " id="clear">
         <div data-role="header">
             <h1 id="levelClear" style="fontsize: xx-large">LEVEL 1 CLEARED</h1>
@@ -166,10 +189,21 @@
 		<h3>Score:</h3>
 		<p class='score'><strong>0</strong></p>
 		<a data-role="button" data-inline="false" class="play">Next Level</a>
-		<a data-role="button" data-inline="false"  class="board">Submit Score</a>
+		<a data-role="button" data-inline="false"  class="sumbit">Submit Score</a>
 		<a data-role="button" data-inline="false" class="menu">Quit Game</a>
 		<a data-role="button" data-inline="false"  class="board">Leaderboard</a>
 	</div>
 	
+	<!-- Start of Sumbit Score Page -->
+	<div data-role="page" class="ui-content" id="sumbitPage">
+		<div data-role="header">
+            <h1>Sumbit Score</h1>
+        </div>
+		<input type="text" class="form-control" id="userID" placeholder="Name">
+		Score: <h1 id="scoreSumbit">0</h1>
+		<br />
+		<a data-role="button" data-inline="false" type="submit" class="btn btn-default" id="sumbitButton">Submit</a>
+		<a data-role="button" data-inline="false" class="menu">Main Menu</a>
+	</div>
 </body>
 </html>
