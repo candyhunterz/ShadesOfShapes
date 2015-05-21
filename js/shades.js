@@ -155,6 +155,7 @@ $(document).ready(function() {
 			board[i][0] = "d" + i;
 		}
 		$("#choice td").css({backgroundColor: color});
+		
 	
 	}
 
@@ -348,16 +349,17 @@ $(document).ready(function() {
 		}
 	}
 	// function that mute the sound 
-	$("#muteButton").on('click touchstart', function() {
+	$(".muteButton").on('click', function() {
 		if(mute == 0){
 			mute = 1;
+			$(".muteButton").text('Sound Off');
 			document.getElementById("music").pause();
-			$(this).attr("src","images/mute.png");
 		} else {
 			mute = 0;
+			$(".muteButton").text('Sound On');
 			document.getElementById("music").play();
-			$(this).attr("src","images/sound.png");
 		}
+		$(this).button('refresh');
 	});
 	
 	// function that tally up all the colors
@@ -521,6 +523,8 @@ $(document).ready(function() {
 			$("#ac").show().slideDown("slow", function() {
 				$("#ach1").fadeOut(5000, function() {$("img#ach1").remove();});
 			});
+			//$("#fastIMG").remove();
+			$(".fastIMG").replaceWith('<img src="images/Trophy_color.png" width="100px" height="100px">');
 			
 		}
 
@@ -533,7 +537,10 @@ $(document).ready(function() {
 			$("#ac").show().slideDown("slow", function() {
 				$("#ach2").fadeOut(5000, function() {$("img#ach1").remove();});
 			});
+			$(".faydeIMG").replaceWith('<img src="images/Trophy_color.png" width="100px" height="100px">');
+
 		}
+
 
 		if (score >= 20000 && lives == 3 && !achiev3 ) {
 			achiev3 = true;
@@ -542,9 +549,11 @@ $(document).ready(function() {
 			$("#ac").show().slideDown("slow", function() {
 				$("#ach3").fadeOut(5000, function() {$("img#ach1").remove();});
 			});
+			$(".upIMG").replaceWith('<img src="images/Trophy_color.png" width="100px" height="100px">');
 		}
+		
 
-	}
+	} 
 	
 	$("#achievementsButton").click(function(){
 		window.location="#achievements";
