@@ -27,7 +27,7 @@
     };
     var secondsIn = {
         Seconds: 1,
-        Minutes: 4
+        Minutes: 2
     };
 
     /**
