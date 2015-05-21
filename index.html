@@ -29,7 +29,7 @@
 	<!-- Start of the main page -->
 	<div data-role="page" id="main">
         <div data-role="main">
-            <img src="images/logo.png" alt="logo" id="logo">
+            <img src="images/logo2.png" alt="logo" id="logo">
             <h1 id="mainHeader">Shades of Shapes</h1>
             <a data-role="button" data-inline="false"  class="play" id="playButton">Play</a>
             <a data-role="button" data-inline="false"  class="board" id="leaderBoard">Leaderboard</a>
@@ -49,13 +49,10 @@
         </div>
 		<div role="main" class="ui-content">
                 <div id="timewrapper">
-                    <div id="timerdiv">
-                        <div id="timer"></div>
-                    </div>
+                    <h1>TAP</h1>
+                    <div id="timer"></div>
                     <div id="choice">
-                        <br/>
-                        <h1>TAP</h1>
-                        <table>
+                        <table id="choicebox">
                             <tr><td id='d25' class=''></td></tr>
                         </table>
                     </div>
@@ -112,12 +109,13 @@
 			</div>
 		</div><!-- /content -->
 		<div data-role="footer">
-			<div id="level">
-				Level: <p id="gameLevel">0</p>
+			<div id="level" class="gLevel">
+				Level: <p class="level">4</p>
 			</div>
-			<div id="lives">
+			<div id="lives" class="gLife">
 				Lives: <p id="gameLives">3</p>
 			</div>
+            <div style="clear: both;"></div>
 		</div><!-- /footer -->
 	</div><!-- /page -->
 	
@@ -148,7 +146,7 @@
 		<h3>Score:</h3>
 		<p class='score'><strong>0</strong></p>
 		<h3>Best Score:</h3>
-		<p id="bestScore"><strong>0</strong></p>
+		<p><strong>0</strong></p>
 		<a  data-role="button" data-inline="false" class="play" id="playAgain">Play Again</a>
 		<a data-role="button" data-inline="false"  class="submit">Submit Score</a>
         <a data-role="button" data-inline="false" class="menu">Quit Game</a>
@@ -196,10 +194,16 @@
         <div data-role="header">
 			<h1 id="LeaderTitle" >Game Settings</h1>
         </div>
-		<p>Background Music: <strong>ON</strong></p>
-        <p>Sound Effects: <strong>ON</strong></p>
-        <a data-role="button" data-inline="false" class="menu">Main Menu</a>
-		
+        <label for="bgmusic">Background Music:</label>
+        <select name="bgmusic" id="bgmusic" data-role="slider">
+            <option value="on">On</option>
+            <option value="off">Off</option>
+        </select> 
+        <label for="sfxmusic">Background Music:</label>
+        <select name="sfxmusic" id="sfxmusic" data-role="slider">
+            <option value="on">On</option>
+            <option value="off">Off</option>
+        </select> 
 	</div>
 	
 	<!-- Start of Sumbit Score Page -->
@@ -208,9 +212,9 @@
             <h1>Sumbit Score</h1>
         </div>
 		<input type="text" class="form-control" id="userID" placeholder="Name">
-		Score: <h1 id="scoreSumbit">0</h1>
+		Score: <h1 id="userScore" class="score">0</h1>
 		<br />
-		<a data-role="button" data-inline="false" type="submit" class="btn btn-default" id="sumbitButton">Submit</a>
+		<a data-role="button" data-inline="false" type="submit" class="btn btn-default" id="send">Submit</a>
 		<a data-role="button" data-inline="false" class="menu">Main Menu</a>
 	</div>
 </body>

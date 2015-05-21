@@ -27,7 +27,6 @@ $(document).ready(function() {
 	var achiev2 = false;
 	var achiev3 = false;
 	var lives = 3;
-	var bestScore = 0;
 
 	function startTime(){
 		stopWatch = setInterval(function(){
@@ -48,7 +47,8 @@ $(document).ready(function() {
 		$("#gameLevel").html(gameLevel);
 		startLevel();
 		setTimeout(function() {
-			window.location = "#game"; 
+			window.location = "#game";
+			$("#gameLevel").html(gameLevel); 
 			if(stopWatch != null){
 				clearInterval(stopWatch);
 				time = 0;
@@ -103,7 +103,7 @@ $(document).ready(function() {
 			}
 			$("#d25").removeClass();
 			return;
-		
+
 		}
 		startGame();
 	});
@@ -191,7 +191,7 @@ $(document).ready(function() {
 	}) */
 
 	// function to get the color of a clicked cell
-	$("td").on('click touchstart', function() {
+	$("td.gametd").on('click touchstart', function() {
 		if(this.id != "d25"){ //Can't click cell in pre-game page
 			for(var i=0; i<board.length; i++) {
 				//Each cell can only be clicked once
@@ -214,10 +214,6 @@ $(document).ready(function() {
 						lives--;
 						if(lives <= 0){
 							window.location="#done";
-							lives = 3;
-							if(score > bestScore){
-								$("#bestScore").text(score);
-							}
 							lives = 3;
 						}
 						$("#gameLives").text(lives);
@@ -428,8 +424,6 @@ $(document).ready(function() {
 		return colorList;
 	}
 
-	var show = false;
-
 	$(".menu").click(function(){
 		window.location = "#main";
 	})
@@ -438,9 +432,8 @@ $(document).ready(function() {
 		window.location = "#LeaderboardPage";
 	})
 
-	var name,num;
 	$("#send").click(function(){
-		var num = parseInt($('#userScore').val());
+		var num = score;
 		var user = $('#userID').val();
 		console.log(num);
 		$.ajax({
@@ -452,20 +445,19 @@ $(document).ready(function() {
 			console.log(msg);
 		});	
 		console.log(user);
+		window.location = "#main";
 	}); 
 
-	$("#LeaderTitle").click(function(){
-		if(!show) {
-			show = true;
-			$.getJSON("https://api.mongolab.com/api/1/databases/sos/collections/leaderboard?apiKey=br10X-RgokMGFuGnyr5w4WHdKpa046Fr&s={%22score%22:-1}", function(result){
-				var j = 1;
-				$.each(result, function(i, field){
-					$("#bodyLeader").append('<tr> <td>'+j+'</td> <td>'+field.name+'</td> <td>'+field.score+'</td> </tr>');
-					j++;
-				});
+	function showLeaderBoard(){
+		$.getJSON("https://api.mongolab.com/api/1/databases/sos/collections/leaderboard?apiKey=br10X-RgokMGFuGnyr5w4WHdKpa046Fr&s={%22score%22:-1}", function(result){
+			var j = 1;
+			$.each(result, function(i, field){
+				$("#bodyLeader").append('<tr class = "LBscore" > <td>'+j+'</td> <td>'+field.name+'</td> <td>'+field.score+'</td> </tr>');
+				j++;
 			});
-		}
-	});
+		});
+		$(".LBscore").remove();
+	}
 
 	function setCookie(cname, cvalue, exdays) {
 		var d = new Date();
@@ -545,17 +537,17 @@ $(document).ready(function() {
 	});
 
 	$("#leaderBoard").click(function(){
+		showLeaderBoard();
 		window.location="#LeaderboardPage";
 	});
 
 	$(".settingButton").click(function(){
 		window.location = "#setting";
 	});	
-
+	
 	$(".submit").click(function(){
 		window.location = "#sumbitPage";
-		$("#scoreSumbit").text(score);
-	})
+	});	
 
 });
 
