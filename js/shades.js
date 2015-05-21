@@ -348,7 +348,7 @@ $(document).ready(function() {
 		}
 	}
 	// function that mute the sound 
-	$(".muteButton").on('click touchstart', function() {
+	$(".muteButton").on('click', function() {
 		if(mute == 0){
 			mute = 1;
 			$(".muteButton").text('Sound Off');
