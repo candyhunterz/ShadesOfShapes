@@ -42,10 +42,11 @@ $(document).ready(function() {
 		$("#timer").TimeCircles().destroy();
 		$("#timer").TimeCircles();
 		var delay = 3800; //Your delay in milliseconds
+		startLevel();
 		$(".score").html(score);
 		$(".level").html(gameLevel);
 		$("#gameLevel").html(gameLevel);
-		startLevel();
+		$("#gameLives").text(lives);
 		setTimeout(function() {
 			window.location = "#game"; 
 			if(stopWatch != null){
@@ -89,22 +90,27 @@ $(document).ready(function() {
 		hasShape = ($("#d25").hasClass("svg")?true:false);
 		countColor();
 	}
+	
+	function putChoice() {	
+		var num = Math.floor(Math.random()*24);
+		$("#d" + num).replaceWith($("#d25").clone(true,true).attr("id", "d"+num));
+		console.log("Cell " + num);
+	}
+	
 	//Use the class tag so every Play and Playagain button can be referenced the same
 	$(".play").on('click touchstart', function(){
-		if($(this).attr('id') == "playAgain" || $(this).attr('id') == "playButton") {
+		if(this.id != "nextLevel")
 			reset();
-			startGame();
-			for(var i=0; i<board.length; i++) {
-			//Sets all cells to be able for clicking again.
-			board[i][1] =0;
-			$("#d"+i).removeClass().addClass("gametd");
-			$("#d"+i).prop("style").removeProperty("border-width");
-			}
-			$("#d25").removeClass();
-			return;
-
+		
+		for(var i=0; i<board.length; i++) {
+		//Sets all cells to be able for clicking again.
+		board[i][1] =0;
+		$("#d"+i).removeClass().addClass("gametd");
+		$("#d"+i).prop("style").removeProperty("border-width");
 		}
+		$("#d25").removeClass();
 		startGame();
+
 	});
 
 	// function to randomize the choice cell
@@ -114,6 +120,7 @@ $(document).ready(function() {
 			.attr("height", 52);
 			var shapeType = randomShapes(svgContainer, num)
 			if(shapeType) {
+				$("#d25").addClass("gametd");
 				$("#d25").addClass(shapeType);
 				$("#d25").addClass("svg");
 			}
@@ -153,6 +160,7 @@ $(document).ready(function() {
 	// initialize game state
 	function setColor() {
 		randomize(numColors);
+		putChoice();
 		//makeShapes();
 	}
 	
@@ -192,12 +200,15 @@ $(document).ready(function() {
 
 	// function to get the color of a clicked cell
 	$("td.gametd").on('click touchstart', function() {
+		console.log(this.id);
 		if(this.id != "d25"){ //Can't click cell in pre-game page
 			for(var i=0; i<board.length; i++) {
 				//Each cell can only be clicked once
 				if(this.id == board[i][0] && board[i][1] == 0){
 					board[i][1] = 1;
-					playSoundFx(SoundfxNum);
+					if (!mute){
+						playSoundFx(SoundfxNum);
+					}
 					var color = $(this).css("background-color");
 					var choiceColor = $("#choice td").css("background-color");
 					var choiceSVG = d3.select("svg");
@@ -214,7 +225,6 @@ $(document).ready(function() {
 						lives--;
 						if(lives <= 0){
 							window.location="#done";
-							lives = 3;
 						}
 						$("#gameLives").text(lives);
 					}
@@ -504,7 +514,9 @@ $(document).ready(function() {
 		
 		if (gameLevel == 3 && !achiev1) {
 			achiev1 = true;
-			achv.play();
+			if(!mute){
+				achv.play();
+			}
 			$("#ac").prepend('<img id="ach1" src="images/a1.png" width="80%"/>').hide();
 			$("#ac").show().slideDown("slow", function() {
 				$("#ach1").fadeOut(5000, function() {$("img#ach1").remove();});
@@ -516,7 +528,9 @@ $(document).ready(function() {
 
 		if (time >= fadeTime && !achiev2) {
 			achiev2 = true;
-			achv.play();
+			if(!mute){
+				achv.play();
+			}
 			$("#ac").prepend('<img id="ach2" src="images/a2.png" width="80%"/>').hide();
 			$("#ac").show().slideDown("slow", function() {
 				$("#ach2").fadeOut(5000, function() {$("img#ach1").remove();});
