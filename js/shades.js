@@ -90,6 +90,13 @@ $(document).ready(function() {
 		hasShape = ($("#d25").hasClass("svg")?true:false);
 		countColor();
 	}
+	
+	function putChoice() {	
+		var num = Math.floor(Math.random()*24);
+		$("#d" + num).replaceWith($("#d25").clone(true,true).attr("id", "d"+num));
+		console.log("Cell " + num);
+	}
+	
 	//Use the class tag so every Play and Playagain button can be referenced the same
 	$(".play").on('click touchstart', function(){
 		if(this.id != "nextLevel")
@@ -113,6 +120,7 @@ $(document).ready(function() {
 			.attr("height", 52);
 			var shapeType = randomShapes(svgContainer, num)
 			if(shapeType) {
+				$("#d25").addClass("gametd");
 				$("#d25").addClass(shapeType);
 				$("#d25").addClass("svg");
 			}
@@ -151,6 +159,7 @@ $(document).ready(function() {
 	// initialize game state
 	function setColor() {
 		randomize(numColors);
+		putChoice();
 		//makeShapes();
 	}
 	
@@ -190,6 +199,7 @@ $(document).ready(function() {
 
 	// function to get the color of a clicked cell
 	$("td.gametd").on('click touchstart', function() {
+		console.log(this.id);
 		if(this.id != "d25"){ //Can't click cell in pre-game page
 			for(var i=0; i<board.length; i++) {
 				//Each cell can only be clicked once
