@@ -177,8 +177,8 @@ $(document).ready(function() {
 		clicked = false;
 		hasShape = false;
 		score = 0;
-		gameLevel = 6;
-		numColors = 5;
+		gameLevel = 1;
+		numColors = 2;
 		numShapes = 0;
 		fadeTime = 10000;
 		faded = false;
