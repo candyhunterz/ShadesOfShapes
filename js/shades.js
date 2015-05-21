@@ -175,7 +175,9 @@ $(document).ready(function() {
 				//Each cell can only be clicked once
 				if(this.id == board[i][0] && board[i][1] == 0){
 					board[i][1] = 1;
-					playSoundFx(SoundfxNum);
+					if (!mute){
+						playSoundFx(SoundfxNum);
+					}
 					var color = $(this).css("background-color");
 					var choiceColor = $("#choice td").css("background-color");
 					var choiceSVG = d3.select("svg");
@@ -474,7 +476,9 @@ $(document).ready(function() {
 		
 		if (gameLevel == 3 && achiev1 == false) {
 			achiev1 = true;
-			achv.play();
+			if(!mute){
+				achv.play();
+			}
 			$("#ac").prepend('<img id="ach1" src="images/a1.png" />').hide();
 			$("#ac").show().slideDown("slow", function() {
 				$("#ach1").fadeOut(5000, function() {$("img#ach1").remove();});
@@ -484,7 +488,9 @@ $(document).ready(function() {
 
 		if (time >= fadeTime && achiev2 == false) {
 			achiev2 = true;
-			achv.play();
+			if(!mute){
+				achv.play();
+			}
 			$("#ac").prepend('<img id="ach2" src="images/a2.png" />').hide();
 			$("#ac").show().slideDown("slow", function() {
 				$("#ach2").fadeOut(5000, function() {$("img#ach1").remove();});
