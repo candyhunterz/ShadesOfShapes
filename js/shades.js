@@ -41,7 +41,7 @@ $(document).ready(function() {
 		window.location = "#pregame";
 		$("#timer").TimeCircles().destroy();
 		$("#timer").TimeCircles();
-		var delay = 3800; //Your delay in milliseconds
+		var delay = 1800; //Your delay in milliseconds
 		startLevel();
 		$(".score").html(score);
 		$(".level").html(gameLevel);
@@ -88,13 +88,15 @@ $(document).ready(function() {
 			}
 		}
 		hasShape = ($("#d25").hasClass("svg")?true:false);
+		putChoice();
 		countColor();
 	}
 	
 	function putChoice() {	
-		var num = Math.floor(Math.random()*24);
-		$("#d" + num).replaceWith($("#d25").clone(true,true).attr("id", "d"+num));
-		console.log("Cell " + num);
+		for(var i=0; i<3; i++) {
+			var num = Math.floor(Math.random()*24);
+			$("#d" + num).replaceWith($("#d25").clone(true,true).attr("id", "d"+num));
+		}
 	}
 	
 	//Use the class tag so every Play and Playagain button can be referenced the same
@@ -160,7 +162,6 @@ $(document).ready(function() {
 	// initialize game state
 	function setColor() {
 		randomize(numColors);
-		putChoice();
 		//makeShapes();
 	}
 	
@@ -284,7 +285,7 @@ $(document).ready(function() {
 				.attr("stroke-width" , 3)
 				.attr("fill", color[0]);
 				shapeList[i] = "circle";
-				return "circle";
+				return "circle " + color[0];
 				break;
 				case 1: 
 				color = randomColor(1);
@@ -297,7 +298,7 @@ $(document).ready(function() {
 				.attr("stroke-width" , 3)
 				.attr("fill", color[0]);
 				shapeList[i] = shape;
-				return "rect";
+				return "rect " + color[0];
 				break;
 				case 2: 
 				color = randomColor(1);
@@ -307,7 +308,7 @@ $(document).ready(function() {
 				.attr("stroke-width" , 3)
 				.attr("fill", color[0]);
 				shapeList[i] = "triangle";
-				return "triangle";
+				return "triangle " + color[0];
 				break;
 				case 3: 
 				break;
@@ -348,7 +349,7 @@ $(document).ready(function() {
 		}
 	}
 	// function that mute the sound 
-	$(".muteButton").on('click touchstart', function() {
+	$(".muteButton").on('click', function() {
 		if(mute == 0){
 			mute = 1;
 			$(".muteButton").text('Sound Off');
@@ -543,6 +544,7 @@ $(document).ready(function() {
 
 		}
 
+
 		if (score >= 20000 && lives == 3 && !achiev3 ) {
 			achiev3 = true;
 			achv.play();
@@ -550,9 +552,12 @@ $(document).ready(function() {
 			$("#ac").show().slideDown("slow", function() {
 				$("#ach3").fadeOut(5000, function() {$("img#ach1").remove();});
 			});
+			$(".upIMG").replaceWith('<img src="images/Trophy_color.png" width="100px" height="100px">');
 		}
-		$(".upIMG").replaceWith('<img src="images/Trophy_color.png" width="100px" height="100px">');
-	}
+
+	} 
+
+
 	
 	$("#achievementsButton").click(function(){
 		window.location="#achievements";
