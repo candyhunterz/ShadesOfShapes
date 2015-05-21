@@ -17,7 +17,7 @@ $(document).ready(function() {
 	var hasShape = false;
 	var score = 0;
 	var gameLevel = 1;
-	var numColors = 3;
+	var numColors = 2;
 	var numShapes = 0;
 	var fadeTime = 10000;
 	var faded = false;
@@ -25,7 +25,8 @@ $(document).ready(function() {
 	var stopWatch;
 	var achiev1 = false;
 	var achiev2 = false;
-	var achieve3 = false;
+	var achiev3 = false;
+	var lives = 3;
 
 	function startTime(){
 		stopWatch = setInterval(function(){
@@ -41,10 +42,11 @@ $(document).ready(function() {
 		$("#timer").TimeCircles().destroy();
 		$("#timer").TimeCircles();
 		var delay = 3800; //Your delay in milliseconds
+		startLevel();
 		$(".score").html(score);
 		$(".level").html(gameLevel);
 		$("#gameLevel").html(gameLevel);
-		startLevel();
+		$("#gameLives").text(lives);
 		setTimeout(function() {
 			window.location = "#game"; 
 			if(stopWatch != null){
@@ -79,6 +81,8 @@ $(document).ready(function() {
 			}
 		}else {
 			//Hard Levels 15+
+			randomChoice(2);
+			makeShapes(2)
 			if(fadeTime > 2000) {
 				fadeTime -= 500;
 			}
@@ -86,14 +90,27 @@ $(document).ready(function() {
 		hasShape = ($("#d25").hasClass("svg")?true:false);
 		countColor();
 	}
+	
+	function putChoice() {	
+		var num = Math.floor(Math.random()*24);
+		$("#d" + num).replaceWith($("#d25").clone(true,true).attr("id", "d"+num));
+		console.log("Cell " + num);
+	}
+	
 	//Use the class tag so every Play and Playagain button can be referenced the same
 	$(".play").on('click touchstart', function(){
-		if(this.id == "playButton" || this.id == "playAgain") {
-			gameLevel = 1;
-			score = 0;
+		if(this.id != "nextLevel")
+			reset();
+		
+		for(var i=0; i<board.length; i++) {
+		//Sets all cells to be able for clicking again.
+		board[i][1] =0;
+		$("#d"+i).removeClass().addClass("gametd");
+		$("#d"+i).prop("style").removeProperty("border-width");
 		}
-		reset();
+		$("#d25").removeClass();
 		startGame();
+
 	});
 
 	// function to randomize the choice cell
@@ -103,6 +120,7 @@ $(document).ready(function() {
 			.attr("height", 52);
 			var shapeType = randomShapes(svgContainer, num)
 			if(shapeType) {
+				$("#d25").addClass("gametd");
 				$("#d25").addClass(shapeType);
 				$("#d25").addClass("svg");
 			}
@@ -135,12 +153,14 @@ $(document).ready(function() {
 			board[i][0] = "d" + i;
 		}
 		$("#choice td").css({backgroundColor: color});
+		
 	
 	}
 
 	// initialize game state
 	function setColor() {
 		randomize(numColors);
+		putChoice();
 		//makeShapes();
 	}
 	
@@ -151,8 +171,18 @@ $(document).ready(function() {
 
 
 	function reset() {
-		correct  = 0;
+		correct = 0;
 		correctClicked = 0;
+		clicked = false;
+		hasShape = false;
+		score = 0;
+		gameLevel = 1;
+		numColors = 2;
+		numShapes = 0;
+		fadeTime = 10000;
+		faded = false;
+		time = 0;
+		lives = 3;
 		$("svg").remove();
 		
 	}
@@ -169,7 +199,8 @@ $(document).ready(function() {
 	}) */
 
 	// function to get the color of a clicked cell
-	$("td").on('click touchstart', function() {
+	$("td.gametd").on('click touchstart', function() {
+		console.log(this.id);
 		if(this.id != "d25"){ //Can't click cell in pre-game page
 			for(var i=0; i<board.length; i++) {
 				//Each cell can only be clicked once
@@ -183,10 +214,19 @@ $(document).ready(function() {
 					var choiceSVG = d3.select("svg");
 					var colorSVG = $(this).css("fill");
 					if (color === choiceColor && (!hasShape && (this.className == "gametd svg" || this.className == "gametd") || $("#d"+i).hasClass($("#d25").attr("class")))) {
+						$(this).css("border-width", "medium");
 						d3.select(this).style("opacity", 0).transition().duration(0).style("opacity", 1);
-						score += 100;
+						var timeDifference = (fadeTime - time)/1000;
+						score = score + ((gameLevel * 10)  * timeDifference) + 100;
 						$(".score").html(score);
 						correctClicked++;
+					}
+					 else {
+						lives--;
+						if(lives <= 0){
+							window.location="#done";
+						}
+						$("#gameLives").text(lives);
 					}
 				}
 			}
@@ -243,7 +283,7 @@ $(document).ready(function() {
 				.attr("stroke", "turquoise")
 				.attr("stroke-width" , 3)
 				.attr("fill", color[0]);
-				shapeList[i] = shape;
+				shapeList[i] = "circle";
 				return "circle";
 				break;
 				case 1: 
@@ -308,16 +348,17 @@ $(document).ready(function() {
 		}
 	}
 	// function that mute the sound 
-	$("#muteButton").on('click touchstart', function() {
+	$(".muteButton").on('click', function() {
 		if(mute == 0){
 			mute = 1;
+			$(".muteButton").text('Sound Off');
 			document.getElementById("music").pause();
-			$(this).attr("src","images/mute.png");
 		} else {
 			mute = 0;
+			$(".muteButton").text('Sound On');
 			document.getElementById("music").play();
-			$(this).attr("src","images/sound.png");
 		}
+		$(this).button('refresh');
 	});
 	
 	// function that tally up all the colors
@@ -332,7 +373,7 @@ $(document).ready(function() {
 	function nextLevel() {
 		faded = false;
 		$("#levelClear").html("LEVEL " + gameLevel + " CLEARED");
-		if (fadeTime > 5000)
+		if (fadeTime > 4000)
 			fadeTime -= 500;
 		gameLevel++;
 		
@@ -342,7 +383,9 @@ $(document).ready(function() {
 			//Sets all cells to be able for clicking again.
 			board[i][1] =0;
 			$("#d"+i).removeClass().addClass("gametd");
+			$("#d"+i).prop("style").removeProperty("border-width");
 		}
+		
 		$("#d25").removeClass();
 		window.location = "#clear"
 		//gameLevel++;
@@ -392,8 +435,6 @@ $(document).ready(function() {
 		return colorList;
 	}
 
-	var show = false;
-
 	$(".menu").click(function(){
 		window.location = "#main";
 	})
@@ -402,9 +443,8 @@ $(document).ready(function() {
 		window.location = "#LeaderboardPage";
 	})
 
-	var name,num;
 	$("#send").click(function(){
-		var num = parseInt($('#userScore').val());
+		var num = score;
 		var user = $('#userID').val();
 		console.log(num);
 		$.ajax({
@@ -416,20 +456,19 @@ $(document).ready(function() {
 			console.log(msg);
 		});	
 		console.log(user);
+		window.location = "#main";
 	}); 
 
-	$("#LeaderTitle").click(function(){
-		if(!show) {
-			show = true;
-			$.getJSON("https://api.mongolab.com/api/1/databases/sos/collections/leaderboard?apiKey=br10X-RgokMGFuGnyr5w4WHdKpa046Fr&s={%22score%22:-1}", function(result){
-				var j = 1;
-				$.each(result, function(i, field){
-					$("#bodyLeader").append('<tr> <td>'+j+'</td> <td>'+field.name+'</td> <td>'+field.score+'</td> </tr>');
-					j++;
-				});
+	function showLeaderBoard(){
+		$.getJSON("https://api.mongolab.com/api/1/databases/sos/collections/leaderboard?apiKey=br10X-RgokMGFuGnyr5w4WHdKpa046Fr&s={%22score%22:-1}", function(result){
+			var j = 1;
+			$.each(result, function(i, field){
+				$("#bodyLeader").append('<tr class = "LBscore" > <td>'+j+'</td> <td>'+field.name+'</td> <td>'+field.score+'</td> </tr>');
+				j++;
 			});
-		}
-	});
+		});
+		$(".LBscore").remove();
+	}
 
 	function setCookie(cname, cvalue, exdays) {
 		var d = new Date();
@@ -474,29 +513,42 @@ $(document).ready(function() {
 	// ACHIEVEMENTS //
 	function achievements() {
 		
-		if (gameLevel == 3 && achiev1 == false) {
+		if (gameLevel == 3 && !achiev1) {
 			achiev1 = true;
 			if(!mute){
 				achv.play();
 			}
-			$("#ac").prepend('<img id="ach1" src="images/a1.png" />').hide();
+			$("#ac").prepend('<img id="ach1" src="images/a1.png" width="80%"/>').hide();
 			$("#ac").show().slideDown("slow", function() {
 				$("#ach1").fadeOut(5000, function() {$("img#ach1").remove();});
 			});
+			//$("#fastIMG").remove();
+			$(".fastIMG").replaceWith('<img src="images/Trophy_color.png" width="100px" height="100px">');
 			
 		}
 
-		if (time >= fadeTime && achiev2 == false) {
+		if (time >= fadeTime && !achiev2) {
 			achiev2 = true;
 			if(!mute){
 				achv.play();
 			}
-			$("#ac").prepend('<img id="ach2" src="images/a2.png" />').hide();
+			$("#ac").prepend('<img id="ach2" src="images/a2.png" width="80%"/>').hide();
 			$("#ac").show().slideDown("slow", function() {
 				$("#ach2").fadeOut(5000, function() {$("img#ach1").remove();});
 			});
-			
+			$(".faydeIMG").replaceWith('<img src="images/Trophy_color.png" width="100px" height="100px">');
+
 		}
+
+		if (score >= 20000 && lives == 3 && !achiev3 ) {
+			achiev3 = true;
+			achv.play();
+			$("#ac").prepend('<img id="ach3" src="images/a3.png" width="80%"/>').hide();
+			$("#ac").show().slideDown("slow", function() {
+				$("#ach3").fadeOut(5000, function() {$("img#ach1").remove();});
+			});
+		}
+		$(".upIMG").replaceWith('<img src="images/Trophy_color.png" width="100px" height="100px">');
 
 	}
 	
@@ -505,11 +557,16 @@ $(document).ready(function() {
 	});
 
 	$("#leaderBoard").click(function(){
+		showLeaderBoard();
 		window.location="#LeaderboardPage";
 	});
 
 	$(".settingButton").click(function(){
 		window.location = "#setting";
+	});	
+	
+	$(".submit").click(function(){
+		window.location = "#sumbitPage";
 	});	
 
 });
