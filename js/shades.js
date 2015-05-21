@@ -189,16 +189,6 @@ $(document).ready(function() {
 		
 	}
 
-	// making the pregame page not lose the color
-	/* 
-	$("h1").on('touchstart click', function(){
-		$("svg").remove();
-		setColor();
-		for (var i=0; i<board.length; i++) {
-				d3.select("#d"+i).style("opacity", 1).transition().duration(20000).style("opacity", 0);
-		}
-		console.log(color);
-	}) */
 
 	// function to get the color of a clicked cell
 	$("td.gametd").on('touchstart click', function(e) {
@@ -323,9 +313,8 @@ $(document).ready(function() {
 				console.log("not a valid shape");
 			}
 		}
-		//console.log(shapeList);
-		//return shapeList;
-}
+	}
+
 	//sound effects
 	function playSoundFx(fx){
 		switch(fx){
@@ -433,9 +422,7 @@ $(document).ready(function() {
 					console.log("cnum too big");
 			}
 
-		}	
-		//console.log(colorList);
-		
+		}
 		return colorList;
 	}
 
@@ -454,16 +441,13 @@ $(document).ready(function() {
 			 $('#userID').attr("placeholder",'Name can not be empty');
 			 return;
 		}
-		console.log(num);
 		$.ajax({
 			url: "https://api.mongolab.com/api/1/databases/sos/collections/leaderboard?apiKey=br10X-RgokMGFuGnyr5w4WHdKpa046Fr",
 			type: "POST",
 			data: JSON.stringify({name: user, score: num}),
 			contentType: "application/json"
 			}).done(function( msg ) {
-			console.log(msg);
 		});	
-		console.log(user);
 		window.location = "#main";
 	}); 
 
