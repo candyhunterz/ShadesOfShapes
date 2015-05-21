@@ -84,12 +84,22 @@ img {
     font-weight: bold;
 }
 
+
 #level p {
-	text-align: left;
-	display: inline;
+    display: inline;
 }
-#level {
-	text-align: left;
+.gLevel {
+    float: left;
+    padding-left: 10px;
+}
+
+#lives p {
+    display: inline;
+}
+
+.gLife {
+    float: right;
+    padding-right: 10px;
 }
 
 #hex {
@@ -118,7 +128,7 @@ circle {
 }
 */
 #main.ui-page{
-    background: url(../images/bg/6.jpg) no-repeat center center fixed;
+    background: url(../images/bg/2.png) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -133,8 +143,6 @@ circle {
 }
 
 #logo{
-	width:300px;
-	height:150px;
     margin: 50px 0px 0px 0px;
 }
 
@@ -285,4 +293,14 @@ circle {
 .score {
 	font-size: xx-large;
 	color: #00FFFF;
+}
+
+.ui-header {
+	font-size: large;
+    padding: 5px;
+}
+
+.ui-header .ui-title {
+    margin-right: 10%;
+    margin-left: 10%;
 }
