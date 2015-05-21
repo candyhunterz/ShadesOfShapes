@@ -200,7 +200,7 @@ $(document).ready(function() {
 	}) */
 
 	// function to get the color of a clicked cell
-	$("td.gametd").on('click touchstart', function() {
+	$("td.gametd").on('click', function() {
 		console.log(this.id);
 		if(this.id != "d25"){ //Can't click cell in pre-game page
 			for(var i=0; i<board.length; i++) {
