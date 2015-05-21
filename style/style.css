@@ -128,7 +128,7 @@ circle {
 }
 */
 #main.ui-page{
-    background: url(../images/bg/2.png) no-repeat center center fixed;
+    background: url(../images/back.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -291,4 +291,10 @@ circle {
 .ui-header .ui-title {
     margin-right: 10%;
     margin-left: 10%;
+}
+
+#logo{
+	width: 300px;
+	height: 143px;
+	 opacity: 0.6;
 }
