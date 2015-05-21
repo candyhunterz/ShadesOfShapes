@@ -100,7 +100,6 @@ $(document).ready(function() {
 			$("#d"+i).removeClass().addClass("gametd");
 			$("#d"+i).prop("style").removeProperty("border-width");
 			}
-		
 			$("#d25").removeClass();
 			return;
 		
