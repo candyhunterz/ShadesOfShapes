@@ -172,13 +172,6 @@ circle {
 }
 */
 
-#muteButton{
-	right:5px;
-	bottom:0;
-	height:50px;
-	position: absolute;
-}
-
 #level {
     text-align: center;
 }
