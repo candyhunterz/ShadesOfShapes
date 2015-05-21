@@ -91,9 +91,9 @@ $(document).ready(function() {
 	}
 	//Use the class tag so every Play and Playagain button can be referenced the same
 	$(".play").on('click touchstart', function(){
-		if($(this).attr('id') == "playAgain") {
+		if($(this).attr('id') == "playAgain" || $(this).attr('id') == "playButton") {
 			reset();
-			window.location = "#main";
+			startGame();
 			for(var i=0; i<board.length; i++) {
 			//Sets all cells to be able for clicking again.
 			board[i][1] =0;
