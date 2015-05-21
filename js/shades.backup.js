@@ -100,8 +100,7 @@ $(document).ready(function() {
 	}
 	
 	//Use the class tag so every Play and Playagain button can be referenced the same
-	$(".play").on('touchstart click', function(e){
-		e.preventDefault();
+	$(".play").on('click touchstart', function(){
 		if(this.id != "nextLevel")
 			reset();
 		
@@ -191,7 +190,7 @@ $(document).ready(function() {
 
 	// making the pregame page not lose the color
 	/* 
-	$("h1").on('touchstart click', function(){
+	$("h1").on('click touchstart', function(){
 		$("svg").remove();
 		setColor();
 		for (var i=0; i<board.length; i++) {
@@ -201,8 +200,7 @@ $(document).ready(function() {
 	}) */
 
 	// function to get the color of a clicked cell
-	$("td.gametd").on('touchstart click', function(e) {
-		e.preventDefault();
+	$("td.gametd").on('click touchstart', function() {
 		console.log(this.id);
 		if(this.id != "d25"){ //Can't click cell in pre-game page
 			for(var i=0; i<board.length; i++) {
@@ -245,8 +243,7 @@ $(document).ready(function() {
 		
 	});
 
-	$("#timed").on('touchstart click', function(e) {
-		e.preventDefault();
+	$("#timed").on('click touchstart', function() {
 		reset();
 		for (var i=0; i<board.length; i++) {
 			$("#d" + i).animate({
