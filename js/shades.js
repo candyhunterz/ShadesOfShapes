@@ -102,7 +102,7 @@ $(document).ready(function() {
 			}
 			$("#d25").removeClass();
 			return;
-		
+
 		}
 		startGame();
 	});
@@ -423,8 +423,6 @@ $(document).ready(function() {
 		return colorList;
 	}
 
-	var show = false;
-
 	$(".menu").click(function(){
 		window.location = "#main";
 	})
@@ -433,9 +431,8 @@ $(document).ready(function() {
 		window.location = "#LeaderboardPage";
 	})
 
-	var name,num;
 	$("#send").click(function(){
-		var num = parseInt($('#userScore').val());
+		var num = score;
 		var user = $('#userID').val();
 		console.log(num);
 		$.ajax({
@@ -447,20 +444,19 @@ $(document).ready(function() {
 			console.log(msg);
 		});	
 		console.log(user);
+		window.location = "#main";
 	}); 
 
-	$("#LeaderTitle").click(function(){
-		if(!show) {
-			show = true;
-			$.getJSON("https://api.mongolab.com/api/1/databases/sos/collections/leaderboard?apiKey=br10X-RgokMGFuGnyr5w4WHdKpa046Fr&s={%22score%22:-1}", function(result){
-				var j = 1;
-				$.each(result, function(i, field){
-					$("#bodyLeader").append('<tr> <td>'+j+'</td> <td>'+field.name+'</td> <td>'+field.score+'</td> </tr>');
-					j++;
-				});
+	function showLeaderBoard(){
+		$.getJSON("https://api.mongolab.com/api/1/databases/sos/collections/leaderboard?apiKey=br10X-RgokMGFuGnyr5w4WHdKpa046Fr&s={%22score%22:-1}", function(result){
+			var j = 1;
+			$.each(result, function(i, field){
+				$("#bodyLeader").append('<tr class = "LBscore" > <td>'+j+'</td> <td>'+field.name+'</td> <td>'+field.score+'</td> </tr>');
+				j++;
 			});
-		}
-	});
+		});
+		$(".LBscore").remove();
+	}
 
 	function setCookie(cname, cvalue, exdays) {
 		var d = new Date();
@@ -540,11 +536,16 @@ $(document).ready(function() {
 	});
 
 	$("#leaderBoard").click(function(){
+		showLeaderBoard();
 		window.location="#LeaderboardPage";
 	});
 
 	$(".settingButton").click(function(){
 		window.location = "#setting";
+	});	
+	
+	$(".submit").click(function(){
+		window.location = "#sumbitPage";
 	});	
 
 });
