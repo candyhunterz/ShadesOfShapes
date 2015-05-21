@@ -191,6 +191,7 @@ $(document).ready(function() {
 
 
 	// function to get the color of a clicked cell
+
 	$("td.gametd").on('touchstart click', function(e) {
 		e.preventDefault();
 		if(this.id != "d25"){ //Can't click cell in pre-game page
