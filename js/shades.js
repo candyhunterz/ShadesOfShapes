@@ -146,6 +146,7 @@ $(document).ready(function() {
 			board[i][0] = "d" + i;
 		}
 		$("#choice td").css({backgroundColor: color});
+		
 	
 	}
 
@@ -508,6 +509,8 @@ $(document).ready(function() {
 			$("#ac").show().slideDown("slow", function() {
 				$("#ach1").fadeOut(5000, function() {$("img#ach1").remove();});
 			});
+			//$("#fastIMG").remove();
+			$(".fastIMG").replaceWith('<img src="images/Trophy_color.png" width="100px" height="100px">');
 			
 		}
 
@@ -518,6 +521,8 @@ $(document).ready(function() {
 			$("#ac").show().slideDown("slow", function() {
 				$("#ach2").fadeOut(5000, function() {$("img#ach1").remove();});
 			});
+			$(".faydeIMG").replaceWith('<img src="images/Trophy_color.png" width="100px" height="100px">');
+
 		}
 
 		if (score >= 20000 && lives == 3 && !achiev3 ) {
@@ -528,6 +533,7 @@ $(document).ready(function() {
 				$("#ach3").fadeOut(5000, function() {$("img#ach1").remove();});
 			});
 		}
+		$(".upIMG").replaceWith('<img src="images/Trophy_color.png" width="100px" height="100px">');
 
 	}
 	
