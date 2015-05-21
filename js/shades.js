@@ -200,7 +200,7 @@ $(document).ready(function() {
 	}) */
 
 	// function to get the color of a clicked cell
-	$("td.gametd").on('click touchstart', function() {
+	$("td.gametd").on('touchstart', function() {
 		console.log(this.id);
 		if(this.id != "d25"){ //Can't click cell in pre-game page
 			for(var i=0; i<board.length; i++) {
@@ -221,6 +221,8 @@ $(document).ready(function() {
 						score = score + ((gameLevel * 10)  * timeDifference) + 100;
 						$(".score").html(score);
 						correctClicked++;
+						console.log(correctClicked);
+						console.log(correct);
 					}
 					 else {
 						lives--;
@@ -364,6 +366,7 @@ $(document).ready(function() {
 	
 	// function that tally up all the colors
 	function countColor() {
+		correct = 0;
 		for (var i=0; i<board.length; i++) {
 			if($("#d" + i).css("background-color") == $("#d25").css("background-color") && (!hasShape && (document.getElementById("d"+i).className == "gametd svg" || document.getElementById("d"+i).className == "gametd") || $("#d"+i).hasClass($("#d25").attr("class")))) {
 				correct++;
@@ -378,7 +381,8 @@ $(document).ready(function() {
 			fadeTime -= 500;
 		gameLevel++;
 		
-		
+		correct = 0;
+		correctClicked = 0;
 		
 		for(var i=0; i<board.length; i++) {
 			//Sets all cells to be able for clicking again.
