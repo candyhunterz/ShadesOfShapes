@@ -17,7 +17,7 @@ $(document).ready(function() {
 	var hasShape = false;
 	var score = 0;
 	var gameLevel = 1;
-	var numColors = 3;
+	var numColors = 2;
 	var numShapes = 0;
 	var fadeTime = 10000;
 	var faded = false;
@@ -80,6 +80,8 @@ $(document).ready(function() {
 			}
 		}else {
 			//Hard Levels 15+
+			randomChoice(2);
+			makeShapes(2)
 			if(fadeTime > 2000) {
 				fadeTime -= 500;
 			}
@@ -89,11 +91,20 @@ $(document).ready(function() {
 	}
 	//Use the class tag so every Play and Playagain button can be referenced the same
 	$(".play").on('click touchstart', function(){
-		if(this.id == "playButton" || this.id == "playAgain") {
-			gameLevel = 1;
-			score = 0;
+		if($(this).attr('id') == "playAgain") {
+			reset();
+			window.location = "#main";
+			for(var i=0; i<board.length; i++) {
+			//Sets all cells to be able for clicking again.
+			board[i][1] =0;
+			$("#d"+i).removeClass().addClass("gametd");
+			$("#d"+i).prop("style").removeProperty("border-width");
+			}
+		
+			$("#d25").removeClass();
+			return;
+		
 		}
-		reset();
 		startGame();
 	});
 
@@ -152,8 +163,18 @@ $(document).ready(function() {
 
 
 	function reset() {
-		correct  = 0;
+		correct = 0;
 		correctClicked = 0;
+		clicked = false;
+		hasShape = false;
+		score = 0;
+		gameLevel = 1;
+		numColors = 2;
+		numShapes = 0;
+		fadeTime = 10000;
+		faded = false;
+		time = 0;
+		lives = 3;
 		$("svg").remove();
 		
 	}
@@ -182,7 +203,7 @@ $(document).ready(function() {
 					var choiceSVG = d3.select("svg");
 					var colorSVG = $(this).css("fill");
 					if (color === choiceColor && (!hasShape && (this.className == "gametd svg" || this.className == "gametd") || $("#d"+i).hasClass($("#d25").attr("class")))) {
-						//$(this).css("border-width", "medium");
+						$(this).css("border-width", "medium");
 						d3.select(this).style("opacity", 0).transition().duration(0).style("opacity", 1);
 						var timeDifference = (fadeTime - time)/1000;
 						score = score + ((gameLevel * 10)  * timeDifference) + 100;
@@ -252,7 +273,7 @@ $(document).ready(function() {
 				.attr("stroke", "turquoise")
 				.attr("stroke-width" , 3)
 				.attr("fill", color[0]);
-				shapeList[i] = shape;
+				shapeList[i] = "circle";
 				return "circle";
 				break;
 				case 1: 
@@ -341,7 +362,7 @@ $(document).ready(function() {
 	function nextLevel() {
 		faded = false;
 		$("#levelClear").html("LEVEL " + gameLevel + " CLEARED");
-		if (fadeTime > 5000)
+		if (fadeTime > 4000)
 			fadeTime -= 500;
 		gameLevel++;
 		
@@ -351,7 +372,7 @@ $(document).ready(function() {
 			//Sets all cells to be able for clicking again.
 			board[i][1] =0;
 			$("#d"+i).removeClass().addClass("gametd");
-			//$("#d"+i).prop("style").removeProperty("border-width");
+			$("#d"+i).prop("style").removeProperty("border-width");
 		}
 		
 		$("#d25").removeClass();
@@ -504,7 +525,7 @@ $(document).ready(function() {
 			});
 		}
 
-		if (score >= 10000 && lives == 3 && !achiev3 ) {
+		if (score >= 20000 && lives == 3 && !achiev3 ) {
 			achiev3 = true;
 			achv.play();
 			$("#ac").prepend('<img id="ach3" src="images/a3.png" width="80%"/>').hide();
