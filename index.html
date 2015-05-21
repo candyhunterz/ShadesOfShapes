@@ -49,13 +49,10 @@
         </div>
 		<div role="main" class="ui-content">
                 <div id="timewrapper">
-                    <div id="timerdiv">
-                        <div id="timer"></div>
-                    </div>
+                    <h1>TAP</h1>
+                    <div id="timer"></div>
                     <div id="choice">
-                        <br/>
-                        <h1>TAP</h1>
-                        <table>
+                        <table id="choicebox">
                             <tr><td id='d25' class=''></td></tr>
                         </table>
                     </div>
@@ -196,10 +193,16 @@
         <div data-role="header">
 			<h1 id="LeaderTitle" >Game Settings</h1>
         </div>
-		<p>Background Music: <strong>ON</strong></p>
-        <p>Sound Effects: <strong>ON</strong></p>
-        <a data-role="button" data-inline="false" class="menu">Main Menu</a>
-		
+        <label for="bgmusic">Background Music:</label>
+        <select name="bgmusic" id="bgmusic" data-role="slider">
+            <option value="on">On</option>
+            <option value="off">Off</option>
+        </select> 
+        <label for="sfxmusic">Background Music:</label>
+        <select name="sfxmusic" id="sfxmusic" data-role="slider">
+            <option value="on">On</option>
+            <option value="off">Off</option>
+        </select> 
 	</div>
 	
 	<!-- Start of Sumbit Score Page -->
