@@ -42,10 +42,11 @@ $(document).ready(function() {
 		$("#timer").TimeCircles().destroy();
 		$("#timer").TimeCircles();
 		var delay = 3800; //Your delay in milliseconds
+		startLevel();
 		$(".score").html(score);
 		$(".level").html(gameLevel);
 		$("#gameLevel").html(gameLevel);
-		startLevel();
+		$("#gameLives").text(lives);
 		setTimeout(function() {
 			window.location = "#game"; 
 			if(stopWatch != null){
@@ -91,20 +92,18 @@ $(document).ready(function() {
 	}
 	//Use the class tag so every Play and Playagain button can be referenced the same
 	$(".play").on('click touchstart', function(){
-		if($(this).attr('id') == "playAgain") {
+		if(this.id != "nextLevel")
 			reset();
-			window.location = "#main";
-			for(var i=0; i<board.length; i++) {
-			//Sets all cells to be able for clicking again.
-			board[i][1] =0;
-			$("#d"+i).removeClass().addClass("gametd");
-			$("#d"+i).prop("style").removeProperty("border-width");
-			}
-			$("#d25").removeClass();
-			return;
-
+		
+		for(var i=0; i<board.length; i++) {
+		//Sets all cells to be able for clicking again.
+		board[i][1] =0;
+		$("#d"+i).removeClass().addClass("gametd");
+		$("#d"+i).prop("style").removeProperty("border-width");
 		}
+		$("#d25").removeClass();
 		startGame();
+
 	});
 
 	// function to randomize the choice cell
@@ -213,7 +212,6 @@ $(document).ready(function() {
 						lives--;
 						if(lives <= 0){
 							window.location="#done";
-							lives = 3;
 						}
 						$("#gameLives").text(lives);
 					}
