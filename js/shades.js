@@ -348,16 +348,17 @@ $(document).ready(function() {
 		}
 	}
 	// function that mute the sound 
-	$("#muteButton").on('click touchstart', function() {
+	$(".muteButton").on('click', function() {
 		if(mute == 0){
 			mute = 1;
+			$(".muteButton").text('Sound Off');
 			document.getElementById("music").pause();
-			$(this).attr("src","images/mute.png");
 		} else {
 			mute = 0;
+			$(".muteButton").text('Sound On');
 			document.getElementById("music").play();
-			$(this).attr("src","images/sound.png");
 		}
+		$(this).button('refresh');
 	});
 	
 	// function that tally up all the colors
