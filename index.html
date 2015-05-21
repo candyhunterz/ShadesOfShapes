@@ -33,8 +33,8 @@
             <h1 id="mainHeader">Shades of Shapes</h1>
             <a data-role="button" data-inline="false"  class="play" id="playButton">Play</a>
             <a data-role="button" data-inline="false"  class="board" id="leaderBoard">Leaderboard</a>
-            <a data-role="button" data-inline="false" id="setting">Achievements</a>
-            <a data-role="button" data-inline="false" id="setting">Settings</a>
+            <a data-role="button" data-inline="false" class="settingButton">Settings</a>
+            <a data-role="button" data-inline="false"  class="achievementsButton" id="achievementsButton">Achievements</a>
             <img src="images/sound.png" alt="mute" id="muteButton">
         </div>
 	</div>
@@ -73,48 +73,50 @@
 				<div id="board">
 					<table id="gametable">
 						<tr>
-							<td id='d0' class"gametd"></td>
-							<td id='d1' class"gametd"></td>
-							<td id='d2' class"gametd"></td>
-							<td id='d3' class"gametd"></td>
-							<td id='d4' class"gametd"></td>
+							<td id='d0' class="gametd"></td>
+							<td id='d1' class="gametd"></td>
+							<td id='d2' class="gametd"></td>
+							<td id='d3' class="gametd"></td>
+							<td id='d4' class="gametd"></td>
 						</tr>
 						<tr>
-							<td id='d5' class"gametd"></td>
-							<td id='d6' class"gametd"></td>
-							<td id='d7' class"gametd"></td>
-							<td id='d8' class"gametd"></td>
-							<td id='d9' class"gametd"></td>
+							<td id='d5' class="gametd"></td>
+							<td id='d6' class="gametd"></td>
+							<td id='d7' class="gametd"></td>
+							<td id='d8' class="gametd"></td>
+							<td id='d9' class="gametd"></td>
 						</tr>
 						<tr>
-							<td id='d10' class"gametd"></td>
-							<td id='d11' class"gametd"></td>
-							<td id='d12' class"gametd"></td>
-							<td id='d13' class"gametd"></td>
-							<td id='d14' class"gametd"></td>
-						</tr>
-						<tr>
-							<td id='d15' class"gametd"></td>
-							<td id='d16' class"gametd"></td>
-							<td id='d17' class"gametd"></td>
-							<td id='d18' class"gametd"></td>
-							<td id='d19' class"gametd"></td>
-						</tr>
-						<tr>
-							<td id='d20' class"gametd"></td>
-							<td id='d21' class"gametd"></td>
-							<td id='d22' class"gametd"></td>
-							<td id='d23' class"gametd"></td>
-							<td id='d24' class"gametd"></td>
+							<td id='d10' class="gametd"></td>
+							<td id='d11' class="gametd"></td>
+							<td id='d12' class="gametd"></td>
+							<td id='d13' class="gametd"></td>
+							<td id='d14' class="gametd"></td>
+						</tr>                 
+						<tr>                  
+							<td id='d15' class="gametd"></td>
+							<td id='d16' class="gametd"></td>
+							<td id='d17' class="gametd"></td>
+							<td id='d18' class="gametd"></td>
+							<td id='d19' class="gametd"></td>
+						</tr>                 
+						<tr>                  
+							<td id='d20' class="gametd"></td>
+							<td id='d21' class="gametd"></td>
+							<td id='d22' class="gametd"></td>
+							<td id='d23' class="gametd"></td>
+							<td id='d24' class="gametd"></td>
 						</tr>
 					</table>
 				</div>
 			</div>
-			<a href="#done">done</a>
 		</div><!-- /content -->
 		<div data-role="footer">
 			<div id="level">
 				Level: <p id="gameLevel">0</p>
+			</div>
+			<div id="lives">
+				Lives: <p id="gameLives">3</p>
 			</div>
 		</div><!-- /footer -->
 	</div><!-- /page -->
@@ -148,20 +150,45 @@
 		<h3>Best Score:</h3>
 		<p><strong>0</strong></p>
 		<a  data-role="button" data-inline="false" class="play">Play Again</a>
-		<a data-role="button" data-inline="false"  class="board">Submit Score</a>
+		<a data-role="button" data-inline="false"  class="submit">Submit Score</a>
         <a data-role="button" data-inline="false" class="menu">Quit Game</a>
 	</div>
 
-	<!-- Start of the gameover page -->
+	<!--Start of Achievements Page-->
+	<div data-role="page" class="ui-content" id="achievements">
+		<div data-role="header">
+			<h1 id="LeaderTitle" >Achievements</h1>
+        </div>
+        <table class="table">
+        	<tr>
+				<!-- Complete one level -->
+        		<td class="def"><h2>Level Up</h2></td>
+        		<td><img src="images/Trophy_bnw.png" class="trophy" alt="levelupIMG" id="levelupIMG"></td>
+        	</tr>
+        	<tr>
+				<!-- Get a score of ZERO -->
+        		<td class="def"><h2>Really?!?!!</h2></td>
+        		<td><img src="images/Trophy_bnw.png" class="trophy" alt="reallyIMG" id="reallyIMG"></td>
+        	</tr>
+        	<tr>
+        		<td class="def"><h2>PLACE HOLDER </h2></td>
+        		<td><img src="images/Trophy_bnw.png" class="trophy" alt="levelupIMG" id="levelupIMG"></td>
+        	</tr>
+		</table>
+		<a data-role="button" data-inline="false" class="menu">Main Menu</a>
+	</div>
+
+	<!-- Start of the LEVEL CLEAR -->
 	<div data-role="page" class="ui-content " id="clear">
         <div data-role="header">
-            <h1 id="levelClear" style="fontsize: xx-large">LEVEL 1 CLEARED</h1>
+            <h1 id="levelClear" style="fontsize: xx-large">LEVEL CLEARED</h1>
         </div>
 		<h3>Score:</h3>
 		<p class='score'><strong>0</strong></p>
-		<a  data-role="button" data-inline="false" class="play">Play Again</a>
-		<a data-role="button" data-inline="false"  class="board">Submit Score</a>
+		<a  data-role="button" data-inline="false" class="play">Next Level</a>
+		<a data-role="button" data-inline="false"  class="submit">Submit Score</a>
         <a data-role="button" data-inline="false" class="menu">Quit Game</a>
+        <div id="ac"></div>
 	</div>
     
     <!-- Start of the Settings page -->
@@ -172,11 +199,19 @@
 		<p>Background Music: <strong>ON</strong></p>
         <p>Sound Effects: <strong>ON</strong></p>
         <a data-role="button" data-inline="false" class="menu">Main Menu</a>
-		<a data-role="button" data-inline="false" class="play">Next Level</a>
-		<a data-role="button" data-inline="false"  class="board">Submit Score</a>
-		<a data-role="button" data-inline="false" class="menu">Quit Game</a>
-		<a data-role="button" data-inline="false"  class="board">Leaderboard</a>
+		
 	</div>
 	
+	<!-- Start of Sumbit Score Page -->
+	<div data-role="page" class="ui-content" id="sumbitPage">
+		<div data-role="header">
+            <h1>Sumbit Score</h1>
+        </div>
+		<input type="text" class="form-control" id="userID" placeholder="Name">
+		Score: <h1 id="scoreSumbit">0</h1>
+		<br />
+		<a data-role="button" data-inline="false" type="submit" class="btn btn-default" id="sumbitButton">Submit</a>
+		<a data-role="button" data-inline="false" class="menu">Main Menu</a>
+	</div>
 </body>
 </html>
