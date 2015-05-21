@@ -447,6 +447,10 @@ $(document).ready(function() {
 	$("#send").click(function(){
 		var num = score;
 		var user = $('#userID').val();
+		if(user == ""){
+			 $('#userID').attr("placeholder",'Name can not be empty');
+			 return;
+		}
 		console.log(num);
 		$.ajax({
 			url: "https://api.mongolab.com/api/1/databases/sos/collections/leaderboard?apiKey=br10X-RgokMGFuGnyr5w4WHdKpa046Fr",
@@ -462,11 +466,12 @@ $(document).ready(function() {
 
 	function showLeaderBoard(){
 		$.getJSON("https://api.mongolab.com/api/1/databases/sos/collections/leaderboard?apiKey=br10X-RgokMGFuGnyr5w4WHdKpa046Fr&s={%22score%22:-1}", function(result){
-			var j = 1;
-			$.each(result, function(i, field){
+			var j = 1;			
+			for(var i = 0; i < 10; i++){
+				var field = result[i];
 				$("#bodyLeader").append('<tr class = "LBscore" > <td>'+j+'</td> <td>'+field.name+'</td> <td>'+field.score+'</td> </tr>');
 				j++;
-			});
+			}
 		});
 		$(".LBscore").remove();
 	}
@@ -523,9 +528,7 @@ $(document).ready(function() {
 			$("#ac").show().slideDown("slow", function() {
 				$("#ach1").fadeOut(5000, function() {$("img#ach1").remove();});
 			});
-			//$("#fastIMG").remove();
 			$(".fastIMG").replaceWith('<img src="images/Trophy_color.png" width="100px" height="100px">');
-			
 		}
 
 		if (time >= fadeTime && !achiev2) {
@@ -551,9 +554,10 @@ $(document).ready(function() {
 			});
 			$(".upIMG").replaceWith('<img src="images/Trophy_color.png" width="100px" height="100px">');
 		}
-		
 
 	} 
+
+
 	
 	$("#achievementsButton").click(function(){
 		window.location="#achievements";
@@ -571,6 +575,6 @@ $(document).ready(function() {
 	$(".submit").click(function(){
 		window.location = "#sumbitPage";
 	});	
-
+	
 });
 
