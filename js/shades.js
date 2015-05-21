@@ -25,7 +25,8 @@ $(document).ready(function() {
 	var stopWatch;
 	var achiev1 = false;
 	var achiev2 = false;
-	var achieve3 = false;
+	var achiev3 = false;
+	var lives = 3;
 
 	function startTime(){
 		stopWatch = setInterval(function(){
@@ -181,10 +182,20 @@ $(document).ready(function() {
 					var choiceSVG = d3.select("svg");
 					var colorSVG = $(this).css("fill");
 					if (color === choiceColor && (!hasShape && (this.className == "gametd svg" || this.className == "gametd") || $("#d"+i).hasClass($("#d25").attr("class")))) {
+						//$(this).css("border-width", "medium");
 						d3.select(this).style("opacity", 0).transition().duration(0).style("opacity", 1);
-						score += 100;
+						var timeDifference = (fadeTime - time)/1000;
+						score = score + ((gameLevel * 10)  * timeDifference) + 100;
 						$(".score").html(score);
 						correctClicked++;
+					}
+					 else {
+						lives--;
+						if(lives <= 0){
+							window.location="#done";
+							lives = 3;
+						}
+						$("#gameLives").text(lives);
 					}
 				}
 			}
@@ -340,7 +351,9 @@ $(document).ready(function() {
 			//Sets all cells to be able for clicking again.
 			board[i][1] =0;
 			$("#d"+i).removeClass().addClass("gametd");
+			//$("#d"+i).prop("style").removeProperty("border-width");
 		}
+		
 		$("#d25").removeClass();
 		window.location = "#clear"
 		//gameLevel++;
@@ -472,24 +485,32 @@ $(document).ready(function() {
 	// ACHIEVEMENTS //
 	function achievements() {
 		
-		if (gameLevel == 3 && achiev1 == false) {
+		if (gameLevel == 3 && !achiev1) {
 			achiev1 = true;
 			achv.play();
-			$("#ac").prepend('<img id="ach1" src="images/a1.png" />').hide();
+			$("#ac").prepend('<img id="ach1" src="images/a1.png" width="80%"/>').hide();
 			$("#ac").show().slideDown("slow", function() {
 				$("#ach1").fadeOut(5000, function() {$("img#ach1").remove();});
 			});
 			
 		}
 
-		if (time >= fadeTime && achiev2 == false) {
+		if (time >= fadeTime && !achiev2) {
 			achiev2 = true;
 			achv.play();
-			$("#ac").prepend('<img id="ach2" src="images/a2.png" />').hide();
+			$("#ac").prepend('<img id="ach2" src="images/a2.png" width="80%"/>').hide();
 			$("#ac").show().slideDown("slow", function() {
 				$("#ach2").fadeOut(5000, function() {$("img#ach1").remove();});
 			});
-			
+		}
+
+		if (score >= 10000 && lives == 3 && !achiev3 ) {
+			achiev3 = true;
+			achv.play();
+			$("#ac").prepend('<img id="ach3" src="images/a3.png" width="80%"/>').hide();
+			$("#ac").show().slideDown("slow", function() {
+				$("#ach3").fadeOut(5000, function() {$("img#ach1").remove();});
+			});
 		}
 
 	}
