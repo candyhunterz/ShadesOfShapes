@@ -147,7 +147,7 @@
 		<p class='score'><strong>0</strong></p>
 		<h3>Best Score:</h3>
 		<p><strong>0</strong></p>
-		<a  data-role="button" data-inline="false" class="play">Play Again</a>
+		<a  data-role="button" data-inline="false" class="play" id="playAgain">Play Again</a>
 		<a data-role="button" data-inline="false"  class="submit">Submit Score</a>
         <a data-role="button" data-inline="false" class="menu">Quit Game</a>
 	</div>
@@ -160,17 +160,17 @@
         <table class="table">
         	<tr>
 				<!-- Complete one level -->
-        		<td class="def"><h2>Level Up</h2></td>
-        		<td><img src="images/Trophy_bnw.png" class="trophy" alt="levelupIMG" id="levelupIMG"></td>
+        		<td class="def"><h2>Fayde Lord</h2><p>complete the level after the grid has faded</p></td>
+        		<td><img src="images/Trophy_bnw.png" class="trophy" alt="levelupIMG" id="levelupIMG" width="100px" height="100px"></td>
         	</tr>
         	<tr>
 				<!-- Get a score of ZERO -->
-        		<td class="def"><h2>Really?!?!!</h2></td>
-        		<td><img src="images/Trophy_bnw.png" class="trophy" alt="reallyIMG" id="reallyIMG"></td>
+        		<td class="def"><h2>2 Fast 2 Furious</h2><p>reach level 3</p></td>
+        		<td><img src="images/Trophy_bnw.png" class="trophy" alt="reallyIMG" id="reallyIMG" width="100px" height="100px"></td>
         	</tr>
         	<tr>
-        		<td class="def"><h2>PLACE HOLDER </h2></td>
-        		<td><img src="images/Trophy_bnw.png" class="trophy" alt="levelupIMG" id="levelupIMG"></td>
+        		<td class="def"><h2>20,000 Points Club</h2><p>reach a score of 20,000 with 3 lives remaining</p></td>
+        		<td><img src="images/Trophy_bnw.png" class="trophy" alt="levelupIMG" id="levelupIMG" width="100px" height="100px"></td>
         	</tr>
 		</table>
 		<a data-role="button" data-inline="false" class="menu">Main Menu</a>
@@ -212,9 +212,9 @@
             <h1>Sumbit Score</h1>
         </div>
 		<input type="text" class="form-control" id="userID" placeholder="Name">
-		Score: <h1 id="scoreSumbit">0</h1>
+		Score: <h1 id="userScore" class="score">0</h1>
 		<br />
-		<a data-role="button" data-inline="false" type="submit" class="btn btn-default" id="sumbitButton">Submit</a>
+		<a data-role="button" data-inline="false" type="submit" class="btn btn-default" id="send">Submit</a>
 		<a data-role="button" data-inline="false" class="menu">Main Menu</a>
 	</div>
 </body>

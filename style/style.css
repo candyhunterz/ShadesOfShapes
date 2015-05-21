@@ -261,7 +261,7 @@ circle {
 }.lbtable tr:last-child td:last-child{
 	border-width:0px 0px 0px 0px;
 }
-.lbtable tr:first-child td{
+.lbtable thead tr:first-child td{
 		background:-o-linear-gradient(bottom, #ed00ed 5%, #ff49ff 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ed00ed), color-stop(1, #ff49ff) );
 	background:-moz-linear-gradient( center top, #ed00ed 5%, #ff49ff 100% );
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#ed00ed", endColorstr="#ff49ff");	background: -o-linear-gradient(top,#ed00ed,ff49ff);
@@ -275,13 +275,8 @@ circle {
 	font-weight:bold;
 	color:#ffffff;
 }
-.lbtable tr:first-child:hover td{
-	background:-o-linear-gradient(bottom, #ed00ed 5%, #ff49ff 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ed00ed), color-stop(1, #ff49ff) );
-	background:-moz-linear-gradient( center top, #ed00ed 5%, #ff49ff 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#ed00ed", endColorstr="#ff49ff");	background: -o-linear-gradient(top,#ed00ed,ff49ff);
 
-	background-color:#ed00ed;
-}
+
 .lbtable tr:first-child td:first-child{
 	border-width:0px 0px 1px 0px;
 }
