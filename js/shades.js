@@ -432,6 +432,10 @@ $(document).ready(function() {
 	$("#send").click(function(){
 		var num = score;
 		var user = $('#userID').val();
+		if(user == ""){
+			 $('#userID').attr("placeholder",'Name can not be empty');
+			 return;
+		}
 		console.log(num);
 		$.ajax({
 			url: "https://api.mongolab.com/api/1/databases/sos/collections/leaderboard?apiKey=br10X-RgokMGFuGnyr5w4WHdKpa046Fr",
@@ -507,7 +511,6 @@ $(document).ready(function() {
 			$("#ac").show().slideDown("slow", function() {
 				$("#ach1").fadeOut(5000, function() {$("img#ach1").remove();});
 			});
-			$(".faydelord").html("<img src='images/Trophy_bnw.png' class='faydelord' alt='faydelordIMG' id='faydelord' width='100px' height='100px'>");
 		}
 
 		if (time >= fadeTime && !achiev2) {
@@ -527,7 +530,6 @@ $(document).ready(function() {
 				$("#ach3").fadeOut(5000, function() {$("img#ach1").remove();});
 			});
 		}
-
 	}
 	
 	$("#achievementsButton").click(function(){
@@ -547,8 +549,5 @@ $(document).ready(function() {
 		window.location = "#sumbitPage";
 	});	
 	
-	$(".faydelord").click(function(){
-		$(".faydelord").html("<img src='images/Trophy_color.png' class='faydelord' alt='faydelordIMG' id='faydelord' width='100px' height='100px'>");
-	});
 });
 
