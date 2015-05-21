@@ -508,7 +508,7 @@ $(document).ready(function() {
 			$("#ac").show().slideDown("slow", function() {
 				$("#ach1").fadeOut(5000, function() {$("img#ach1").remove();});
 			});
-			
+			$(".faydelord").html("<img src='images/Trophy_bnw.png' class='faydelord' alt='faydelordIMG' id='faydelord' width='100px' height='100px'>");
 		}
 
 		if (time >= fadeTime && !achiev2) {
@@ -547,6 +547,9 @@ $(document).ready(function() {
 	$(".submit").click(function(){
 		window.location = "#sumbitPage";
 	});	
-
+	
+	$(".faydelord").click(function(){
+		$(".faydelord").html("<img src='images/Trophy_color.png' class='faydelord' alt='faydelordIMG' id='faydelord' width='100px' height='100px'>");
+	});
 });
 
