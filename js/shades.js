@@ -539,6 +539,7 @@ $(document).ready(function() {
 
 		}
 
+
 		if (score >= 20000 && lives == 3 && !achiev3 ) {
 			achiev3 = true;
 			achv.play();
@@ -546,10 +547,11 @@ $(document).ready(function() {
 			$("#ac").show().slideDown("slow", function() {
 				$("#ach3").fadeOut(5000, function() {$("img#ach1").remove();});
 			});
+			$(".upIMG").replaceWith('<img src="images/Trophy_color.png" width="100px" height="100px">');
 		}
-		$(".upIMG").replaceWith('<img src="images/Trophy_color.png" width="100px" height="100px">');
+		
 
-	}
+	} 
 	
 	$("#achievementsButton").click(function(){
 		window.location="#achievements";
