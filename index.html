@@ -12,17 +12,14 @@
 	<script type="text/javascript" src="js/shades.js"></script>
 	<script src="js/d3.v3.min.js" charset="utf-8"></script>
 	<link rel="stylesheet" href="style/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="style/style.css"> 
 	<script type="text/javascript" src="js/TimeCircles.js"></script>
-	<script type="text/javascript" src="js/difficulty.js"></script>
-	<!-- <script type="text/javascript" src="js/peyman.js"></script> -->
     <link rel="stylesheet" href="themes/theme.min.css" />
 	<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
     <link rel="stylesheet" type="text/css" href="style/style.css"> 
 </head>
 <body>
 	<!--Audio file for music -->
-	<audio id="music">
+	<audio id="music" autoplay loop>
 		<source src="sounds/elavator.mp3" type="audio/mpeg">
 	</audio>
 	
@@ -33,9 +30,8 @@
             <h1 id="mainHeader">Shades of Shapes</h1>
             <a data-role="button" data-inline="false"  class="play" id="playButton">Play</a>
             <a data-role="button" data-inline="false"  class="board" id="leaderBoard">Leaderboard</a>
-            <a data-role="button" data-inline="false" class="settingButton">Settings</a>
+            <a data-role="button" data-inline="false" class="muteButton">Sound On</a>
             <a data-role="button" data-inline="false"  class="achievementsButton" id="achievementsButton">Achievements</a>
-            <img src="images/sound.png" alt="mute" id="muteButton">
         </div>
 	</div>
 	<!-- End of the main page -->
@@ -53,7 +49,7 @@
                     <div id="timer"></div>
                     <div id="choice">
                         <table id="choicebox">
-                            <tr><td id='d25' class=''></td></tr>
+                            <tr><td id='d25' class="gametd"></td></tr>
                         </table>
                     </div>
                 </div>
@@ -109,12 +105,13 @@
 			</div>
 		</div><!-- /content -->
 		<div data-role="footer">
-			<div id="level">
-				Level: <p id="gameLevel">0</p>
+			<div id="level" class="gLevel">
+				Level: <p id="gameLevel" class="level">0</p>
 			</div>
-			<div id="lives">
+			<div id="lives" class="gLife">
 				Lives: <p id="gameLives">3</p>
 			</div>
+            <div style="clear: both;"></div>
 		</div><!-- /footer -->
 	</div><!-- /page -->
 	
@@ -144,10 +141,9 @@
         </div>
 		<h3>Score:</h3>
 		<p class='score'><strong>0</strong></p>
-		<h3>Best Score:</h3>
-		<p><strong>0</strong></p>
-		<a  data-role="button" data-inline="false" class="play">Play Again</a>
+		<a  data-role="button" data-inline="false" class="play" id="playAgain">Play Again</a>
 		<a data-role="button" data-inline="false"  class="submit">Submit Score</a>
+		<a data-role="button" data-inline="false" class="muteButton">Sound On</a>
         <a data-role="button" data-inline="false" class="menu">Quit Game</a>
 	</div>
 
@@ -158,18 +154,18 @@
         </div>
         <table class="table">
         	<tr>
-				<!-- Complete one level -->
-        		<td class="def"><h2>Level Up</h2></td>
-        		<td><img src="images/Trophy_bnw.png" class="trophy" alt="levelupIMG" id="levelupIMG"></td>
+				<!-- finish the level after grid faded -->
+        		<td class="def"><h2>Fayde Lord</h2><p>complete the level after the grid has faded</p></td>
+        		<td><div id="achv1"><img src="images/Trophy_bnw.png" class="faydeIMG"  alt="faydeIMG"  width="100px" height="100px"></div></td>
         	</tr>
         	<tr>
-				<!-- Get a score of ZERO -->
-        		<td class="def"><h2>Really?!?!!</h2></td>
-        		<td><img src="images/Trophy_bnw.png" class="trophy" alt="reallyIMG" id="reallyIMG"></td>
+				<!-- get to level 3 -->
+        		<td class="def"><h2>2 Fast 2 Furious</h2><p>reach level 3</p></td>
+        		<td><div id="achv2"><img src="images/Trophy_bnw.png" class="fastIMG" alt="fastIMG" width="100px" height="100px"></div></td>
         	</tr>
         	<tr>
-        		<td class="def"><h2>PLACE HOLDER </h2></td>
-        		<td><img src="images/Trophy_bnw.png" class="trophy" alt="levelupIMG" id="levelupIMG"></td>
+        		<td class="def"><h2>20,000 Points Club</h2><p>reach a score of 20,000 with 3 lives remaining</p></td>
+        		<td><div id="achv3"><img src="images/Trophy_bnw.png" class="upIMG" alt="upIMG" width="100px" height="100px"></div></td>
         	</tr>
 		</table>
 		<a data-role="button" data-inline="false" class="menu">Main Menu</a>
@@ -182,8 +178,8 @@
         </div>
 		<h3>Score:</h3>
 		<p class='score'><strong>0</strong></p>
-		<a  data-role="button" data-inline="false" class="play">Next Level</a>
-		<a data-role="button" data-inline="false"  class="submit">Submit Score</a>
+		<a  data-role="button" data-inline="false" id = "nextLevel" class="play">Next Level</a>
+		<a data-role="button" data-inline="false" class="muteButton">Sound On</a>
         <a data-role="button" data-inline="false" class="menu">Quit Game</a>
         <div id="ac"></div>
 	</div>
@@ -195,12 +191,12 @@
         </div>
         <label for="bgmusic">Background Music:</label>
         <select name="bgmusic" id="bgmusic" data-role="slider">
-            <option value="on">On</option>
+            <option value="on" selected="true">On</option>
             <option value="off">Off</option>
         </select> 
         <label for="sfxmusic">Background Music:</label>
         <select name="sfxmusic" id="sfxmusic" data-role="slider">
-            <option value="on">On</option>
+            <option value="on" selected="true">On</option>
             <option value="off">Off</option>
         </select> 
 	</div>
@@ -210,10 +206,10 @@
 		<div data-role="header">
             <h1>Sumbit Score</h1>
         </div>
-		<input type="text" class="form-control" id="userID" placeholder="Name">
-		Score: <h1 id="scoreSumbit">0</h1>
+		<input type="text" class="form-control" id="userID" placeholder="Name" required>
+		Score: <h1 id="userScore" class="score">0</h1>
 		<br />
-		<a data-role="button" data-inline="false" type="submit" class="btn btn-default" id="sumbitButton">Submit</a>
+		<a data-role="button" data-inline="false" type="submit" class="btn btn-default" id="send">Submit</a>
 		<a data-role="button" data-inline="false" class="menu">Main Menu</a>
 	</div>
 </body>

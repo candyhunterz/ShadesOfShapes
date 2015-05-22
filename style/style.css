@@ -84,12 +84,22 @@ img {
     font-weight: bold;
 }
 
+
 #level p {
-	text-align: left;
-	display: inline;
+    display: inline;
 }
-#level {
-	text-align: left;
+.gLevel {
+    float: left;
+    padding-left: 10px;
+}
+
+#lives p {
+    display: inline;
+}
+
+.gLife {
+    float: right;
+    padding-right: 10px;
 }
 
 #hex {
@@ -118,7 +128,7 @@ circle {
 }
 */
 #main.ui-page{
-    background: url(../images/bg/6.jpg) no-repeat center center fixed;
+    background: url(../images/back.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -133,8 +143,6 @@ circle {
 }
 
 #logo{
-	width:300px;
-	height:150px;
     margin: 50px 0px 0px 0px;
 }
 
@@ -163,13 +171,6 @@ circle {
 	width:300px;
 }
 */
-
-#muteButton{
-	right:5px;
-	bottom:0;
-	height:50px;
-	position: absolute;
-}
 
 #level {
     text-align: center;
@@ -253,7 +254,7 @@ circle {
 }.lbtable tr:last-child td:last-child{
 	border-width:0px 0px 0px 0px;
 }
-.lbtable tr:first-child td{
+.lbtable thead tr:first-child td{
 		background:-o-linear-gradient(bottom, #ed00ed 5%, #ff49ff 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ed00ed), color-stop(1, #ff49ff) );
 	background:-moz-linear-gradient( center top, #ed00ed 5%, #ff49ff 100% );
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#ed00ed", endColorstr="#ff49ff");	background: -o-linear-gradient(top,#ed00ed,ff49ff);
@@ -267,13 +268,8 @@ circle {
 	font-weight:bold;
 	color:#ffffff;
 }
-.lbtable tr:first-child:hover td{
-	background:-o-linear-gradient(bottom, #ed00ed 5%, #ff49ff 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ed00ed), color-stop(1, #ff49ff) );
-	background:-moz-linear-gradient( center top, #ed00ed 5%, #ff49ff 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#ed00ed", endColorstr="#ff49ff");	background: -o-linear-gradient(top,#ed00ed,ff49ff);
 
-	background-color:#ed00ed;
-}
+
 .lbtable tr:first-child td:first-child{
 	border-width:0px 0px 1px 0px;
 }
@@ -285,4 +281,20 @@ circle {
 .score {
 	font-size: xx-large;
 	color: #00FFFF;
+}
+
+.ui-header {
+	font-size: large;
+    padding: 5px;
+}
+
+.ui-header .ui-title {
+    margin-right: 10%;
+    margin-left: 10%;
+}
+
+#logo{
+	width: 300px;
+	height: 143px;
+	 opacity: 0.6;
 }

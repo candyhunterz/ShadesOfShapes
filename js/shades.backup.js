@@ -100,8 +100,7 @@ $(document).ready(function() {
 	}
 	
 	//Use the class tag so every Play and Playagain button can be referenced the same
-	$(".play").on('touchstart click', function(e){
-		e.preventDefault();
+	$(".play").on('click touchstart', function(){
 		if(this.id != "nextLevel")
 			reset();
 		
@@ -189,11 +188,20 @@ $(document).ready(function() {
 		
 	}
 
+	// making the pregame page not lose the color
+	/* 
+	$("h1").on('click touchstart', function(){
+		$("svg").remove();
+		setColor();
+		for (var i=0; i<board.length; i++) {
+				d3.select("#d"+i).style("opacity", 1).transition().duration(20000).style("opacity", 0);
+		}
+		console.log(color);
+	}) */
 
 	// function to get the color of a clicked cell
-
-	$("td.gametd").on('touchstart click', function(e) {
-		e.preventDefault();
+	$("td.gametd").on('click touchstart', function() {
+		console.log(this.id);
 		if(this.id != "d25"){ //Can't click cell in pre-game page
 			for(var i=0; i<board.length; i++) {
 				//Each cell can only be clicked once
@@ -235,8 +243,7 @@ $(document).ready(function() {
 		
 	});
 
-	$("#timed").on('touchstart click', function(e) {
-		e.preventDefault();
+	$("#timed").on('click touchstart', function() {
 		reset();
 		for (var i=0; i<board.length; i++) {
 			$("#d" + i).animate({
@@ -310,10 +317,12 @@ $(document).ready(function() {
 				case 5: 
 				break;
 				default: ;
+				console.log("not a valid shape");
 			}
 		}
-	}
-
+		//console.log(shapeList);
+		//return shapeList;
+}
 	//sound effects
 	function playSoundFx(fx){
 		switch(fx){
@@ -355,8 +364,6 @@ $(document).ready(function() {
 	
 	// function that tally up all the colors
 	function countColor() {
-		correct = 0;
-		correctClicked = 0;
 		for (var i=0; i<board.length; i++) {
 			if($("#d" + i).css("background-color") == $("#d25").css("background-color") && (!hasShape && (document.getElementById("d"+i).className == "gametd svg" || document.getElementById("d"+i).className == "gametd") || $("#d"+i).hasClass($("#d25").attr("class")))) {
 				correct++;
@@ -386,6 +393,9 @@ $(document).ready(function() {
 		
 		$(".score").html(score);
 	}
+
+
+//////////////////////////////////////////////////////////////////////////////////
 
 	// new function to generate color
 	// cnum from 0 to 5
@@ -417,14 +427,23 @@ $(document).ready(function() {
 					colorList[i] = color;
 					break;
 				default:
+					console.log("cnum too big");
 			}
 
-		}
+		}	
+		//console.log(colorList);
+		
 		return colorList;
 	}
 
-	// ---------------------------------------------------
-	// LeaderboardPage //
+	$(".menu").click(function(){
+		window.location = "#main";
+	})
+
+	$(".board").click(function(){
+		window.location = "#LeaderboardPage";
+	})
+
 	$("#send").click(function(){
 		var num = score;
 		var user = $('#userID').val();
@@ -432,13 +451,16 @@ $(document).ready(function() {
 			 $('#userID').attr("placeholder",'Name can not be empty');
 			 return;
 		}
+		console.log(num);
 		$.ajax({
 			url: "https://api.mongolab.com/api/1/databases/sos/collections/leaderboard?apiKey=br10X-RgokMGFuGnyr5w4WHdKpa046Fr",
 			type: "POST",
 			data: JSON.stringify({name: user, score: num}),
 			contentType: "application/json"
 			}).done(function( msg ) {
+			console.log(msg);
 		});	
+		console.log(user);
 		window.location = "#main";
 	}); 
 
@@ -454,6 +476,45 @@ $(document).ready(function() {
 		$(".LBscore").remove();
 	}
 
+	function setCookie(cname, cvalue, exdays) {
+		var d = new Date();
+		d.setTime(d.getTime() + (exdays*24*60*60*1000));
+		var expires = "expires="+d.toUTCString();
+		document.cookie = cname + "=" + cvalue + "; " + expires;	
+	}
+	/*	
+		Take the cookiename as parameter (cname).
+		Create a variable (name) with the text to search for (cname + "=").
+		Split document.cookie on semicolons into an array called ca (ca = document.cookie.split(';')).
+		Loop through the ca array (i=0;i<ca.length;i++), and read out each value c=ca[i]).
+		If the cookie is found (c.indexOf(name) == 0), return the value of the cookie (c.substring(name.length,c.length).
+		If the cookie is not found, return "".
+	 */
+	function getCookie(cname) {
+		var name = cname + "=";
+		var ca = document.cookie.split(';');
+		for(var i=0; i<ca.length; i++) {
+			var c = ca[i];
+			while (c.charAt(0)==' ') 
+			c = c.substring(1);
+			if (c.indexOf(name) == 0) 
+			return c.substring(name.length, c.length);
+		}
+		return "";
+	}
+
+	//example on making a cookie and checking for it
+	function checkCookie() {
+		var user = getCookie("username");
+		if (user != "") {
+			alert("Welcome again " + user);
+		} else {
+			user = prompt("Please enter your name:", "");
+			if (user != "" && user != null) {
+				setCookie("username", user, 365);
+			}
+		}
+	}
 	// ---------------------------------------------------
 	// ACHIEVEMENTS //
 	function achievements() {
@@ -495,9 +556,9 @@ $(document).ready(function() {
 		}
 
 	} 
+
+
 	
-	// ---------------------------------------------------
-	// Page links //
 	$("#achievementsButton").click(function(){
 		window.location="#achievements";
 	});
@@ -515,9 +576,5 @@ $(document).ready(function() {
 		window.location = "#sumbitPage";
 	});	
 	
-	$(".menu").click(function(){
-		window.location = "#main";
-	})
-
 });
 
