@@ -12,24 +12,21 @@
 	<script type="text/javascript" src="js/shades.js"></script>
 	<script src="js/d3.v3.min.js" charset="utf-8"></script>
 	<link rel="stylesheet" href="style/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="style/style.css"> 
 	<script type="text/javascript" src="js/TimeCircles.js"></script>
-	<script type="text/javascript" src="js/difficulty.js"></script>
-	<!-- <script type="text/javascript" src="js/peyman.js"></script> -->
     <link rel="stylesheet" href="themes/theme.min.css" />
 	<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
     <link rel="stylesheet" type="text/css" href="style/style.css"> 
 </head>
 <body>
 	<!--Audio file for music -->
-	<audio id="music">
+	<audio id="music" autoplay loop>
 		<source src="sounds/elavator.mp3" type="audio/mpeg">
 	</audio>
 	
 	<!-- Start of the main page -->
 	<div data-role="page" id="main">
         <div data-role="main">
-            <img src="images/logo2.png" alt="logo" id="logo">
+            <img src="images/logo.png" alt="logo" id="logo">
             <h1 id="mainHeader">Shades of Shapes</h1>
             <a data-role="button" data-inline="false"  class="play" id="playButton">Play</a>
             <a data-role="button" data-inline="false"  class="board" id="leaderBoard">Leaderboard</a>
@@ -62,7 +59,7 @@
 	<!-- Start of the game page -->
 	<div data-role="page" id="game">
         <div data-role="header">
-			<p class='score'>0</p>
+			<p id='gamescore' class='score'>0</p>
         </div>
 		<div role="main" class="ui-content">
 			<div class="background">
@@ -144,8 +141,6 @@
         </div>
 		<h3>Score:</h3>
 		<p class='score'><strong>0</strong></p>
-		<h3>Best Score:</h3>
-		<p><strong>0</strong></p>
 		<a  data-role="button" data-inline="false" class="play" id="playAgain">Play Again</a>
 		<a data-role="button" data-inline="false"  class="submit">Submit Score</a>
 		<a data-role="button" data-inline="false" class="muteButton">Sound On</a>
@@ -184,7 +179,6 @@
 		<h3>Score:</h3>
 		<p class='score'><strong>0</strong></p>
 		<a  data-role="button" data-inline="false" id = "nextLevel" class="play">Next Level</a>
-		<a data-role="button" data-inline="false"  class="submit">Submit Score</a>
 		<a data-role="button" data-inline="false" class="muteButton">Sound On</a>
         <a data-role="button" data-inline="false" class="menu">Quit Game</a>
         <div id="ac"></div>
@@ -212,11 +206,10 @@
 		<div data-role="header">
             <h1>Sumbit Score</h1>
         </div>
-		<input type="text" class="form-control" id="userID" placeholder="Name" required>
-		Score: <h1 id="userScore" class="score">0</h1>
-		<br />
+        <h3>Score:</h3>
+        <p id="userScore" class='score'><strong>0</strong></p>
+		<input type="text" id="userID" placeholder="Name" class="required" data-mini="true">
 		<a data-role="button" data-inline="false" type="submit" class="btn btn-default" id="send">Submit</a>
-		<a data-role="button" data-inline="false" class="menu">Main Menu</a>
 	</div>
 </body>
 </html>

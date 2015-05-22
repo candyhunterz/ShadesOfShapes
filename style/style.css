@@ -128,7 +128,7 @@ circle {
 }
 */
 #main.ui-page{
-    background: url(../images/bg/2.png) no-repeat center center fixed;
+    background: url(../images/background.png) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -142,13 +142,15 @@ circle {
     height: 100%;
 }
 
-#logo{
-    margin: 50px 0px 0px 0px;
-}
-
-
 #mainHeader{
-	margin: 20px 0px 40px 0px;
+    font-family: impact,sans-serif;
+    color: #0091FF;
+    font-size: 60px;
+    font-variant: small-caps;
+    text-align: center;
+    letter-spacing: -0.8pt;
+    word-spacing: 6.2pt;
+    margin: 20px 0px 40px 0px;
 }
 /*
 #playButton{
@@ -278,9 +280,14 @@ circle {
 
 }
 
-.score {
+#gamescore {
 	font-size: xx-large;
-	color: #00FFFF;
+	color: #fffe05;
+}
+
+.score {
+    font-size: xx-large;
+    color: #FF8300;
 }
 
 .ui-header {
@@ -291,4 +298,11 @@ circle {
 .ui-header .ui-title {
     margin-right: 10%;
     margin-left: 10%;
+}
+
+#logo{
+    margin: 50px 0px 0px 0px;
+	width: 300px;
+	height: 143px;
+	opacity: 0.9;
 }
