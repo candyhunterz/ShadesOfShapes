@@ -59,7 +59,7 @@
 	<!-- Start of the game page -->
 	<div data-role="page" id="game">
         <div data-role="header">
-			<p class='score'>0</p>
+			<p id='gamescore' class='score'>0</p>
         </div>
 		<div role="main" class="ui-content">
 			<div class="background">
@@ -206,11 +206,10 @@
 		<div data-role="header">
             <h1>Sumbit Score</h1>
         </div>
-		<input type="text" class="form-control" id="userID" placeholder="Name" required>
-		Score: <h1 id="userScore" class="score">0</h1>
-		<br />
+        <h3>Score:</h3>
+        <p id="userScore" class='score'><strong>0</strong></p>
+		<input type="text" id="userID" placeholder="Name" class="required" data-mini="true">
 		<a data-role="button" data-inline="false" type="submit" class="btn btn-default" id="send">Submit</a>
-		<a data-role="button" data-inline="false" class="menu">Main Menu</a>
 	</div>
 </body>
 </html>

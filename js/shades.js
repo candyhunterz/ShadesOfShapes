@@ -37,7 +37,6 @@ $(document).ready(function() {
 	
 	// starts the game
 	function startGame() {
-		
 		$("svg").remove();
 		window.location = "#pregame";
 		$("#timer").TimeCircles().destroy();
@@ -88,10 +87,6 @@ $(document).ready(function() {
 				fadeTime -= 500;
 			}
 		}
-		for (var i=0; i<board.length; i++) {
-			d3.select("#d"+i).style("opacity", 0).transition().duration(0).style("opacity", 1);
-		}
-		
 		hasShape = ($("#d25").hasClass("svg")?true:false);
 		putChoice();
 		countColor();
@@ -116,6 +111,7 @@ $(document).ready(function() {
 		$("#d"+i).removeClass().addClass("gametd");
 		$("#d"+i).prop("style").removeProperty("border-width");
 		}
+		$("#d25").removeClass();
 		startGame();
 
 	});
@@ -142,19 +138,24 @@ $(document).ready(function() {
 			var color='';
 			board[i][0] = 0;
 			if (num == 0) {
-				color = 'red';
+                //red
+				color = '#ff4747';
 			}
 			else if (num == 1) {
-				color = 'blue';	
+                //blue
+				color = '#3dddfc';	
 			}
 			else if (num == 2) {
-				color = 'yellow';
+                //yellow
+				color = '#fff834';
 			}
 			else if (num == 3) {
-				color = 'green';
+                //green
+				color = '#a5f766';
 			}
 			else if (num == 4) {
-				color = 'purple';
+                //purple
+				color = '#ff5ebe';
 			}
 			$("#d"+i).css({backgroundColor: color});
 			board[i][0] = "d" + i;
@@ -177,7 +178,6 @@ $(document).ready(function() {
 
 
 	function reset() {
-		mlives();
 		correct = 0;
 		correctClicked = 0;
 		clicked = false;
@@ -221,12 +221,7 @@ $(document).ready(function() {
 					}
 					 else {
 						lives--;
-						if (lives == 2)
-							$("#life3").remove();
-						if (lives == 1)
-							$("#life2").remove();
 						if(lives <= 0){
-							$("#life1").remove();
 							window.location="#done";
 						}
 						$("#gameLives").text(lives);
@@ -235,7 +230,9 @@ $(document).ready(function() {
 			}
 		}
 		if(correct == correctClicked) {
-			
+			for (var i=0; i<board.length; i++) {
+				d3.select("#d"+i).style("opacity", 0).transition().duration(0).style("opacity", 1);
+			}
 			achievements();
 			nextLevel();
 		}
@@ -243,6 +240,15 @@ $(document).ready(function() {
 		
 	});
 
+	$("#timed").on('touchstart click', function(e) {
+		e.preventDefault();
+		reset();
+		for (var i=0; i<board.length; i++) {
+			$("#d" + i).animate({
+				opacity: 0, color: '#FFFFFF'}, 5000, function() {
+				});
+		}
+	});
 
 	// function to generate shapes into each cell using svg 
 	// using D3.js to make things easier
@@ -273,7 +279,7 @@ $(document).ready(function() {
 				.attr("cx",27)
 				.attr("cy",27)
 				.attr("r",25)
-				.attr("stroke", "turquoise")
+				.attr("stroke", "white")
 				.attr("stroke-width" , 3)
 				.attr("fill", color[0]);
 				shapeList[i] = "circle";
@@ -286,7 +292,7 @@ $(document).ready(function() {
 				.attr("y", 2)
 				.attr("width",50)
 				.attr("height",50)
-				.attr("stroke", "turquoise")
+				.attr("stroke", "white")
 				.attr("stroke-width" , 3)
 				.attr("fill", color[0]);
 				shapeList[i] = shape;
@@ -296,7 +302,7 @@ $(document).ready(function() {
 				color = randomColor(1);
 				svg.append("polygon")
 				.attr("points", "25, 0 0, 50 50,50")
-				.attr("stroke", "turquoise")
+				.attr("stroke", "white")
 				.attr("stroke-width" , 3)
 				.attr("fill", color[0]);
 				shapeList[i] = "triangle";
@@ -381,6 +387,7 @@ $(document).ready(function() {
 		
 		$("#d25").removeClass();
 		window.location = "#clear"
+		//gameLevel++;
 		
 		$(".score").html(score);
 	}
@@ -395,23 +402,28 @@ $(document).ready(function() {
 			var color;
 			switch (num) {
 				case 0: 
-					color = "blue";
+                    //blue
+					color = "#04c4e9 ";
 					colorList[i] = color;
 					break;
 				case 1:
-					color = "red";
+                    //red
+					color = "#ff1414";
 					colorList[i] = color;
 					break;
 				case 2:
-					color = "yellow";
+                    //yellow
+					color = "#fff601";
 					colorList[i] = color;
 					break;
 				case 3:
-					color = "green";
+                    //green
+					color = "#8ff641";
 					colorList[i] = color;
 					break;
 				case 4:
-					color = "purple";
+                    // purple
+					color = "#ff19a3";
 					colorList[i] = color;
 					break;
 				default:
@@ -493,15 +505,6 @@ $(document).ready(function() {
 		}
 
 	} 
-
-	function mlives() {
-		var life = new Image();
-		life.src = 'images/life.png';
-		$(".life").prepend('<img id="life1" src="images/life.png" width="30px" height="30px" />');
-		$(".life").prepend('<img id="life2" src="images/life.png" width="30px" height="30px" />');
-		$(".life").prepend('<img id="life3" src="images/life.png" width="30px" height="30px" />');
-	}
-	
 	
 	// ---------------------------------------------------
 	// Page links //
