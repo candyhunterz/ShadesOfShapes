@@ -87,6 +87,10 @@ $(document).ready(function() {
 				fadeTime -= 500;
 			}
 		}
+		for (var i=0; i<board.length; i++) {
+			d3.select("#d"+i).style("opacity", 0).transition().duration(0).style("opacity", 1);
+		}
+		
 		hasShape = ($("#d25").hasClass("svg")?true:false);
 		putChoice();
 		countColor();
@@ -111,7 +115,6 @@ $(document).ready(function() {
 		$("#d"+i).removeClass().addClass("gametd");
 		$("#d"+i).prop("style").removeProperty("border-width");
 		}
-		$("#d25").removeClass();
 		startGame();
 
 	});
@@ -225,9 +228,7 @@ $(document).ready(function() {
 			}
 		}
 		if(correct == correctClicked) {
-			for (var i=0; i<board.length; i++) {
-				d3.select("#d"+i).style("opacity", 0).transition().duration(0).style("opacity", 1);
-			}
+			
 			achievements();
 			nextLevel();
 		}
@@ -235,15 +236,6 @@ $(document).ready(function() {
 		
 	});
 
-	$("#timed").on('touchstart click', function(e) {
-		e.preventDefault();
-		reset();
-		for (var i=0; i<board.length; i++) {
-			$("#d" + i).animate({
-				opacity: 0, color: '#FFFFFF'}, 5000, function() {
-				});
-		}
-	});
 
 	// function to generate shapes into each cell using svg 
 	// using D3.js to make things easier
@@ -382,7 +374,6 @@ $(document).ready(function() {
 		
 		$("#d25").removeClass();
 		window.location = "#clear"
-		//gameLevel++;
 		
 		$(".score").html(score);
 	}
