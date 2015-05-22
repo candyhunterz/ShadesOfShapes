@@ -229,7 +229,8 @@ $(document).ready(function() {
 						if(lives <= 0){
 							$("#life1").remove();
 							window.location="#done";
-					}
+						}
+						$("#gameLives").text(lives);
 				}
 			}
 		}
