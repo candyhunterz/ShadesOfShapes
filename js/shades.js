@@ -285,7 +285,7 @@ $(document).ready(function() {
 				.attr("cx",27)
 				.attr("cy",27)
 				.attr("r",25)
-				.attr("stroke", "white")
+				.attr("stroke", "turquoise")
 				.attr("stroke-width" , 3)
 				.attr("fill", color[0]);
 				shapeList[i] = "circle";
@@ -298,7 +298,7 @@ $(document).ready(function() {
 				.attr("y", 2)
 				.attr("width",50)
 				.attr("height",50)
-				.attr("stroke", "white")
+				.attr("stroke", "turquoise")
 				.attr("stroke-width" , 3)
 				.attr("fill", color[0]);
 				shapeList[i] = shape;
@@ -308,7 +308,7 @@ $(document).ready(function() {
 				color = randomColor(1);
 				svg.append("polygon")
 				.attr("points", "25, 0 0, 50 50,50")
-				.attr("stroke", "white")
+				.attr("stroke", "turquoise")
 				.attr("stroke-width" , 3)
 				.attr("fill", color[0]);
 				shapeList[i] = "triangle";
@@ -409,27 +409,27 @@ $(document).ready(function() {
 			switch (num) {
 				case 0: 
                     //blue
-					color = "#04c4e9 ";
+					color = "blue";
 					colorList[i] = color;
 					break;
 				case 1:
                     //red
-					color = "#ff1414";
+					color = "red";
 					colorList[i] = color;
 					break;
 				case 2:
                     //yellow
-					color = "#fff601";
+					color = "yellow";
 					colorList[i] = color;
 					break;
 				case 3:
                     //green
-					color = "#8ff641";
+					color = "green";
 					colorList[i] = color;
 					break;
 				case 4:
                     // purple
-					color = "#ff19a3";
+					color = "purple";
 					colorList[i] = color;
 					break;
 				default:
