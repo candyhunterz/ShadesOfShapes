@@ -37,6 +37,7 @@ $(document).ready(function() {
 	
 	// starts the game
 	function startGame() {
+		
 		$("svg").remove();
 		window.location = "#pregame";
 		$("#timer").TimeCircles().destroy();
@@ -173,6 +174,7 @@ $(document).ready(function() {
 
 
 	function reset() {
+		mlives();
 		correct = 0;
 		correctClicked = 0;
 		clicked = false;
@@ -216,7 +218,12 @@ $(document).ready(function() {
 					}
 					 else {
 						lives--;
+						if (lives == 2)
+							$("#life3").remove();
+						if (lives == 1)
+							$("#life2").remove();
 						if(lives <= 0){
+							$("#life1").remove();
 							window.location="#done";
 						}
 						$("#gameLives").text(lives);
@@ -495,6 +502,15 @@ $(document).ready(function() {
 		}
 
 	} 
+
+	function mlives() {
+		var life = new Image();
+		life.src = 'images/life.png';
+		$(".life").prepend('<img id="life1" src="images/life.png" width="30px" height="30px" />');
+		$(".life").prepend('<img id="life2" src="images/life.png" width="30px" height="30px" />');
+		$(".life").prepend('<img id="life3" src="images/life.png" width="30px" height="30px" />');
+	}
+	
 	
 	// ---------------------------------------------------
 	// Page links //
