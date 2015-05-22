@@ -498,16 +498,8 @@ $(document).ready(function() {
 	
 	// ---------------------------------------------------
 	// Page links //
-	
-	document.addEventListener("deviceready", onDeviceReady, false);
-	function onDeviceReady() {
-		console.log(device.cordova);
-	}
-	
 	$("#achievementsButton").click(function(){
 		window.location="#achievements";
-		var string = device.uuid;
-		$(".test").html(string);
 	});
 
 	$("#leaderBoard").click(function(){
@@ -527,6 +519,5 @@ $(document).ready(function() {
 		window.location = "#main";
 	})
 
-	
 });
 
