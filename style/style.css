@@ -307,6 +307,10 @@ circle {
 	opacity: 0.9;
 }
 
+.life{
+	display: inline;
+}
+
 .livesHeart{
 	height:40px;
 	width:40px;
