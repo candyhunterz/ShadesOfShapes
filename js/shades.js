@@ -139,23 +139,23 @@ $(document).ready(function() {
 			board[i][0] = 0;
 			if (num == 0) {
                 //red ff4747
-				color = '#ff4747';
+				color = 'red';
 			}
 			else if (num == 1) {
                 //blue 3dddfc
-				color = '#3dddfc';	
+				color = 'blue';	
 			}
 			else if (num == 2) {
                 //yellow fff834
-				color = '#fff834';
+				color = 'yellow';
 			}
 			else if (num == 3) {
                 //green a5f766
-				color = '#a5f766';
+				color = 'green';
 			}
 			else if (num == 4) {
                 //purple ff5ebe
-				color = '#ff5ebe';
+				color = 'purple';
 			}
 			$("#d"+i).css({backgroundColor: color});
 			board[i][0] = "d" + i;
@@ -236,9 +236,6 @@ $(document).ready(function() {
 			}
 		}
 		if(correct == correctClicked) {
-			for (var i=0; i<board.length; i++) {
-				d3.select("#d"+i).style("opacity", 0).transition().duration(0).style("opacity", 1);
-			}
 			achievements();
 			nextLevel();
 		}
@@ -382,7 +379,9 @@ $(document).ready(function() {
 			fadeTime -= 500;
 		gameLevel++;
 		
-		
+		for (var i=0; i<board.length; i++) {
+			d3.select("#d"+i).style("opacity", 0).transition().duration(0).style("opacity", 1);
+		}
 		
 		for(var i=0; i<board.length; i++) {
 			//Sets all cells to be able for clicking again.
