@@ -138,23 +138,23 @@ $(document).ready(function() {
 			var color='';
 			board[i][0] = 0;
 			if (num == 0) {
-                //red
+                //red ff4747
 				color = '#ff4747';
 			}
 			else if (num == 1) {
-                //blue
+                //blue 3dddfc
 				color = '#3dddfc';	
 			}
 			else if (num == 2) {
-                //yellow
+                //yellow fff834
 				color = '#fff834';
 			}
 			else if (num == 3) {
-                //green
+                //green a5f766
 				color = '#a5f766';
 			}
 			else if (num == 4) {
-                //purple
+                //purple ff5ebe
 				color = '#ff5ebe';
 			}
 			$("#d"+i).css({backgroundColor: color});
@@ -408,27 +408,27 @@ $(document).ready(function() {
 			var color;
 			switch (num) {
 				case 0: 
-                    //blue
+                    //blue 04c4e9
 					color = "blue";
 					colorList[i] = color;
 					break;
 				case 1:
-                    //red
+                    //red ff1414
 					color = "red";
 					colorList[i] = color;
 					break;
 				case 2:
-                    //yellow
+                    //yellow fff601
 					color = "yellow";
 					colorList[i] = color;
 					break;
 				case 3:
-                    //green
+                    //green 8ff641
 					color = "green";
 					colorList[i] = color;
 					break;
 				case 4:
-                    // purple
+                    // purple ff19a3
 					color = "purple";
 					colorList[i] = color;
 					break;
