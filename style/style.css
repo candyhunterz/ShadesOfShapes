@@ -90,15 +90,19 @@ img {
 }
 .gLevel {
     float: left;
+    width: 70px;
     padding-left: 10px;
+    text-align: left;
 }
 
-#lives p {
+.life {
     display: inline;
 }
 
 .gLife {
     float: right;
+    width: 151px;
+    text-align: left;
     padding-right: 10px;
 }
 
