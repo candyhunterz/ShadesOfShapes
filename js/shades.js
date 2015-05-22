@@ -106,10 +106,12 @@ $(document).ready(function() {
 			reset();
 		
 		for(var i=0; i<board.length; i++) {
-		//Sets all cells to be able for clicking again.
-		board[i][1] =0;
-		$("#d"+i).removeClass().addClass("gametd");
-		$("#d"+i).prop("style").removeProperty("border-width");
+			//Sets all cells to be able for clicking again.
+			board[i][1] =0;
+			$("#d"+i).removeClass().addClass("gametd");
+			$("#d"+i).prop("style").removeProperty("border-width");
+			
+			d3.select("#d"+i).style("opacity", 0).transition().duration(0).style("opacity", 1);
 		}
 		$("#d25").removeClass();
 		startGame();
@@ -378,10 +380,6 @@ $(document).ready(function() {
 		if (fadeTime > 4000)
 			fadeTime -= 500;
 		gameLevel++;
-		
-		for (var i=0; i<board.length; i++) {
-			d3.select("#d"+i).style("opacity", 0).transition().duration(0).style("opacity", 1);
-		}
 		
 		for(var i=0; i<board.length; i++) {
 			//Sets all cells to be able for clicking again.
