@@ -231,6 +231,7 @@ $(document).ready(function() {
 							window.location="#done";
 						}
 						$("#gameLives").text(lives);
+					}
 				}
 			}
 		}
