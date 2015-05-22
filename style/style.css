@@ -90,15 +90,19 @@ img {
 }
 .gLevel {
     float: left;
+    width: 70px;
     padding-left: 10px;
+    text-align: left;
 }
 
-#lives p {
+.life {
     display: inline;
 }
 
 .gLife {
     float: right;
+    width: 151px;
+    text-align: left;
     padding-right: 10px;
 }
 
@@ -145,12 +149,12 @@ circle {
 #mainHeader{
     font-family: impact,sans-serif;
     color: #0091FF;
-    font-size: 48px;
+    font-size: 36px;
     font-variant: small-caps;
     text-align: center;
     letter-spacing: -0.8pt;
     word-spacing: 6.2pt;
-    margin: 20px 0px 40px 0px;
+    margin: 15px 0px 40px 0px;
 }
 /*
 #playButton{

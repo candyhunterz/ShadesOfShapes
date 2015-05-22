@@ -138,23 +138,23 @@ $(document).ready(function() {
 			var color='';
 			board[i][0] = 0;
 			if (num == 0) {
-                //red
+                //red ff4747
 				color = '#ff4747';
 			}
 			else if (num == 1) {
-                //blue
+                //blue 3dddfc
 				color = '#3dddfc';	
 			}
 			else if (num == 2) {
-                //yellow
+                //yellow fff834
 				color = '#fff834';
 			}
 			else if (num == 3) {
-                //green
+                //green a5f766
 				color = '#a5f766';
 			}
 			else if (num == 4) {
-                //purple
+                //purple ff5ebe
 				color = '#ff5ebe';
 			}
 			$("#d"+i).css({backgroundColor: color});
@@ -178,6 +178,7 @@ $(document).ready(function() {
 
 
 	function reset() {
+		mlives();
 		correct = 0;
 		correctClicked = 0;
 		clicked = false;
@@ -221,7 +222,12 @@ $(document).ready(function() {
 					}
 					 else {
 						lives--;
+						if (lives == 2)
+							$("#life3").remove();
+						if (lives == 1)
+							$("#life2").remove();
 						if(lives <= 0){
+							$("#life1").remove();
 							window.location="#done";
 						}
 						$("#gameLives").text(lives);
@@ -402,27 +408,27 @@ $(document).ready(function() {
 			var color;
 			switch (num) {
 				case 0: 
-                    //blue
-					color = "#04c4e9 ";
+                    //blue 04c4e9
+					color = "#04c4e9";
 					colorList[i] = color;
 					break;
 				case 1:
-                    //red
+                    //red ff1414
 					color = "#ff1414";
 					colorList[i] = color;
 					break;
 				case 2:
-                    //yellow
+                    //yellow fff601
 					color = "#fff601";
 					colorList[i] = color;
 					break;
 				case 3:
-                    //green
+                    //green 8ff641
 					color = "#8ff641";
 					colorList[i] = color;
 					break;
 				case 4:
-                    // purple
+                    // purple ff19a3
 					color = "#ff19a3";
 					colorList[i] = color;
 					break;
@@ -505,6 +511,13 @@ $(document).ready(function() {
 		}
 
 	} 
+	function mlives() {
+		var life = new Image();
+		life.src = 'images/life.png';
+		$(".life").prepend('<img id="life1" src="images/life.png" width="30px" height="30px" />');
+		$(".life").prepend('<img id="life2" src="images/life.png" width="30px" height="30px" />');
+		$(".life").prepend('<img id="life3" src="images/life.png" width="30px" height="30px" />');
+	}
 	
 	// ---------------------------------------------------
 	// Page links //
