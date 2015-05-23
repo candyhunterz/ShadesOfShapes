@@ -141,23 +141,23 @@ $(document).ready(function() {
 			board[i][0] = 0;
 			if (num == 0) {
                 //red ff4747
-				color = 'red';
+				color = '#ff4747';
 			}
 			else if (num == 1) {
                 //blue 3dddfc
-				color = 'blue';	
+				color = '#3dddfc';	
 			}
 			else if (num == 2) {
                 //yellow fff834
-				color = 'yellow';
+				color = '#fff834';
 			}
 			else if (num == 3) {
                 //green a5f766
-				color = 'green';
+				color = '#a5f766';
 			}
 			else if (num == 4) {
                 //purple ff5ebe
-				color = 'purple';
+				color = '#ff5ebe';
 			}
 			$("#d"+i).css({backgroundColor: color});
 			board[i][0] = "d" + i;
@@ -284,7 +284,7 @@ $(document).ready(function() {
 				.attr("cx",27)
 				.attr("cy",27)
 				.attr("r",25)
-				.attr("stroke", "turquoise")
+				.attr("stroke", "white")
 				.attr("stroke-width" , 3)
 				.attr("fill", color[0]);
 				shapeList[i] = "circle";
@@ -297,7 +297,7 @@ $(document).ready(function() {
 				.attr("y", 2)
 				.attr("width",50)
 				.attr("height",50)
-				.attr("stroke", "turquoise")
+				.attr("stroke", "white")
 				.attr("stroke-width" , 3)
 				.attr("fill", color[0]);
 				shapeList[i] = shape;
@@ -307,7 +307,7 @@ $(document).ready(function() {
 				color = randomColor(1);
 				svg.append("polygon")
 				.attr("points", "25, 0 0, 50 50,50")
-				.attr("stroke", "turquoise")
+				.attr("stroke", "white")
 				.attr("stroke-width" , 3)
 				.attr("fill", color[0]);
 				shapeList[i] = "triangle";
@@ -406,27 +406,27 @@ $(document).ready(function() {
 			switch (num) {
 				case 0: 
                     //blue 04c4e9
-					color = "blue";
+					color = "#04c4e9";
 					colorList[i] = color;
 					break;
 				case 1:
                     //red ff1414
-					color = "red";
+					color = "#ff1414";
 					colorList[i] = color;
 					break;
 				case 2:
                     //yellow fff601
-					color = "yellow";
+					color = "#fff601";
 					colorList[i] = color;
 					break;
 				case 3:
                     //green 8ff641
-					color = "green";
+					color = "#8ff641";
 					colorList[i] = color;
 					break;
 				case 4:
                     // purple ff19a3
-					color = "purple";
+					color = "#ff19a3";
 					colorList[i] = color;
 					break;
 				default:
