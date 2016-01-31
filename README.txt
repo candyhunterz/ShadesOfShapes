@@ -1,10 +1,4 @@
-TEAM INFO:
-	team #29
-	Nguyen Nguyen
-	Derrick Prasad
-	Peyman Parsa
-	Eric Lau
-	Jan Ycasas
+
 
 Project Overview:
 	Title: Shades Of Shapes
